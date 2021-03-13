@@ -12,7 +12,14 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@images/*": ["assets/images/*"],
-      "@icons/*": ["assets/images/icons/*"]
+      "@icons/*": ["assets/images/icons/*"],
+      "@components/*": ["components/*"],
+      "@dictionaries/*": ["dictionaries/*"],
+      "@screens/*": ["screens/*"],
+      "@store/*": ["store/*"],
+      "@translations/*": ["translations/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
     }
   }
 }

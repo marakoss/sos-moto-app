@@ -1,66 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Magnetometer } from 'expo-sensors';
-import * as Location from 'expo-location';
+import 'react-native-gesture-handler'; // Must be at top for some reason
+
+import React from 'react';
+
+import { useKeepAwake } from 'expo-keep-awake';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { Main, Filter, Menu } from '@screens/index';
+
+import i18n from 'i18n-js';
+import * as Localization from 'expo-localization';
+import { cs, en } from '@translations/index';
+
+i18n.translations = {
+  en: cs, //TODO: Translate to english
+  cs: cs,
+};
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+
+const Stack = createStackNavigator();
 
 export default function App() {
-  const [data, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  const [location, setLocation] = useState({ magHeading: 33 });
-  const [errorMsg, setErrorMsg] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-
-      let remove = Location.watchHeadingAsync(_updateCords);
-
-    })();
-  }, []);
-
-  const _updateCords = (location) => {
-    setLocation(location);
-  };
-
-  const _fast = () => {
-    Magnetometer.setUpdateInterval(100);
-  };
-
-  const _subscribe = () => {
-      Magnetometer.addListener(result => {
-        setData(result);
-      })
-  };
-  _fast();
-  _subscribe();
-
-  const { x, y, z } = data;
+  useKeepAwake();
 
   return (
-    <View style={styles.container}>
-      <Text>Splash screen{"\n"}
-        x: {Math.round(x)} {"\n"}
-        y: {Math.round(y)} {"\n"}
-        z: {Math.round(z)} {"\n"}
-        heading: {location.magHeading} {"\n"}
-        { errorMsg }
-      </Text>
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator  initialRouteName="Main" headerMode="none">
+          <Stack.Screen name="Home" component={Main} />
+          <Stack.Screen name="Filter" component={Filter} />
+          <Stack.Screen name="Menu" component={Menu} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};

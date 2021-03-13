@@ -1,10 +1,11 @@
 {
-  "name": "app",
-  "displayName": "app",
+  "name": "SOSMoto",
+  "displayName": "SOS Moto",
   "expo": {
-    "name": "app",
-    "slug": "app",
-    "version": "1.0.0",
+    "name": "SOS Moto",
+    "slug": "sos-moto",
+    "version": "1.0.1",
+    "orientation" : "portrait",
     "assetBundlePatterns": [
       "**/*"
     ]
