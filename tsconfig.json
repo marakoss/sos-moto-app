@@ -7,6 +7,19 @@
     "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@images/*": ["assets/images/*"],
+      "@icons/*": ["assets/images/icons/*"],
+      "@components/*": ["components/*"],
+      "@dictionaries/*": ["dictionaries/*"],
+      "@screens/*": ["screens/*"],
+      "@store/*": ["store/*"],
+      "@translations/*": ["translations/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+    }
   }
 }
