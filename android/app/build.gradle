@@ -2,6 +2,20 @@ apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 
+def getPassword(String currentUser, String keyChain) {
+    def stdout = new ByteArrayOutputStream()
+    def stderr = new ByteArrayOutputStream()
+    exec {
+        commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
+        standardOutput = stdout
+        errorOutput = stderr
+        ignoreExitValue true
+    }
+    //noinspection GroovyAssignabilityCheck
+    stdout.toString().trim()
+}
+
+
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -122,6 +136,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  * and the benefits of using Hermes will therefore be sharply reduced.
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
+def pass = getPassword("marakoss","android_keystore")
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -132,10 +147,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.app"
+        applicationId "com.imagedesign.sosmoto"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        versionCode 2
         versionName "1.0"
     }
     splits {
@@ -153,6 +168,14 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword pass
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword pass
+            }
+        }
     }
     buildTypes {
         debug {
@@ -161,7 +184,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -180,6 +203,9 @@ android {
             }
 
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
