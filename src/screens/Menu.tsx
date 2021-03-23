@@ -4,7 +4,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 import { Headline, Button  } from '@components/index';
 import { IconNavigate  } from '@icons/index';
-import globalStyle from '@components/platform/globalStyle';
+import globalStyle from '@components/Platform/globalStyle';
+import { COLORS } from '@dictionaries/colors';
 
 
 const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
@@ -13,7 +14,7 @@ const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
         <View style={s.container}>
             <SafeAreaView style={s.safeArea}>
                 <View style={s.header}>
-                    <Headline headline={i18n.t('Navigate')} textColor={{color: '#000'}} />
+                    <Headline headline={i18n.t('Navigate')} textColor={{color: COLORS.BLACK }} />
                 </View>
 
                 <View style={s.content}>
@@ -46,7 +47,7 @@ const s = StyleSheet.create({
       paddingHorizontal: 20,
     },
     container: {
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.WHITE,
         flex: 1,
     },
     safeArea: {

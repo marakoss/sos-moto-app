@@ -1,124 +1,183 @@
 import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, Pressable, Text, Linking, Share} from 'react-native';
+import { StyleSheet, View, SafeAreaView, Pressable, Text, Linking } from 'react-native';
 
-import globalStyle from '@components/platform/globalStyle';
+import globalStyle from '@components/Platform/globalStyle';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackScreenProps } from '@react-navigation/stack';
 
 import i18n from 'i18n-js';
 
-import { UserList, Background, Headline, Radar, RadarAnimation, ButtonFilter, ButtonInversed } from '@components/index';
-import { IconMenu, IconFilters, IconShare } from '@icons/index';
+import { UserList, Background, Headline, Radar, RadarAnimation, ButtonFilter, Share, Mobile } from '@components/index';
+import { IconMenu, IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
-import { toDecimalPlaces } from '@utils/Math';
 
 import * as Location from 'expo-location';
-import { LocationHeadingObject, PermissionStatus } from 'expo-location';
+import { PermissionStatus } from 'expo-location';
+
+import * as Network from 'expo-network';
 
 import { Card } from 'types/card';
 import { API_BASE } from "@env";
 
 import { filters } from '../store/filters';
 
-const encodeDataToURL = (data: object) => {
-  return Object
-    .keys(data)
-    .map(value => `${value}=${encodeURIComponent(data[value])}`)
-    .join('&');
+const location_initial = {
+  coords: {
+    latitude: 0,
+    longitude: 0
+  }
 };
 
 const Main: FC<StackScreenProps<any>> = ({navigation}) => {
 
   const [status, setStatus] = useState('');
   const [isError, setIsError] = useState(false);
-  const [location, setLocation] = useState({coords: {latitude:0, longitude:0}});
+  const [location, setLocation] = useState(location_initial);
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [network, setNetwork] = useState({});
+  const [isConnected, setIsConnected] = useState(false);
   const [people, setPeople] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastCheckTime, setLastCheckTime] = useState(0);
 
   useEffect(() => {
       (async () => {
+        try {
           let { status } = await Location.requestPermissionsAsync();
           if (status !== PermissionStatus.GRANTED) {
               setStatus(status);
               setIsError(true);
-              return;
           }else{
               setIsError(false);
           }
-
-          let location = await Location.getCurrentPositionAsync({});
-          setLocation(location);
-
-          console.log('status change', status);
-
+          //console.log('status change', status);
+        } catch {
+          setIsError(true);
+        }
       })();
+
   }, [status]);
 
+  useEffect(() => {
+    if (isError) return;
 
+    (async() => {
+      try {
+        let location = await Location.getLastKnownPositionAsync({requiredAccuracy: 100});
+        if (location != null){
+          setLocation(location);
+          setLatitude(location.coords.latitude);
+          setLongitude(location.coords.longitude);
 
-
-  const fetchData = async (
-      lat: number, lon: number
-  ): Promise<Array<Card>> => {
-      setLoading(true);
-      //return await fetch(API_BASE + '/people')
-      if (lat === 0 || lon == 0){
-          return Promise.reject('Location is not updated');
+          //console.log(location, 'last known was called at', new Date().getTime());
+        }
+      } catch {
+          // do nothing
       }
-
-      console.log(encodeURIComponent(filters.items), filters.items);
-
-      return await fetch(API_BASE + '/?lat=' + lat + '&lon=' + lon + '&services=' + encodeURIComponent(filters.items))
-          .then((response) => response.json())
-          .then((json) => {
-              //console.log(json);
-              setLoading(false);
-              setPeople(json);
-              setLastCheckTime(new Date().getTime());
-              return json;
-          })
-          .catch((error) => {
-              setLoading(false);
-              console.error(error);
-          }); 
-  };
-
-  const loadData = (lat: number, lon: number) => {
-      const timeLimit = (1000 * 30); // thirty seconds
-      if ((lastCheckTime + timeLimit) <= new Date().getTime()) {
-          fetchData(lat, lon);
-      } else {
-          console.warn('Too many requests in a time period');
-      }
-  } 
+    })();
+  },[isError]);
 
   useEffect(() => {
-      console.log('how many times?');
-      loadData(location.coords.latitude, location.coords.longitude);
-  }, [location.coords.latitude, location.coords.longitude]);
+    if (isError) return;
+    (async() => {
+      try {
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        setLatitude(location.coords.latitude);
+        setLongitude(location.coords.longitude);
 
-  const onShare = async () => {
+        //console.log(location, 'current was called at', new Date().getTime());
+      } catch {
+        setLocation(location_initial);
+      }
+    })();
+  }, [isError]); //[location]);
+
+  useEffect(() => {
+    ( async () => {
+      try {
+        let response = await Network.getNetworkStateAsync();
+        //console.log('connected', response.isConnected);
+        setNetwork(response);
+        setIsConnected(response.isConnected ? response.isConnected : false);
+      } catch {
+        setIsConnected(false);
+      }
+      
+    })();
+    
+  }, []); 
+  //[network]);
+
+
+  const fetchData = (
+    lat: number, lon: number
+  ) => {
+    let data = fetchJson(lat, lon);
+    data.then((people) => {
+      if (typeof people === 'object') {
+        setPeople(people);
+      }
+    });
+  }
+
+  const fetchJson = async (
+    lat: number, lon: number
+  ): Promise<Array<Card> | boolean> => {
+    setLoading(true);
+
+    if (lat === 0 || lon == 0) {
+      console.log('still zero');
+      setLoading(false);
+      return false;
+    }
+
     try {
-      const result = await Share.share({
-        message: 'Mám potíže na cestě. Moje poloha je: '+ toDecimalPlaces(location.coords.latitude, 5) +', '+ toDecimalPlaces(location.coords.longitude, 5),
-      });
+      const response = await fetch(API_BASE + '/v1/users/?lat=' + lat + '&lon=' + lon + '&services=' + filters.getActive(filters.items).join(','));
+      const json = await response.json();
+      setLoading(false);
+      setLastCheckTime(new Date().getTime());
+      return json;
     } catch (error) {
-      //alert(error.message);
+      setLoading(false);
+      console.error('error: ', error);
+      return false;
     }
   };
 
+  const loadData = () => {
+    // TODO: redo as if last position is different by 1 km.
+    console.log('Started loading', latitude, longitude);
+      const timeLimit = (1000 * 3); // thirty seconds
+      if ((lastCheckTime + timeLimit) <= new Date().getTime()) {
+        
+        fetchData(latitude, longitude);
+ 
+      } else {
+          console.warn('Too many requests in a time period');
+      }
+  }
+
+  useEffect(() => {
+    //console.log('how many times?', latitude, longitude);
+    if (!isError)
+      loadData();
+  }, [isError, filters.items]); //[location.coords.latitude, location.coords.longitude]);
+
+
+
   return (
     <View style={s.container}>
+      {<Mobile />}
       <LinearGradient
-        colors={['#7E09D4', '#2F84CB']}
+        colors={[ COLORS.BACKGROUNDGRADIENT1, COLORS.BACKGROUNDGRADIENT2 ]}
         style={s.gradient}
       >
         <SafeAreaView style={s.safeArea}>
           <View style={s.header}>
             <View>
-
               <Headline headline={
                  isError ?  i18n.t('Location services inactive') : i18n.t('Help in area')
               } />
@@ -132,8 +191,8 @@ const Main: FC<StackScreenProps<any>> = ({navigation}) => {
             </View>
           </View>
           <View style={s.radar}>
-          {isError && (
-            <View style={s.errorContainer}>
+            {isError && (
+              <View style={s.errorContainer}>
                 <Pressable onPress={() => Linking.openURL('app-settings:')}>
                   <View style={s.error} >
                       <Text style={s.errorText}>
@@ -144,26 +203,17 @@ const Main: FC<StackScreenProps<any>> = ({navigation}) => {
               </View>
               )
             }
-            <RadarAnimation />
+            {<RadarAnimation />}
+
             {!isError && (
-              <View style={s.share}>
-                <ButtonInversed
-                  onPress={onShare}
-                  icon={<IconShare fillColor={COLORS.WHITE} />}
-                >
-                  <Text style={s.shareText}>
-                    {toDecimalPlaces(location.coords.latitude, 5)}
-                    {', '}
-                    {toDecimalPlaces(location.coords.longitude, 5)}
-                  </Text>
-                </ButtonInversed>
-              </View>
+              <Share lat={latitude} lon={longitude} />
             )}
+
             {!isError && (
               <Radar
                 people={people}
-                lat={location.coords.latitude}
-                lon={location.coords.longitude}
+                lat={latitude}
+                lon={longitude}
               />
             )}
             
@@ -174,11 +224,13 @@ const Main: FC<StackScreenProps<any>> = ({navigation}) => {
             icon={<IconFilters fillColor={COLORS.WHITE} />}
             />
           <Background>
-            <UserList
-              people={people}
-              loading={loading}
-              onRefresh={() => loadData(location.coords.latitude, location.coords.longitude)}
-            />
+            {isConnected && (
+              <UserList
+                people={people}
+                loading={loading}
+                onRefresh={() => loadData()}
+              />
+            )}
           </Background>
         </SafeAreaView>
       </LinearGradient>
@@ -222,8 +274,9 @@ const s = StyleSheet.create({
     top: '45%',
   },
   menu: {
-    marginRight: 20,
-    marginTop: 2 // TODO: can we get rid of this?
+    paddingRight: 20,
+    marginTop: 2, // TODO: can we get rid of this?
+    backgroundColor: 'rgba(0, 0, 0, 0.0001)',
   },
   errorContainer: {
     alignItems: 'center',
@@ -242,14 +295,7 @@ const s = StyleSheet.create({
       paddingVertical: 5,
       borderRadius: 50,
   },
-  share: {
-    position: 'absolute',
-    zIndex: 20,
-    marginLeft: 20,
-  },
-  shareText: {
-    fontSize: 10
-  },
+
 });
 
 export default Main;
