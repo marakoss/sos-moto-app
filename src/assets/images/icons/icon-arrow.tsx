@@ -18,8 +18,8 @@ const IconArrow: mySvgIcon = ({
       height={myHeight}
       viewBox="0 0 50 50"
     >
-      <Polygon fill={fillColor?fillColor:'#000'} points="25,35 45,49 25,0 5,49 "/>
-      <Polygon fill={fillColor2?fillColor2:'#f00'} points="25,35 45,49 25,0 "/>
+      <Polygon fill={fillColor ? fillColor : '#000000'} points="25,35 45,49 25,0 5,49 "/>
+      <Polygon fill={fillColor2 ? fillColor2 : '#ff0000'} points="25,35 45,49 25,0 "/>
     </Svg>
   )
 };

@@ -4,9 +4,8 @@ import { StyleSheet, View, Text, FlatList, ListRenderItem} from 'react-native';
 import Empty from './Empty';
 
 import Vcard from '@components/Vcard/Vcard';
-import { Card } from 'types/card';
 import { COLORS } from '@dictionaries/colors';
-
+import { Card } from 'types/card';
 
 interface ListView {
     people: Card[],
@@ -34,7 +33,7 @@ const List: FC<ListView> = ({
                 initialNumToRender={3}
                 //onEndReached={load more}
                 //onEndReachedThreshold
-                onRefresh={() => onRefresh}
+                onRefresh={() => onRefresh()}
                 refreshing={loading}
                 extraData={people}
             />

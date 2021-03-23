@@ -1,23 +1,24 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, Text, View, Linking, Alert } from 'react-native';
-import Button from '@components/Button/Button'; // require cycle?
-import { IconPhone, IconNavigate, IconPoint } from '@icons/index';
+import Button from '@components/Button/Button';
+import { IconPhone, IconNavigate } from '@icons/index';
+import { colorList } from '@dictionaries/colors';
 import { COLORS, SERVICES } from '@dictionaries/index';
 import i18n from 'i18n-js';
 import { Card } from 'types/card';
-
+import { hexToRgbA } from '@utils/Colors';
 
 const makeCall = (phoneNumber: string|undefined) => {
     Alert.alert(
-        'Požádat o pomoc',
-        'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze.',
+        i18n.t('Ask for help'),
+        i18n.t('Are you sure to make this call? Contacts in this application serves for emergency situations only.'),
         [
           {
-            text: 'Zrušit',
+            text: i18n.t('Cancel'),
             style: 'cancel'
           },
           {
-            text: 'Volat',
+            text: i18n.t('Call'),
             onPress: () => Linking.openURL(`tel:${phoneNumber}`)
         }
         ],
@@ -39,7 +40,7 @@ const getServices = (services: Array<number> | undefined) => {
 
     return services.map((item, index, array) => {
         const text: string = Object.values(SERVICES)[item].toString();
-        return (i18n.translate(text)+(((array.length-1) > index) ? ', ':''));
+        return (i18n.translate(text) + (((array.length - 1) > index) ? ', ':''));
     })
 
 };
@@ -56,23 +57,18 @@ const Vcard: FC<Card> = ({
     index
 }) => {
 
-
-    const colorlist: Array<string> = [
-        COLORS.RED,
-        COLORS.GREEN,
-        COLORS.BLUE,
-        COLORS.YELLOW,
-        COLORS.ORANGE,
-    ];
-
-    const color = colorlist[Number(index)];
+    const color = colorList[Number(index)];
 
     return (
     <View style={s.container}>
 
         <View style={s.sideLine} />
-        <View style={s.point}>
-            <IconPoint width="16" height="16" fillColor={color} />
+        <View style={s.pointPosition}>
+            <View style={[s.shadow, {borderColor: hexToRgbA(color)}]}>
+                <View style={s.shadowSpace}>
+                    <View style={[s.point, {backgroundColor: color}]} />
+                </View>
+            </View>
         </View>
 
         <View style={s.distance}>
@@ -115,10 +111,12 @@ const s = StyleSheet.create({
         fontSize: 20,
         paddingBottom: 8,
     },
-    point: {
+    pointPosition: {
         position: 'absolute',
-        left: 53,
-        top: 0,
+        left: 56,
+        top: 3,
+        width: 19,
+        height: 19,
     },
     distance: {
         position: 'absolute',
@@ -144,6 +142,25 @@ const s = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         
+    },
+    point: {
+        width: 13,
+        height: 13,
+        borderRadius: 13,
+    },
+    shadowSpace: {
+        width: 17,
+        height: 17,
+        borderRadius: 17,
+        borderColor: 'rgba(0, 0, 0, 0)',
+        borderWidth: 2,
+    },
+    shadow: {
+        width: 19,
+        height: 19,
+        borderRadius: 19,
+        borderColor: 'rgba(255, 0, 0, 0.5)',
+        borderWidth: 1,
     },
 });
 
