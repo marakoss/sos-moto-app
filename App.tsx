@@ -27,7 +27,7 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <Stack.Navigator  initialRouteName="Main" headerMode="none">
+        <Stack.Navigator  initialRouteName="Home" headerMode="none">
           <Stack.Screen name="Home" component={Main} />
           <Stack.Screen name="Filter" component={Filter} />
           <Stack.Screen name="Menu" component={Menu} />

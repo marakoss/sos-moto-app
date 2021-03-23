@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, Text, useWindowDimensions } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 
 interface background {
     height?: number

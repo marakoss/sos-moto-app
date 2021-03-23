@@ -28,6 +28,8 @@ PODS:
     - UMCore
     - UMPermissionsInterface
     - UMTaskManagerInterface
+  - EXNetwork (2.4.0):
+    - UMCore
   - EXPermissions (10.0.0):
     - UMCore
     - UMPermissionsInterface
@@ -295,8 +297,6 @@ PODS:
     - React
   - RNGestureHandler (1.8.0):
     - React
-  - RNReanimated (1.13.2):
-    - React-Core
   - RNScreens (2.15.2):
     - React-Core
   - RNSVG (12.1.0):
@@ -332,6 +332,7 @@ DEPENDENCIES:
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
+  - EXNetwork (from `../node_modules/expo-network/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXSensors (from `../node_modules/expo-sensors/ios`)
@@ -367,7 +368,6 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - UMAppLoader (from `../node_modules/unimodules-app-loader/ios`)
@@ -412,6 +412,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-localization/ios"
   EXLocation:
     :path: "../node_modules/expo-location/ios"
+  EXNetwork:
+    :path: "../node_modules/expo-network/ios"
   EXPermissions:
     :path: "../node_modules/expo-permissions/ios"
   EXSecureStore:
@@ -478,8 +480,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -526,6 +526,7 @@ SPEC CHECKSUMS:
   EXLinearGradient: c803fbd1aa974be038177b1e45524bc35759fe9c
   EXLocalization: 8b9463c81843da214476b541a27811dd885c9a76
   EXLocation: d55e2a37f61bcfb4eba9c813b3f4621d896c4c00
+  EXNetwork: 6efac2968418772829f979a78c555900267ce231
   EXPermissions: 17d4846ad1880f6891c74ae58ca1acb43e47ed47
   EXSecureStore: 1b571851e6068b30b8ec097be848a04603c03bae
   EXSensors: d7829297e383600b38d4bf22b2137097e6748358
@@ -559,7 +560,6 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
-  RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   UMAppLoader: 92d044af52626af3d81a69796ad666fc7a9a7d78
@@ -577,6 +577,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 4c60b43eaf3cb05a164bc9113258a171c18b7bf7
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 7b086565cd37f72f080d9b6c51232a3fc7357ccd
+PODFILE CHECKSUM: 12121113417dd4dfe0010812474f38e10884699d
 
 COCOAPODS: 1.10.0

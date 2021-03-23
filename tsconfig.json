@@ -20,6 +20,7 @@
       "@translations/*": ["translations/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
+      "@logic/*": ["logic/*"],
     }
   }
 }

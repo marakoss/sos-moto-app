@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { COLORS } from '@dictionaries/colors';
 import { IconArrow } from '@icons/index';
 
 
-const Arrow = () => {
+const Arrow: FC = () => {
     return (
         <View style={[s.arrow]}>
-            <IconArrow fillColor={COLORS.PRIMARY} fillColor2='#d00' width='100' height='100' />
+            <IconArrow fillColor={COLORS.PRIMARY} fillColor2={ COLORS.DARKERRED } width='100' height='100' />
         </View>
     )
 }

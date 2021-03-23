@@ -20,12 +20,29 @@ export const filters = {
       return this;
     },
 
-    // TODO: Fix
     getActive (items: object) {
-      return Object.keys(items).filter(value => typeof value === 'string').reduce((acc: any, cur, i, a) => {
-        if (items[i] === true) {
-          return NUMBERED_SERVICES[acc];
+      let keys = Object.keys(items).filter(value => typeof value === 'string');
+      let values = Object.values(items);
+
+      return keys.filter((cur, i, a) => {
+        if (values[i] === true) {
+          return true;
         }
-    }, {});
-    }
+      }).map((cur,i, a) => {
+        return NUMBERED_SERVICES.get(cur);
+      });
+    },
+
+    getDisabled (items: object) {
+      let keys = Object.keys(items).filter(value => typeof value === 'string');
+      let values = Object.values(items);
+
+      return keys.filter((cur, i, a) => {
+        if (values[i] === false) {
+          return true;
+        }
+      }).map((cur,i, a) => {
+        return NUMBERED_SERVICES.get(cur);
+      });
+    },
   };

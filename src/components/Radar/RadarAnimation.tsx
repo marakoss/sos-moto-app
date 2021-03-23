@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef, FC } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
 import { COLORS } from '@dictionaries/colors';
 
-export default function RadarAnimation() {
+const RadarAnimation: FC = () => {
 
     const animatedSize = useRef(new Animated.Value(0)).current;
 
@@ -75,3 +75,5 @@ const s = StyleSheet.create({
         borderRadius: 1000,
     },
 });
+
+export default RadarAnimation;

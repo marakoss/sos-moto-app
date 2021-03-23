@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import i18n from 'i18n-js';
-import { Headline, ButtonFilter, FilterItem } from '@components/index';
+import { Headline, Button, FilterItem } from '@components/index';
 import { IconCheck } from '@icons/index';
-import globalStyle from '@components/platform/globalStyle';
+import globalStyle from '@components/Platform/globalStyle';
 //import { SERVICES } from '@dictionaries/services';
-
+import { COLORS } from '@dictionaries/colors';
 import { filters } from '../store/filters';
 
 
@@ -29,16 +29,18 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
         <View style={s.container}>
             <SafeAreaView style={s.safeArea}>
                 <View style={s.header}>
-                    <Headline headline={i18n.t('Filter by')} textColor={{color: '#000'}} />
+                    <Headline headline={i18n.t('Filter by')} textColor={{color: COLORS.BLACK }} />
                 </View>
                 <View style={s.content}>
                     {renderFilters()}
                 </View>
                 <View style={s.button}>
-                    <ButtonFilter
+                    <Button
                         onPress={() => navigation.navigate('Home')}
-                        icon={<IconCheck fillColor='#fff' />}
-                    />
+                        icon={<IconCheck fillColor={ COLORS.RED }/>}
+                    >
+                        {i18n.t('confirm')}
+                    </Button>
                 </View>
             </SafeAreaView>
         </View>
@@ -54,7 +56,7 @@ const s = StyleSheet.create({
 
     },
     container: {
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.WHITE,
         flex: 1
     },
     safeArea: {
