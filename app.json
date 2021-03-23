@@ -8,6 +8,15 @@
     "orientation" : "portrait",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "icon": "./src/assets/images/app-icon/applogo.png",
+    "ios": {
+      "bundleIdentifier": "com.imagedesigncz.sosmoto",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.imagedesigncz.sosmoto",
+      "versionCode": 1
+    }
   }
 }
