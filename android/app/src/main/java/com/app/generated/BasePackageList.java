@@ -17,6 +17,7 @@ public class BasePackageList {
         new expo.modules.lineargradient.LinearGradientPackage(),
         new expo.modules.localization.LocalizationPackage(),
         new expo.modules.location.LocationPackage(),
+        new expo.modules.network.NetworkPackage(),
         new expo.modules.permissions.PermissionsPackage(),
         new expo.modules.securestore.SecureStorePackage(),
         new expo.modules.sensors.SensorsPackage(),
