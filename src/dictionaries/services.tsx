@@ -6,14 +6,14 @@ export enum SERVICES {
     GARAGE,
     SLEEPOVER,
     REPAIR_SHOP,
-}
+};
 
-export enum NUMBERED_SERVICES {
-    'HELP_SITE' = '1',
-    'TOW' = '2',
-    'TIRE' = '3',
-    'WORKBENCH' = '4',
-    'GARAGE' = '5',
-    'SLEEPOVER' = '6',
-    'REPAIR_SHOP' = '7',
-}
+export const NUMBERED_SERVICES = new Map([
+    [ 'HELP_SITE', '0' ],
+    [ 'TOW', '1' ],
+    [ 'TIRE', '2' ],
+    [ 'WORKBENCH', '3' ],
+    [ 'GARAGE', '4' ],
+    [ 'SLEEPOVER', '5' ],
+    [ 'REPAIR_SHOP', '6' ],
+]);
