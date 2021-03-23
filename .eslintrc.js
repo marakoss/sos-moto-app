@@ -24,10 +24,10 @@ module.exports = {
         "react-native/react-native": true
       },
     rules: {
-        "react-native/no-unused-styles": 2,
+        "react-native/no-unused-styles": "warn",
         "react-native/split-platform-components": 2,
-        "react-native/no-inline-styles": 2,
-        "react-native/no-color-literals": 2,
+        "react-native/no-inline-styles": "off",
+        "react-native/no-color-literals": "off",
         "react-native/no-raw-text": 2,
         "react-native/no-single-element-style-arrays": 2,
         "no-use-before-define": "off",
@@ -36,7 +36,15 @@ module.exports = {
         "comma-dangle": "off",
         "padded-blocks": "off",
         "arrow-body-style": "off",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "import/prefer-default-export": "off",
+        "@typescript-eslint/no-use-before-define": ["warn", { "functions": false, "classes": false, "variables": false }],
+        "@typescript-eslint/no-unused-vars": "warn",
+        "consistent-return": "warn",
+        "@typescript-eslint/naming-convention": ["warn", { selector: 'typeLike', format: ['camelCase'] }],
+        "no-bitwise": "off",
+        "no-console": "off",
+        "react/destructuring-assignment": "warn"
       },
       globals: {
         fetch: false
