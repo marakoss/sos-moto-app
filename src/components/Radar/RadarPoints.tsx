@@ -5,89 +5,82 @@ import { hexToRgbA } from '@utils/Colors';
 import { coordsDistance } from '@utils/Geo';
 import { COLORS, colorList } from '@dictionaries/colors';
 
-import type { coordinate } from 'types/gps';
-import type { point } from 'types/cartesian';
-import type { Card } from 'types/card';
+import type { iCoordinate } from 'types/gps';
+import type { iPoint } from 'types/cartesian';
+import type { iCard } from 'types/card';
 
-interface MyProps {
-    people: Card[],
-    lat: number,
-    lon: number,
+interface iMyProps {
+	people: iCard[];
+	lat: number;
+	lon: number;
 }
 
-const RadarPoints: FC<MyProps> = ({
-    people,
-    lat,
-    lon,
-}) => {
-    let n = 0;
-    
-    const list = people.map((point: Card) => {
+const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
+	let n = 0;
 
-        // average between points
-        const maxDistance = 20;
-        const points = getPoints(point, {lat: lat, lon: lon}, 100, maxDistance);
-        const color = colorList[Number(n)];
+	const list = people.map((person: iCard) => {
+		// average between points
+		const maxDistance = 20;
+		const points = getPoints(person, { lat, lon }, 100, maxDistance);
+		const color = colorList[Number(n)];
 
-        n += 1; // RN screams each child should have unique key
-        
-        return (
-        <View key={n} style={[s.points, { top: points.x - 6, right: points.y - 6 }]}>
-            <View style={[s.shadow, {borderColor: hexToRgbA(color)}]}>
-                <View style={s.shadowSpace}>
-                    <View style={[s.point, {backgroundColor: color}]} />
-                </View>
-            </View>
-        </View>);
-    });
+		n += 1; // RN screams each child should have unique key
 
-    return (
-        <View style={s.container}>
-            {list}
-        </View>
-    );
+		return (
+			<View
+				key={n}
+				style={[s.points, { top: points.x - 6, right: points.y - 6 }]}
+			>
+				<View style={[s.shadow, { borderColor: hexToRgbA(color) }]}>
+					<View style={s.shadowSpace}>
+						<View style={[s.point, { backgroundColor: color }]} />
+					</View>
+				</View>
+			</View>
+		);
+	});
+
+	return <View style={s.container}>{list}</View>;
 };
 
-
 const s = StyleSheet.create({
-    container: {
-        width: 1,
-        height: 1,
-        position: 'absolute',
-        left: '49%',
-        top: '49%',
-        // Debug
-        //borderColor: COLORS.BLACK,
-        //borderWidth: 1,
-    },
-    points: {
-        shadowColor: COLORS.BLACK,
-        shadowOffset: {width: 0, height: 5},
-        shadowOpacity: 0.2,
-        shadowRadius: 2,
-        position: 'absolute',
-    },
-    point: {
-        width: 13,
-        height: 13,
-        borderRadius: 13,
-        backgroundColor: '#f00',
-    },
-    shadowSpace: {
-        width: 17,
-        height: 17,
-        borderRadius: 17,
-        borderColor: 'rgba(0, 0, 0, 0)',
-        borderWidth: 2,
-    },
-    shadow: {
-        width: 19,
-        height: 19,
-        borderRadius: 19,
-        borderColor: 'rgba(255, 0, 0, 0.5)',
-        borderWidth: 1,
-    },
-    
+	container: {
+		width: 1,
+		height: 1,
+		position: 'absolute',
+		left: '49%',
+		top: '49%'
+		// Debug
+		// borderColor: COLORS.BLACK,
+		// borderWidth: 1,
+	},
+	points: {
+		shadowColor: COLORS.BLACK,
+		shadowOffset: { width: 0, height: 5 },
+		shadowOpacity: 0.2,
+		shadowRadius: 2,
+		position: 'absolute'
+	},
+	point: {
+		width: 13,
+		height: 13,
+		borderRadius: 13,
+		backgroundColor: '#f00'
+	},
+	shadowSpace: {
+		width: 17,
+		height: 17,
+		borderRadius: 17,
+		borderColor: 'rgba(0, 0, 0, 0)',
+		borderWidth: 2
+	},
+	shadow: {
+		width: 19,
+		height: 19,
+		borderRadius: 19,
+		borderColor: 'rgba(255, 0, 0, 0.5)',
+		borderWidth: 1
+	}
 });
 
 /*
@@ -104,54 +97,56 @@ const data: Array<coordinate> = [
 
 // Inverse of Moove coordinate origin to our current location
 const getNormalizedCoords = (
-    lat: number,
-    lon: number,
-    center_lat: number = 0,
-    center_lon: number = 0
-): coordinate => {
-    return {
-        lat: (lat-center_lat),
-        lon: (lon-center_lon)
-    };
-}
+	lat: number,
+	lon: number,
+	center_lat: number = 0,
+	center_lon: number = 0
+): iCoordinate => {
+	return {
+		lat: lat - center_lat,
+		lon: lon - center_lon
+	};
+};
 
 /*
-*
-*/
+ *
+ */
 const getPoints = (
-    gps: coordinate,
-    origin: coordinate,
-    radius: number,
-    maxDistance: number = 10
-): point => {
-    
-    // Get viewport rectangle [square]
-    const viewportSize = radius * 2;
-    const scale = viewportSize / maxDistance;
-    const distance = coordsDistance(gps.lat, gps.lon, origin.lat, origin.lon);
-    const normalizedGPS = getNormalizedCoords(gps.lat, gps.lon, origin.lat, origin.lon); // Move to origin
+	gps: iCoordinate,
+	origin: iCoordinate,
+	radius: number,
+	maxDistance: number = 10
+): iPoint => {
+	// Get viewport rectangle [square]
+	const viewportSize = radius * 2;
+	const scale = viewportSize / maxDistance;
+	const distance = coordsDistance(gps.lat, gps.lon, origin.lat, origin.lon);
+	const normalizedGPS = getNormalizedCoords(
+		gps.lat,
+		gps.lon,
+		origin.lat,
+		origin.lon
+	); // Move to origin
 
-    let angleFromOrigin = Math.atan2(normalizedGPS.lat, normalizedGPS.lon);
+	let angleFromOrigin = Math.atan2(normalizedGPS.lat, normalizedGPS.lon);
 
-    if (angleFromOrigin < 0) angleFromOrigin = (2 * Math.PI) + angleFromOrigin;
+	if (angleFromOrigin < 0) angleFromOrigin = 2 * Math.PI + angleFromOrigin;
 
-    // Limit distance 
-    let zone = maxDistance;
-    if (distance > 0 && distance <= 5) zone = 5;
-    if (distance > 5 && distance <= 10) zone = 7.5;
-    if (distance > 10 && distance <= 15) zone = 10;
-    if (distance > 15 && distance <= 20) zone = 12;
-    if (distance > 20 ) zone = 12;
+	// Limit distance
+	let zone = maxDistance;
+	if (distance > 0 && distance <= 5) zone = 5;
+	if (distance > 5 && distance <= 10) zone = 7.5;
+	if (distance > 10 && distance <= 15) zone = 10;
+	if (distance > 15 && distance <= 20) zone = 12;
+	if (distance > 20) zone = 12;
 
-    const x = zone * (Math.sin((Math.PI / 2) - angleFromOrigin));
-    const y = zone * (Math.sin(angleFromOrigin));
+	const x = zone * Math.sin(Math.PI / 2 - angleFromOrigin);
+	const y = zone * Math.sin(angleFromOrigin);
 
-
-    return {
-        x: x * scale,
-        y: y * scale,
-    }
-
+	return {
+		x: x * scale,
+		y: y * scale
+	};
 };
 
 export default RadarPoints;

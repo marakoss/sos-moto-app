@@ -1,3 +1,3 @@
 export const sk = {
-    'Help': 'Pomoc v oblasti'
+	Help: 'Pomoc v oblasti'
 };

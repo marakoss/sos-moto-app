@@ -1,7 +1,4 @@
 import { COLORS } from './colors';
 import { SERVICES } from './services';
 
-export {
-    COLORS,
-    SERVICES,
-};
+export { COLORS, SERVICES };

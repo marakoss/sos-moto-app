@@ -9,13 +9,13 @@ import IconCheck from './icon-check';
 import IconShare from './icon-share';
 
 export {
-    IconArrow,
-    IconPhone,
-    IconPoint,
-    IconMenu,
-    IconFilters,
-    IconBlob,
-    IconNavigate,
-    IconCheck,
-    IconShare
-}
+	IconArrow,
+	IconPhone,
+	IconPoint,
+	IconMenu,
+	IconFilters,
+	IconBlob,
+	IconNavigate,
+	IconCheck,
+	IconShare
+};

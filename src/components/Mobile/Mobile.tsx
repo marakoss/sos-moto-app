@@ -1,34 +1,26 @@
-import React, { Component } from 'react';
-import { AppState } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { AppState, AppStateStatus } from 'react-native';
 
+const Mobile: FC = () => {
+	const [state, setState] = useState<AppStateStatus>('unknown');
 
+	const handleAppStateChange = (nextAppState: AppStateStatus) => {
+		if (state.match(/inactive|background/) && nextAppState === 'active') {
+			// console.log('App has come to the foreground!');
+		}
+		setState(nextAppState);
+	};
 
+	useEffect(() => {
+		setState(AppState.currentState);
+		AppState.addEventListener('change', handleAppStateChange);
 
+		return () => {
+			AppState.removeEventListener('change', handleAppStateChange);
+		};
+	}, []);
 
-class Mobile extends Component {
-  state = {
-    appState: AppState.currentState,
-  };
-
-  componentDidMount() {
-    AppState.addEventListener('change', this._handleAppStateChange);
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this._handleAppStateChange);
-  }
-
-  _handleAppStateChange = (nextAppState: string) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-      //console.log('App has come to the foreground!');
-      
-    }
-    this.setState({ appState: nextAppState });
-  };
-
-  render() {
-    return <></>;
-  }
-}
+	return <></>;
+};
 
 export default Mobile;
