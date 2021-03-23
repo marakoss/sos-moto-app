@@ -1,3 +1,3 @@
 export const en = {
-    'Help': 'Pomoc v oblasti'
+	Help: 'Pomoc v oblasti'
 };

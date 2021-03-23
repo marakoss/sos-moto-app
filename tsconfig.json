@@ -22,5 +22,8 @@
       "@utils/*": ["utils/*"],
       "@logic/*": ["logic/*"],
     }
-  }
+  },
+  "exclude": [
+    "__tests__/**/*-test.ts"
+  ]
 }

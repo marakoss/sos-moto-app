@@ -1,29 +1,33 @@
 export const degreesToRadians = (degrees: number): number => {
-    return degrees * Math.PI / 180;
-}
+	return (degrees * Math.PI) / 180;
+};
 
 export const radiansToDegrees = (radians: number): number => {
-  return radians * (180 / Math.PI);
-}
+	return radians * (180 / Math.PI);
+};
 
 export const coordsDistance = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
+	lat1: number,
+	lon1: number,
+	lat2: number,
+	lon2: number
 ): number => {
-    let earthRadiusKm = 6371;
+	const earthRadiusKm = 6371;
 
-    let dLat = degreesToRadians(lat2 - lat1);
-    let dLon = degreesToRadians(lon2 - lon1);
+	const dLat = degreesToRadians(lat2 - lat1);
+	const dLon = degreesToRadians(lon2 - lon1);
 
-    lat1 = degreesToRadians(lat1);
-    lat2 = degreesToRadians(lat2);
+	const nlat1 = degreesToRadians(lat1);
+	const nlat2 = degreesToRadians(lat2);
 
-    let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-    
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	const a =
+		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.sin(dLon / 2) *
+			Math.sin(dLon / 2) *
+			Math.cos(nlat1) *
+			Math.cos(nlat2);
 
-    return earthRadiusKm * c;
-}
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+	return earthRadiusKm * c;
+};
