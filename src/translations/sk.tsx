@@ -1,3 +1,3 @@
-export const sk = {
+export default {
 	Help: 'Pomoc v oblasti'
 };

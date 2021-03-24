@@ -1,5 +1,5 @@
-import { cs } from './cs';
-import { sk } from './sk';
-import { en } from './en';
+import en from './en';
+import cs from './cs';
+import sk from './sk';
 
-export { cs, en, sk };
+export { en, cs, sk };
