@@ -23,6 +23,8 @@ const buttons = {
 	Radar: 'Radar',
 	Register: 'Registrovat se',
 	About: 'O aplikaci',
+	'back to application': 'zpět do aplikace',
+	'back': 'zpět',
 	'Allow access to location services': 'Povolit přistup k polohovým službám',
 	'Share location': 'Sdílet polohu'
 };
@@ -37,11 +39,11 @@ const errors = {
 
 const modals = {
 	'Ask for help': 'Požádat o pomoc',
-	'Are you sure to make this call? Contacts in this application serves for emergency situations only.':
-		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze.'
+	'Are you sure to make this call? Contacts in this application serves for emergency situations only':
+		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze'
 };
 
-export const cs = {
+export default {
 	...headlines,
 	...services,
 	...buttons,

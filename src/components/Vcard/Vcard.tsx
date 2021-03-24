@@ -12,7 +12,7 @@ const makeCall = (phoneNumber: string | undefined) => {
 	Alert.alert(
 		i18n.t('Ask for help'),
 		i18n.t(
-			'Are you sure to make this call? Contacts in this application serves for emergency situations only.'
+			'Are you sure to make this call? Contacts in this application serves for emergency situations only'
 		),
 		[
 			{

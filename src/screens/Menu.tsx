@@ -27,11 +27,11 @@ const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
 						{i18n.t('Radar')}
 					</Button>
 
-					<Button onPress={() => navigation.navigate('Home')}>
+					<Button onPress={() => navigation.navigate('Register')}>
 						{i18n.t('Register')}
 					</Button>
 
-					<Button onPress={() => navigation.navigate('Home')}>
+					<Button onPress={() => navigation.navigate('About')}>
 						{i18n.t('About')}
 					</Button>
 				</View>
