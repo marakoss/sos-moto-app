@@ -29,14 +29,13 @@ import { IconMenu, IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
 
 import * as Location from 'expo-location';
-import { PermissionStatus } from 'expo-location';
+import { LocationObject, PermissionStatus } from 'expo-location';
 
 import * as Network from 'expo-network';
 
 import { iCard } from 'types/card';
-import { API_BASE } from '@env';
 
-import { filters } from '../store/filters';
+import { loadUsers } from '@logic/Users';
 
 const location_initial = {
 	coords: {
@@ -47,141 +46,116 @@ const location_initial = {
 
 const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const [geoStatus, setGeoStatus] = useState('');
-	const [isError, setIsError] = useState(false);
+	const [isError, setIsError] = useState(true);
+	const [loading, setLoading] = useState(true);
+	const [isConnected, setIsConnected] = useState(false);
+	const [isLocationResolved, setIsLocationResolved] = useState(false);
 	const [location, setLocation] = useState(location_initial);
 	const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
 	const [network, setNetwork] = useState({});
-	const [isConnected, setIsConnected] = useState(false);
 	const [people, setPeople] = useState<iCard[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [lastCheckTime, setLastCheckTime] = useState(0);
+
+	const updateLocation = (loc: LocationObject | null) => {
+		if (loc !== null) {
+			setLocation(loc);
+			setLatitude(loc.coords.latitude);
+			setLongitude(loc.coords.longitude);
+			setIsLocationResolved(true);
+		}
+	};
 
 	useEffect(() => {
+		if (!isError) return;
+
 		(async () => {
-			try {
-				const { status } = await Location.requestPermissionsAsync();
+			const { status } = await Location.requestPermissionsAsync();
+			return status;
+		})()
+			.then((status: PermissionStatus) => {
 				if (status !== PermissionStatus.GRANTED) {
-					setGeoStatus(status);
 					setIsError(true);
 				} else {
 					setIsError(false);
 				}
-				// console.log('status change', status);
-			} catch {
+				setGeoStatus(status);
+
+				if (__DEV__) {
+					console.log('status change', status);
+				}
+			})
+			.catch(() => {
 				setIsError(true);
-			}
-		})();
-	}, [geoStatus]);
+			});
+	}, [isError, geoStatus]);
 
 	useEffect(() => {
 		if (isError) return;
 
 		(async () => {
-			try {
-				const loc = await Location.getLastKnownPositionAsync({
-					requiredAccuracy: 100
-				});
-				if (loc != null) {
-					setLocation(loc);
-					setLatitude(loc.coords.latitude);
-					setLongitude(loc.coords.longitude);
-
-					// console.log(location, 'last known was called at', new Date().getTime());
-				}
-			} catch {
-				// do nothing
+			const loc = await Location.getLastKnownPositionAsync({
+				requiredAccuracy: 100
+			});
+			if (__DEV__) {
+				console.log(
+					'Last known position was called at',
+					new Date().getTime()
+				);
 			}
-		})();
+			return loc;
+		})().then(updateLocation);
 	}, [isError]);
 
 	useEffect(() => {
 		if (isError) return;
-		(async () => {
-			try {
-				const loc = await Location.getCurrentPositionAsync({});
-				setLocation(loc);
-				setLatitude(loc.coords.latitude);
-				setLongitude(loc.coords.longitude);
 
-				// console.log(location, 'current was called at', new Date().getTime());
-			} catch {
-				setLocation(location_initial);
+		(async () => {
+			const loc = await Location.getCurrentPositionAsync({});
+			if (__DEV__) {
+				console.log(
+					'Real current position was called at',
+					new Date().getTime()
+				);
 			}
-		})();
+			return loc;
+		})().then(updateLocation);
 	}, [isError]); // [location]);
 
 	useEffect(() => {
 		(async () => {
-			try {
-				const response = await Network.getNetworkStateAsync();
-				// console.log('connected', response.isConnected);
+			const response = await Network.getNetworkStateAsync();
+			// console.log('connected', response.isConnected);
+			return response;
+		})()
+			.then((response) => {
 				setNetwork(response);
 				setIsConnected(
 					response.isConnected ? response.isConnected : false
 				);
-			} catch {
+			})
+			.catch(() => {
 				setIsConnected(false);
-			}
-		})();
+			});
 	}, []);
 	// [network]);
 
-	const fetchData = (lat: number, lon: number) => {
-		const data = fetchJson(lat, lon);
+	const loadData = (lat: number, lon: number) => {
+		setLoading(true);
+		const data = loadUsers(lat, lon);
 		data.then((apipeople) => {
-			if (typeof apipeople === 'object') {
-				setPeople(apipeople);
-			}
+			setLoading(false);
+			setPeople(apipeople);
+		}).catch((error: Error) => {
+			console.warn(error.name, ': ', error.message);
+			setLoading(false);
 		});
 	};
 
-	const fetchJson = async (
-		lat: number,
-		lon: number
-	): Promise<Array<iCard> | boolean> => {
-		setLoading(true);
-
-		if (lat === 0 || lon === 0) {
-			console.log('still zero');
-			setLoading(false);
-			return false;
-		}
-
-		try {
-			const response = await fetch(
-				`${API_BASE}/v1/users/?lat=${lat}&lon=${lon}&services=${filters
-					.getActive(filters.items)
-					.join(',')}`
-			);
-			const json = await response.json();
-			setLoading(false);
-			setLastCheckTime(new Date().getTime());
-			return json;
-		} catch (error) {
-			setLoading(false);
-			console.error('error: ', error);
-			return false;
-		}
-	};
-
-	const loadData = () => {
-		// TODO: redo as if last position is different by 1 km.
-		console.log('Started loading', latitude, longitude);
-		const timeLimit = 1000 * 3; // thirty seconds
-		if (lastCheckTime + timeLimit <= new Date().getTime()) {
-			fetchData(latitude, longitude);
-		} else {
-			console.warn('Too many requests in a time period');
-		}
-	};
-
 	useEffect(() => {
-		// console.log('how many times?', latitude, longitude);
-		if (!isError) {
-			loadData();
+		if (!isError && isLocationResolved) {
+			loadData(latitude, longitude);
 		}
-	}, [isError]); // [location.coords.latitude, location.coords.longitude]);
+	}, [isError, location, isLocationResolved]);
 
 	return (
 		<View style={s.container}>
@@ -254,7 +228,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 							<UserList
 								people={people}
 								loading={loading}
-								onRefresh={() => loadData()}
+								onRefresh={() => loadData(latitude, longitude)}
 							/>
 						)}
 					</Background>
