@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>cs</string>
 	<key>CFBundleDisplayName</key>
 	<string>SOS Moto</string>
 	<key>CFBundleExecutable</key>
@@ -21,7 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.navigation</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

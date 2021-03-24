@@ -10,9 +10,15 @@
       "**/*"
     ],
     "icon": "./src/assets/images/app-icon/applogo.png",
+    "splash": {
+      "images": "./src/assets/images/splash/splashscreen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "bundleIdentifier": "com.imagedesigncz.sosmoto",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.0",
+      "supportsTablet": false
     },
     "android": {
       "package": "com.imagedesigncz.sosmoto",
