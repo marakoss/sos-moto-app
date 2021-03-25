@@ -8,4 +8,5 @@ export interface iCard {
 	services?: Array<number>;
 	distance?: number;
 	index?: number;
+	note?: string;
 }

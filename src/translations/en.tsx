@@ -23,8 +23,8 @@ const buttons = {
 	Radar: 'Radar',
 	Register: 'Registrovat se',
 	About: 'O aplikaci',
+	back: 'zpět',
 	'back to application': 'zpět do aplikace',
-	'back': 'zpět',
 	'Allow access to location services': 'Povolit přistup k polohovým službám',
 	'Share location': 'Sdílet polohu'
 };
@@ -43,12 +43,17 @@ const modals = {
 		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze'
 };
 
+const labels = {
+	offers: 'nabízí: ',
+	note: 'poznámka: '
+};
+
 export default {
 	...headlines,
 	...services,
 	...buttons,
 	...errors,
 	...modals,
-	offers: 'nabízí: ',
+	...labels,
 	'back to': 'zpět na'
 };

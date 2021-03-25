@@ -1,5 +1,12 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View, Linking, Alert } from 'react-native';
+import React, { FC, useState } from 'react';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Linking,
+	Alert,
+	Pressable
+} from 'react-native';
 import Button from '@components/Button/Button';
 import { IconPhone, IconNavigate } from '@icons/index';
 import { colorList } from '@dictionaries/colors';
@@ -55,62 +62,77 @@ const Vcard: FC<iCard> = ({
 	lon,
 	services,
 	distance,
+	note,
 	index
 }) => {
 	const color = colorList[Number(index)];
+	const [noteShowed, setNoteShowed] = useState(false);
+	const showNote = () => {
+		setNoteShowed(!noteShowed);
+	};
 
 	return (
-		<View style={s.container}>
-			<View style={s.sideLine} />
-			<View style={s.pointPosition}>
-				<View style={[s.shadow, { borderColor: hexToRgbA(color) }]}>
-					<View style={s.shadowSpace}>
-						<View style={[s.point, { backgroundColor: color }]} />
+		<Pressable onPress={() => showNote()}>
+			<View style={s.container}>
+				<View style={s.sideLine} />
+				<View style={s.pointPosition}>
+					<View style={[s.shadow, { borderColor: hexToRgbA(color) }]}>
+						<View style={s.shadowSpace}>
+							<View
+								style={[s.point, { backgroundColor: color }]}
+							/>
+						</View>
 					</View>
 				</View>
-			</View>
 
-			<View style={s.distance}>
-				<Text style={s.distanceText}>{distance} km</Text>
-			</View>
+				<View style={s.distance}>
+					<Text style={s.distanceText}>{distance} km</Text>
+				</View>
 
-			<View style={s.name}>
-				<Text style={[s.nameText, { color }]}>
-					{name} {surname}
-				</Text>
-				<Text>
-					{i18n.translate('offers')}
-					{getServices(services)}
-				</Text>
-			</View>
+				<View style={s.name}>
+					<Text style={[s.nameText, { color }]}>
+						{name} {surname}
+					</Text>
+					<Text>
+						{i18n.translate('offers')}
+						{getServices(services)}
+					</Text>
+				</View>
 
-			<View style={s.contact}>
-				<Button
-					onPress={() => makeCall(phone)}
-					icon={
-						<IconPhone
-							width="16"
-							height="16"
-							fillColor={COLORS.DARKTEXT}
-						/>
-					}
-				>
-					{i18n.t('call')}
-				</Button>
-				<Button
-					onPress={() => navigate(lat, lon)}
-					icon={
-						<IconNavigate
-							width="16"
-							height="16"
-							fillColor={COLORS.DARKTEXT}
-						/>
-					}
-				>
-					{i18n.t('navigate')}
-				</Button>
+				<View style={s.contact}>
+					<Button
+						onPress={() => makeCall(phone)}
+						icon={
+							<IconPhone
+								width="16"
+								height="16"
+								fillColor={COLORS.DARKTEXT}
+							/>
+						}
+					>
+						{i18n.t('call')}
+					</Button>
+					<Button
+						onPress={() => navigate(lat, lon)}
+						icon={
+							<IconNavigate
+								width="16"
+								height="16"
+								fillColor={COLORS.DARKTEXT}
+							/>
+						}
+					>
+						{i18n.t('navigate')}
+					</Button>
+				</View>
+				{noteShowed && note && note?.length > 0 && (
+					<View>
+						<Text>{i18n.t('note')}</Text>
+						<Text>{note}</Text>
+					</View>
+				)}
 			</View>
-		</View>
+		</Pressable>
 	);
 };
 
