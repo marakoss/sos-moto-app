@@ -44,7 +44,8 @@ module.exports = {
         "@typescript-eslint/naming-convention": ["warn", { selector: 'typeLike', format: ['camelCase'] }],
         "no-bitwise": "off",
         "no-console": "off",
-        "react/destructuring-assignment": "warn"
+        "react/destructuring-assignment": "warn",
+		"object-shorthand": "off"
       },
       globals: {
         fetch: false
