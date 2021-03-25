@@ -4,7 +4,7 @@ import { coordsDistance } from '@utils/Geo';
 import type { iCard } from 'types/card';
 import { API_BASE } from '@env';
 
-import { filters } from '@store/filters';
+import { getActive } from '@store/filters';
 
 // Check if this could cause an error
 const lastRequest = {
@@ -16,14 +16,18 @@ const lastRequest = {
 
 const timeLimit = 1000 * 10; // ten seconds
 
-export const loadUsers = async (lat: number, lon: number): Promise<iCard[]> => {
+export const loadUsers = async (
+	lat: number,
+	lon: number,
+	filtered: object
+): Promise<iCard[]> => {
 	const distance = coordsDistance(
 		lat,
 		lon,
 		lastRequest.lastLat,
 		lastRequest.lastLon
 	);
-	const filterString = filters.getActive(filters.items).join(',');
+	const filterString = getActive(filtered).join(',');
 	const query = `${API_BASE}/v1/users/?lat=${lat}&lon=${lon}&services=${filterString}`;
 
 	if (lastRequest.lastFilters === filterString) {

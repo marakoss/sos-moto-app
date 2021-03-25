@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useContext } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -37,6 +37,8 @@ import { iCard } from 'types/card';
 
 import { loadUsers } from '@logic/Users';
 
+import { FiltersContext } from '@store/filters';
+
 const location_initial = {
 	coords: {
 		latitude: 0,
@@ -53,8 +55,9 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const [location, setLocation] = useState(location_initial);
 	const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
-	const [network, setNetwork] = useState({});
+	const [network, setNetwork] = useState({}); // fix
 	const [people, setPeople] = useState<iCard[]>([]);
+	const filters = useContext(FiltersContext);
 
 	const updateLocation = (loc: LocationObject | null) => {
 		if (loc !== null) {
@@ -141,12 +144,12 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 
 	const loadData = (lat: number, lon: number) => {
 		setLoading(true);
-		const data = loadUsers(lat, lon);
+		const data = loadUsers(lat, lon, filters.items);
 		data.then((apipeople) => {
 			setLoading(false);
 			setPeople(apipeople);
 		}).catch((error: Error) => {
-			console.warn(error.name, ': ', error.message);
+			console.log(error.message);
 			setLoading(false);
 		});
 	};
@@ -155,7 +158,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 		if (!isError && isLocationResolved) {
 			loadData(latitude, longitude);
 		}
-	}, [isError, location, isLocationResolved]);
+	}, [isError, location, isLocationResolved, filters]);
 
 	return (
 		<View style={s.container}>
