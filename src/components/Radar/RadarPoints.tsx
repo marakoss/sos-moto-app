@@ -16,12 +16,16 @@ interface iMyProps {
 }
 
 const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
-	let n = 0;
-
-	const list = people.map((person: iCard) => {
+	const points = people.map((person: iCard) => {
 		// average between points
 		const maxDistance = 20;
-		const points = getPoints(person, { lat, lon }, 100, maxDistance);
+		const point = getPoint(person, { lat, lon }, 100, maxDistance);
+		return point;
+	});
+
+	let n = 0;
+	const list = points.map((point: iPoint) => {
+		const realpoint = sperateClosePoints(point, points, n);
 		const color = colorList[Number(n)];
 
 		n += 1; // RN screams each child should have unique key
@@ -29,7 +33,10 @@ const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
 		return (
 			<View
 				key={n}
-				style={[s.points, { top: points.x - 6, right: points.y - 6 }]}
+				style={[
+					s.points,
+					{ top: realpoint.x - 6, right: realpoint.y - 6 }
+				]}
 			>
 				<View style={[s.shadow, { borderColor: hexToRgbA(color) }]}>
 					<View style={s.shadowSpace}>
@@ -84,6 +91,7 @@ const s = StyleSheet.create({
 });
 
 /*
+// Real world data test
 const mypos: coordinate = { lat: 49.454232 , lon: 17.452700};
 const data: Array<coordinate> = [
     { lat: 49.454226 , lon: 17.455272},
@@ -92,6 +100,22 @@ const data: Array<coordinate> = [
     { lat: 49.453857, lon: 17.454027 },
     { lat: 49.418700, lon: 17.502790 },
     { lat: 49.318700, lon: 17.502790 },
+];
+
+// Point clustering test
+const points = [
+	{
+		x: 40,
+		y: 0
+	},
+	{
+		x: 40,
+		y: 0
+	},
+	{
+		x: 40,
+		y: 0
+	},
 ];
 */
 
@@ -109,9 +133,9 @@ const getNormalizedCoords = (
 };
 
 /*
- *
+ * Transform GPS coords to X,Y points with a center of 0, 0.
  */
-const getPoints = (
+const getPoint = (
 	gps: iCoordinate,
 	origin: iCoordinate,
 	radius: number,
@@ -146,6 +170,36 @@ const getPoints = (
 	return {
 		x: x * scale,
 		y: y * scale
+	};
+};
+
+/*
+ * If points are close together move them aside
+ */
+const sperateClosePoints = (
+	point: iPoint,
+	points: iPoint[],
+	index: number
+): iPoint => {
+	const radius = 15; // pixels
+	const moveBy = radius / 2;
+	let new_x = point.x;
+	let new_y = point.y;
+
+	points.forEach((item, i) => {
+		if (index < i) {
+			if (item.x - moveBy <= point.x && item.x + moveBy >= point.x) {
+				if (item.y - moveBy <= point.y && item.y + moveBy >= point.y) {
+					new_x = point.x - radius + Math.random() * radius;
+					new_y = point.y - radius;
+				}
+			}
+		}
+	});
+
+	return {
+		x: new_x,
+		y: new_y
 	};
 };
 

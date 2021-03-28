@@ -22,5 +22,11 @@ export const colorList: Array<string> = [
 	COLORS.GREEN,
 	COLORS.BLUE,
 	COLORS.ORANGE,
+	COLORS.YELLOW,
+	// error state?
+	COLORS.RED,
+	COLORS.GREEN,
+	COLORS.BLUE,
+	COLORS.ORANGE,
 	COLORS.YELLOW
 ];
