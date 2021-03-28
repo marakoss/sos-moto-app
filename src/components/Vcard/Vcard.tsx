@@ -54,7 +54,6 @@ const getServices = (services: Array<number> | undefined) => {
 };
 
 const Vcard: FC<iCard> = ({
-	id,
 	name,
 	surname,
 	phone,
@@ -102,25 +101,21 @@ const Vcard: FC<iCard> = ({
 				<View style={s.contact}>
 					<Button
 						onPress={() => makeCall(phone)}
-						icon={
-							<IconPhone
-								width="16"
-								height="16"
-								fillColor={COLORS.DARKTEXT}
-							/>
-						}
+						icon={() => IconPhone}
+						iconWidth={16}
+						iconHeight={16}
+						iconFillColor={COLORS.DARKTEXT}
+						iconHoverFillColor={COLORS.WHITE}
 					>
 						{i18n.t('call')}
 					</Button>
 					<Button
 						onPress={() => navigate(lat, lon)}
-						icon={
-							<IconNavigate
-								width="16"
-								height="16"
-								fillColor={COLORS.DARKTEXT}
-							/>
-						}
+						icon={() => IconNavigate}
+						iconWidth={16}
+						iconHeight={16}
+						iconFillColor={COLORS.DARKTEXT}
+						iconHoverFillColor={COLORS.WHITE}
 					>
 						{i18n.t('navigate')}
 					</Button>

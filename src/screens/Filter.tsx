@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 import { Headline, Button, FilterItem } from '@components/index';
@@ -42,7 +42,9 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
 						<View style={s.button}>
 							<Button
 								onPress={() => navigation.navigate('Home')}
-								icon={<IconCheck fillColor={COLORS.RED} />}
+								icon={() => IconCheck}
+								iconFillColor={COLORS.PRIMARY}
+								iconHoverFillColor={COLORS.WHITE}
 							>
 								{i18n.t('confirm')}
 							</Button>

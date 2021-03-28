@@ -15,7 +15,6 @@ interface iMyProp {
 	styles?: {
 		container: any;
 	};
-	icon?: ReactNode;
 	title?: string;
 	onPress?: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
 	color?: ColorValue;
@@ -23,6 +22,11 @@ interface iMyProp {
 	disabled?: boolean;
 	testID?: string;
 	wrapperStyle?: object;
+	icon?: ReactNode;
+	iconFillColor?: ColorValue;
+	iconHoverFillColor?: ColorValue;
+	iconWidth?: number;
+	iconHeight?: number;
 }
 
 const ButtonFilter: FC<iMyProp> = ({
@@ -31,9 +35,31 @@ const ButtonFilter: FC<iMyProp> = ({
 	onPress,
 	disabled,
 	testID,
-	wrapperStyle
+	wrapperStyle,
+	iconFillColor,
+	iconHoverFillColor,
+	iconWidth,
+	iconHeight
 }): React.ReactElement => {
 	const container = wrapperStyle || {};
+
+	const getIcon = (Component: ReactNode, pressed: boolean) => {
+		if (Component instanceof Function) {
+			if (!pressed) {
+				return React.createElement(Component(), {
+					fillColor: iconFillColor,
+					width: iconWidth,
+					height: iconHeight
+				});
+			}
+			return React.createElement(Component(), {
+				fillColor: iconHoverFillColor,
+				width: iconWidth,
+				height: iconHeight
+			});
+		}
+		return Component;
+	};
 
 	return (
 		<Pressable
@@ -46,10 +72,11 @@ const ButtonFilter: FC<iMyProp> = ({
 			{({ pressed }) => (
 				<View style={s.container}>
 					<View style={s.overlay}>
-						<IconBlob fillColor={COLORS.PRIMARY} />
+						{pressed && <IconBlob fillColor={COLORS.WHITE} />}
+						{!pressed && <IconBlob fillColor={COLORS.PRIMARY} />}
 					</View>
 					<View style={[s.overlay, pressed && s.overlayPressed]}>
-						{icon}
+						{getIcon(icon, pressed)}
 					</View>
 				</View>
 			)}
@@ -72,7 +99,7 @@ const s = StyleSheet.create({
 		position: 'absolute'
 	},
 	overlayPressed: {
-		// no
+		opacity: 0.8
 	}
 });
 

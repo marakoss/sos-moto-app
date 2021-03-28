@@ -15,7 +15,10 @@ interface iMyButton {
 		button: any;
 		text: any;
 	};
-
+	stylesPressed?: {
+		button: any;
+		text: any;
+	};
 	title?: string;
 	onPress?: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;
 	color?: ColorValue;
@@ -35,12 +38,42 @@ const Button: FC<iMyButton> = ({
 	onPress,
 	disabled,
 	testID,
-	icon
+	icon,
+	iconFillColor,
+	iconHoverFillColor,
+	iconWidth,
+	iconHeight,
+	styles,
+	stylesPressed
 }): React.ReactElement => {
-	const buttonStyles = [s.button];
-	const buttonPressed = [s.buttonPressed];
-	const textStyles = [s.text];
-	const textPressed = [s.textPressed];
+	const buttonStyles = { ...s.button, ...(styles ? styles.button : {}) };
+	const buttonPressed = {
+		...s.buttonPressed,
+		...(stylesPressed ? stylesPressed.button : {})
+	};
+	const textStyles = { ...s.text, ...(styles ? styles.text : {}) };
+	const textPressed = {
+		...s.textPressed,
+		...(stylesPressed ? stylesPressed.text : {})
+	};
+
+	const getIcon = (Component: ReactNode, pressed: boolean) => {
+		if (Component instanceof Function) {
+			if (!pressed) {
+				return React.createElement(Component(), {
+					fillColor: iconFillColor,
+					width: iconWidth,
+					height: iconHeight
+				});
+			}
+			return React.createElement(Component(), {
+				fillColor: iconHoverFillColor,
+				width: iconWidth,
+				height: iconHeight
+			});
+		}
+		return Component;
+	};
 
 	return (
 		<Pressable
@@ -52,7 +85,7 @@ const Button: FC<iMyButton> = ({
 		>
 			{({ pressed }) => (
 				<View style={[s.inner, buttonStyles, pressed && buttonPressed]}>
-					<View style={s.gap}>{icon}</View>
+					<View style={s.gap}>{getIcon(icon, pressed)}</View>
 
 					<View style={s.gap}>
 						<Text style={[textStyles, pressed && textPressed]}>
@@ -95,7 +128,7 @@ const s = StyleSheet.create({
 	},
 	buttonPressed: {
 		backgroundColor: COLORS.PRIMARY,
-		borderColor: 'transparent'
+		borderColor: COLORS.TRANSPARENT
 	}
 });
 

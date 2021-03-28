@@ -224,7 +224,9 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 					<ButtonFilter
 						wrapperStyle={s.filter}
 						onPress={() => navigation.navigate('Filter')}
-						icon={<IconFilters fillColor={COLORS.WHITE} />}
+						icon={() => IconFilters}
+						iconFillColor={COLORS.WHITE}
+						iconHoverFillColor={COLORS.PRIMARY}
 					/>
 					<Background>
 						{isConnected && (
