@@ -1,4 +1,4 @@
-import React, { useRef, FC } from 'react';
+import React, { useRef, FC, useEffect } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
 import { COLORS } from '@dictionaries/colors';
@@ -12,13 +12,15 @@ const RadarAnimation: FC = () => {
 			Animated.timing(animatedSize, {
 				toValue: 100,
 				duration: 2000,
-				useNativeDriver: false // false Doesnt work
+				useNativeDriver: true // false Doesnt work
 			}),
 			Animated.delay(2000)
-		]);
-		// .start(() => runAnimation());
+		]).start(() => runAnimation());
 	};
-	runAnimation();
+
+	useEffect(() => {
+		runAnimation();
+	}, []);
 
 	return (
 		<View style={s.radar}>
@@ -28,7 +30,7 @@ const RadarAnimation: FC = () => {
 					{
 						opacity: animatedSize.interpolate({
 							inputRange: [0, 100],
-							outputRange: [0.5, 0]
+							outputRange: [0.3, 0]
 						}),
 						transform: [
 							{
@@ -67,7 +69,8 @@ const s = StyleSheet.create({
 		right: 0,
 		bottom: 0,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		zIndex: 0
 	},
 	radarCircle: {
 		position: 'absolute',
@@ -83,7 +86,8 @@ const s = StyleSheet.create({
 		height: 300,
 		backgroundColor: COLORS.PRIMARY,
 		opacity: 1,
-		borderRadius: 1000
+		borderRadius: 1000,
+		zIndex: 1
 	}
 });
 

@@ -209,16 +209,16 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 								</Pressable>
 							</View>
 						)}
-						<RadarAnimation />
-
-						{!isError && <Share lat={latitude} lon={longitude} />}
-
 						{!isError && (
-							<Radar
-								people={people}
-								lat={latitude}
-								lon={longitude}
-							/>
+							<>
+								<RadarAnimation />
+								<Share lat={latitude} lon={longitude} />
+								<Radar
+									people={people}
+									lat={latitude}
+									lon={longitude}
+								/>
+							</>
 						)}
 					</View>
 					<ButtonFilter
@@ -255,7 +255,9 @@ const s = StyleSheet.create({
 	header: {
 		width: '100%',
 		flexDirection: 'row',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
+		position: 'relative',
+		zIndex: 100
 	},
 	radar: {
 		width: '100%',

@@ -24,6 +24,7 @@ const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
 						icon={<IconNavigate />}
 					>
 						{i18n.t('back to')}
+						{' '}
 						{i18n.t('Radar')}
 					</Button>
 

@@ -32,7 +32,7 @@ const FilterItem: FC<filteritem> = ({
 		<View style={s.container}>
 			<Text style={[s.text, color]}>{itemText}</Text>
 			<Switch
-				trackColor={{ false: COLORS.DARKTEXT, true: COLORS.PRIMARY }}
+				trackColor={{ false: COLORS.DARKERTEXT, true: COLORS.PRIMARY }}
 				thumbColor={COLORS.WHITE}
 				ios_backgroundColor={COLORS.LIGHTTEXT}
 				onValueChange={toggleSwitch}
