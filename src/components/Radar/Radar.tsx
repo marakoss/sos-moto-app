@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import * as Location from 'expo-location';
@@ -83,6 +83,11 @@ const Radar: FC<iMyProps> = ({ people, lat, lon }) => {
 		});
 	}, []);
 
+
+	const MemoizedComponent = useMemo(() => {
+		return <RadarPoints lat={lat} lon={lon} people={people} />;
+	}, [lat, lon, people]);
+
 	return (
 		<View style={s.container}>
 			<View style={s.radarContainer}>
@@ -92,7 +97,7 @@ const Radar: FC<iMyProps> = ({ people, lat, lon }) => {
 					}}
 				>
 					<RadarArrow />
-					<RadarPoints lat={lat} lon={lon} people={people} />
+					{MemoizedComponent}
 				</View>
 			</View>
 		</View>
