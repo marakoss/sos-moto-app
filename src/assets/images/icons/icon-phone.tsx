@@ -5,8 +5,8 @@ import { mySvgIcon } from 'types/svg';
 const IconPhone: mySvgIcon = ({ width, height, fillColor }): JSX.Element => {
 	return (
 		<Svg
-			width={Number(width) | 20}
-			height={Number(height) | 20}
+			width={Number(width) || 20}
+			height={Number(height) || 20}
 			viewBox="0 0 58 58"
 			fill={fillColor || '#000000'}
 		>

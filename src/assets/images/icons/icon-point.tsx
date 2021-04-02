@@ -5,8 +5,8 @@ import { mySvgIcon } from 'types/svg';
 const IconPoint: mySvgIcon = ({ width, height, fillColor }): JSX.Element => {
 	return (
 		<Svg
-			width={Number(width) | 10}
-			height={Number(height) | 10}
+			width={Number(width) || 10}
+			height={Number(height) || 10}
 			viewBox="0 0 12 12"
 		>
 			<Circle cx="6" cy="6" r="6" fill={fillColor || 'red'} />

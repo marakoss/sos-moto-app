@@ -8,11 +8,12 @@ const IconArrow: mySvgIcon = ({
 	width,
 	height
 }): JSX.Element => {
-	const myWidth = width || 50;
-	const myHeight = height || 50;
-
 	return (
-		<Svg width={myWidth} height={myHeight} viewBox="0 0 50 50">
+		<Svg
+			width={Number(width) || 50}
+			height={Number(height) || 50}
+			viewBox="0 0 50 50"
+		>
 			<Polygon
 				fill={fillColor || '#000000'}
 				points="25,35 45,49 25,0 5,49 "

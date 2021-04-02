@@ -5,8 +5,8 @@ import { mySvgIcon } from 'types/svg';
 const IconCheck: mySvgIcon = ({ width, height, fillColor }): JSX.Element => {
 	return (
 		<Svg
-			width={Number(width) | 42}
-			height={Number(height) | 42}
+			width={Number(width) || 30}
+			height={Number(height) || 30}
 			viewBox="0 0 405 405"
 			fill={String(fillColor || '#000000')}
 		>
