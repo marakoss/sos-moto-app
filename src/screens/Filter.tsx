@@ -39,12 +39,22 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
 						<View style={s.content}>
 							{renderFilters(items, dispatch)}
 						</View>
-						<View style={s.button}>
+						<View style={s.buttonContainer}>
 							<Button
 								onPress={() => navigation.navigate('Home')}
+								styles={{
+									button: s.button,
+									text: s.buttonText
+								}}
+								stylesPressed={{
+									button: s.buttonPressed,
+									text: s.buttonTextPressed
+								}}
 								icon={() => IconCheck}
-								iconFillColor={COLORS.PRIMARY}
-								iconHoverFillColor={COLORS.WHITE}
+								iconFillColor={COLORS.WHITE}
+								iconHoverFillColor={COLORS.PRIMARY}
+								iconWidth={24}
+								iconHeight={24}
 							>
 								{i18n.t('confirm')}
 							</Button>
@@ -68,9 +78,23 @@ const s = StyleSheet.create({
 	safeArea: {
 		...globalStyle.droidSafeArea
 	},
-	button: {
-		alignItems: 'flex-end',
+	buttonContainer: {
+		width: '100%',
 		paddingHorizontal: 20
+	},
+	button: {
+		backgroundColor: COLORS.PRIMARY,
+		borderColor: COLORS.PRIMARY
+	},
+	buttonText: {
+		color: COLORS.WHITE
+	},
+	buttonPressed: {
+		backgroundColor: COLORS.TRANSPARENT,
+		borderColor: COLORS.PRIMARY
+	},
+	buttonTextPressed: {
+		color: COLORS.PRIMARY
 	}
 });
 
