@@ -10,9 +10,17 @@ interface iListView {
 	people: iCard[];
 	loading: boolean;
 	onRefresh: Function;
+	navigation?: any;
+	route?: any;
 }
 
-const List: FC<iListView> = ({ people, loading, onRefresh }) => {
+const List: FC<iListView> = ({
+	people,
+	loading,
+	onRefresh,
+	navigation,
+	route
+}) => {
 	const renderItem: ListRenderItem<iCard> = ({ item, index }) => (
 		/* eslint-disable react/jsx-props-no-spreading */
 		<Vcard {...item} index={index} />
@@ -25,8 +33,10 @@ const List: FC<iListView> = ({ people, loading, onRefresh }) => {
 				data={people}
 				renderItem={renderItem}
 				keyExtractor={(item) => (item.id ? item.id : '').toString()}
-				ListEmptyComponent={<Empty />}
-				initialNumToRender={3}
+				ListEmptyComponent={
+					<Empty navigation={navigation} route={route} />
+				}
+				initialNumToRender={5}
 				// onEndReached={load more}
 				// onEndReachedThreshold
 				onRefresh={() => onRefresh()}
