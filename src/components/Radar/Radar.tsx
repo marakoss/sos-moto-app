@@ -83,7 +83,6 @@ const Radar: FC<iMyProps> = ({ people, lat, lon }) => {
 		});
 	}, []);
 
-
 	const MemoizedComponent = useMemo(() => {
 		return <RadarPoints lat={lat} lon={lon} people={people} />;
 	}, [lat, lon, people]);

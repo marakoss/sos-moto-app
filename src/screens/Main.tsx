@@ -21,6 +21,7 @@ import {
 	Headline,
 	Radar,
 	RadarAnimation,
+	RadarCircles,
 	ButtonFilter,
 	Share,
 	Mobile
@@ -209,9 +210,12 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 								</Pressable>
 							</View>
 						)}
-						{!isError && (
+						{!isError && isLocationResolved && isForeground && (
+							<RadarAnimation />
+						)}
+						{!isError && isLocationResolved && (
 							<>
-								<RadarAnimation />
+								<RadarCircles />
 								<Share lat={latitude} lon={longitude} />
 								<Radar
 									people={people}

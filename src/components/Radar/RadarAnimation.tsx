@@ -44,19 +44,6 @@ const RadarAnimation: FC = () => {
 					}
 				]}
 			/>
-			<View style={[s.radarCircle, { opacity: 0.8 }]} />
-			<View
-				style={[
-					s.radarCircle,
-					{ opacity: 0.5, width: 150, height: 150 }
-				]}
-			/>
-			<View
-				style={[
-					s.radarCircle,
-					{ opacity: 0.3, width: 200, height: 200 }
-				]}
-			/>
 		</View>
 	);
 };
@@ -71,14 +58,6 @@ const s = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		zIndex: 0
-	},
-	radarCircle: {
-		position: 'absolute',
-		width: 100,
-		height: 100,
-		borderColor: COLORS.PRIMARY,
-		borderWidth: 2,
-		borderRadius: 1000
 	},
 	radarCircleAnimated: {
 		position: 'absolute',
