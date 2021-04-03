@@ -38,7 +38,6 @@ const makeCall = (phoneNumber: string | undefined) => {
 const navigate = (lat: number, lon: number) => {
 	if (!lat || !lon) return;
 
-	// console.log('https://www.google.com/maps/dir/?api=1&travelmode=driving&destination='+lat+','+lon+'');
 	Linking.openURL(
 		`https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=${lat},${lon}`
 	);
@@ -106,6 +105,7 @@ const Vcard: FC<iCard> = ({
 						iconHeight={16}
 						iconFillColor={COLORS.DARKTEXT}
 						iconHoverFillColor={COLORS.WHITE}
+						styles={{ button: s.buttonSpace }}
 					>
 						{i18n.t('call')}
 					</Button>
@@ -173,8 +173,12 @@ const s = StyleSheet.create({
 	},
 	contact: {
 		flexDirection: 'row',
-		justifyContent: 'flex-start'
+		justifyContent: 'flex-start',
 	},
+	buttonSpace: {
+		marginRight: 8
+	},
+
 	point: {
 		width: 13,
 		height: 13,
