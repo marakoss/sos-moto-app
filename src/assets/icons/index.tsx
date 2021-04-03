@@ -7,6 +7,9 @@ import IconBlob from './icon-blob';
 import IconNavigate from './icon-navigate';
 import IconCheck from './icon-check';
 import IconShare from './icon-share';
+import IconPerson from './icon-person';
+import IconInfo from './icon-info';
+import IconEmpty from './icon-empty';
 
 export {
 	IconArrow,
@@ -17,5 +20,8 @@ export {
 	IconBlob,
 	IconNavigate,
 	IconCheck,
-	IconShare
+	IconShare,
+	IconPerson,
+	IconInfo,
+	IconEmpty
 };

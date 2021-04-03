@@ -12,7 +12,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@images/*": ["assets/images/*"],
-      "@icons/*": ["assets/images/icons/*"],
+      "@icons/*": ["assets/icons/*"],
       "@components/*": ["components/*"],
       "@dictionaries/*": ["dictionaries/*"],
       "@screens/*": ["screens/*"],
