@@ -19,7 +19,8 @@ const timeLimit = 1000 * 10; // ten seconds
 export const loadUsers = async (
 	lat: number,
 	lon: number,
-	filtered: object
+	filtered: object,
+	people: Array<iCard>
 ): Promise<iCard[]> => {
 	const distance = coordsDistance(
 		lat,
@@ -30,17 +31,23 @@ export const loadUsers = async (
 	const filterString = getActive(filtered).join(',');
 	const query = `${API_BASE}/v1/users/?lat=${lat}&lon=${lon}&services=${filterString}`;
 
-	if (lastRequest.lastFilters === filterString) {
-		if (distance <= 1) {
-			return Promise.reject(
-				new Error('Too close to previous location to force recalculate')
-			);
-		}
+	if (people.length !== 0) {
+		if (lastRequest.lastFilters === filterString) {
+			if (distance <= 1) {
+				return Promise.reject(
+					new Error(
+						'Too close to previous location to force recalculate'
+					)
+				);
+			}
 
-		if (lastRequest.lastCheckTime + timeLimit >= new Date().getTime()) {
-			return Promise.reject(
-				new Error('Too many request in a time period to recalculate')
-			);
+			if (lastRequest.lastCheckTime + timeLimit >= new Date().getTime()) {
+				return Promise.reject(
+					new Error(
+						'Too many request in a time period to recalculate'
+					)
+				);
+			}
 		}
 	}
 	// Update checks before making request

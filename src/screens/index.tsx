@@ -4,10 +4,4 @@ import Menu from './Menu';
 import Register from './Register';
 import About from './About';
 
-export {
-	Main,
-	Filter,
-	Menu,
-	Register,
-	About
-};
+export { Main, Filter, Menu, Register, About };

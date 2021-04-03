@@ -24,7 +24,8 @@ import {
 	RadarCircles,
 	ButtonFilter,
 	Share,
-	Mobile
+	Mobile,
+	UserListPlaceholder
 } from '@components/index';
 import { IconMenu, IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
@@ -39,6 +40,7 @@ import { iCard } from 'types/card';
 import { loadUsers } from '@logic/Users';
 
 import { FiltersContext } from '@store/filters';
+import { MobileContext } from '@store/mobile';
 
 const location_initial = {
 	coords: {
@@ -47,10 +49,11 @@ const location_initial = {
 	}
 };
 
-const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
+const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 	const [geoStatus, setGeoStatus] = useState('');
 	const [isError, setIsError] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const [isForeground, setIsForeground] = useState(true);
 	const [isConnected, setIsConnected] = useState(false);
 	const [isLocationResolved, setIsLocationResolved] = useState(false);
 	const [location, setLocation] = useState(location_initial);
@@ -59,6 +62,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const [network, setNetwork] = useState({}); // fix
 	const [people, setPeople] = useState<iCard[]>([]);
 	const filters = useContext(FiltersContext);
+	const mobile = useContext(MobileContext);
 
 	const updateLocation = (loc: LocationObject | null) => {
 		if (loc !== null) {
@@ -128,10 +132,10 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 	useEffect(() => {
 		(async () => {
 			const response = await Network.getNetworkStateAsync();
-			// console.log('connected', response.isConnected);
 			return response;
 		})()
 			.then((response) => {
+				// console.log('connected?', response.isConnected);
 				setNetwork(response);
 				setIsConnected(
 					response.isConnected ? response.isConnected : false
@@ -141,11 +145,11 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 				setIsConnected(false);
 			});
 	}, []);
-	// [network]);
+	// network
 
-	const loadData = (lat: number, lon: number) => {
+	const loadData = () => {
 		setLoading(true);
-		const data = loadUsers(lat, lon, filters.items);
+		const data = loadUsers(latitude, longitude, filters.items, people);
 		data.then((apipeople) => {
 			setLoading(false);
 			setPeople(apipeople);
@@ -157,18 +161,20 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 
 	useEffect(() => {
 		if (!isError && isLocationResolved) {
-			loadData(latitude, longitude);
+			loadData();
 		}
-	}, [isError, location, isLocationResolved, filters]);
+	}, [location, isError, isLocationResolved, isForeground, filters]);
 
 	return (
 		<View style={s.container}>
-			<Mobile />
+			<Mobile setIsForeground={setIsForeground} />
 			<LinearGradient
 				colors={[
 					COLORS.BACKGROUNDGRADIENT1,
 					COLORS.BACKGROUNDGRADIENT2
 				]}
+				start={{ x: 0, y: 0 }}
+				end={{ x: 0, y: 1 }}
 				style={s.gradient}
 			>
 				<SafeAreaView style={s.safeArea}>
@@ -233,13 +239,19 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 						iconHoverFillColor={COLORS.PRIMARY}
 					/>
 					<Background>
-						{isConnected && (
+						{isConnected && isLocationResolved && isForeground && (
 							<UserList
 								people={people}
 								loading={loading}
-								onRefresh={() => loadData(latitude, longitude)}
+								onRefresh={() => loadData()}
+								navigation={navigation}
+								route={route}
 							/>
 						)}
+						{(!isConnected ||
+							isError ||
+							!isLocationResolved ||
+							!isForeground) && <UserListPlaceholder />}
 					</Background>
 				</SafeAreaView>
 			</LinearGradient>
@@ -250,7 +262,8 @@ const Main: FC<StackScreenProps<any>> = ({ navigation }) => {
 const s = StyleSheet.create({
 	container: {
 		width: '100%',
-		backgroundColor: COLORS.BLACK
+		backgroundColor: COLORS.BLACK,
+		flex: 1
 	},
 	safeArea: {
 		flex: 1,

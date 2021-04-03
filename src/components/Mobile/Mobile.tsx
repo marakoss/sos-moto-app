@@ -1,23 +1,43 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 
-const Mobile: FC = () => {
-	const [state, setState] = useState<AppStateStatus>('unknown');
+// airplane mode
+
+// is connected
+
+// is in foreground
+
+interface iMobile {
+	setIsForeground?: Function;
+}
+
+const Mobile: FC<iMobile> = ({ setIsForeground }) => {
+	const state = useRef<AppStateStatus>('unknown');
 
 	const handleAppStateChange = (nextAppState: AppStateStatus) => {
-		if (state.match(/inactive|background/) && nextAppState === 'active') {
-			// console.log('App has come to the foreground!');
+		if (typeof setIsForeground === 'function') {
+			if (
+				//state.current.match(/inactive|background|unknown/) &&
+				nextAppState === 'active'
+			) {
+				setIsForeground(true);
+			} else {
+				setIsForeground(false);
+			}
 		}
-		setState(nextAppState);
+		state.current = nextAppState;
 	};
 
 	useEffect(() => {
-		setState(AppState.currentState);
-		AppState.addEventListener('change', handleAppStateChange);
+		state.current = AppState.currentState;
+		AppState.addEventListener('change', (s) => handleAppStateChange(s));
 
 		return () => {
-			AppState.removeEventListener('change', handleAppStateChange);
+			AppState.removeEventListener('change', (s) =>
+				handleAppStateChange(s)
+			);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return <></>;
