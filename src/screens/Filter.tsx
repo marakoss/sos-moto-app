@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, ScrollView } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 import { Headline, Button, FilterItem } from '@components/index';
@@ -36,29 +36,39 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
 								textColor={{ color: COLORS.BLACK }}
 							/>
 						</View>
-						<View style={s.content}>
-							{renderFilters(items, dispatch)}
-						</View>
-						<View style={s.buttonContainer}>
-							<Button
-								onPress={() => navigation.navigate('Home')}
-								styles={{
-									button: s.button,
-									text: s.buttonText
-								}}
-								stylesPressed={{
-									button: s.buttonPressed,
-									text: s.buttonTextPressed
-								}}
-								icon={() => IconCheck}
-								iconFillColor={COLORS.WHITE}
-								iconHoverFillColor={COLORS.PRIMARY}
-								iconWidth={24}
-								iconHeight={24}
-							>
-								{i18n.t('confirm')}
-							</Button>
-						</View>
+						<ScrollView
+							style={s.scrollView}
+							showsVerticalScrollIndicator={false}
+						>
+							<View style={s.content}>
+								{renderFilters(items, dispatch)}
+							</View>
+							<View style={s.buttonContainer}>
+								<Button
+									onPress={() => navigation.navigate('Home')}
+									styles={{
+										button: s.button,
+										text: s.buttonText
+									}}
+									stylesPressed={{
+										button: s.buttonPressed,
+										text: s.buttonTextPressed
+									}}
+									icon={() => IconCheck}
+									iconFillColor={COLORS.WHITE}
+									iconHoverFillColor={COLORS.PRIMARY}
+									iconWidth={24}
+									iconHeight={24}
+								>
+									{i18n.t('confirm')}
+								</Button>
+							</View>
+							<View style={s.helpContainer}>
+								<Text style={s.helpText}>
+									{i18n.t('filters_helpText')}
+								</Text>
+							</View>
+						</ScrollView>
 					</SafeAreaView>
 				</View>
 			)}
@@ -67,16 +77,24 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
 };
 
 const s = StyleSheet.create({
-	header: {
-		paddingBottom: 20
-	},
-	content: {},
 	container: {
 		backgroundColor: COLORS.WHITE,
 		flex: 1
 	},
 	safeArea: {
-		...globalStyle.droidSafeArea
+		...globalStyle.droidSafeArea,
+		flex: 1
+	},
+	scrollView: {},
+	content: {},
+	header: {
+		paddingBottom: 20
+	},
+	helpContainer: {
+		padding: 20
+	},
+	helpText: {
+		textAlign: 'justify'
 	},
 	buttonContainer: {
 		width: '100%',

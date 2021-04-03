@@ -100,13 +100,13 @@ const Button: FC<iMyButton> = ({
 
 const s = StyleSheet.create({
 	container: {
-		marginRight: 8,
 		marginVertical: 8
 	},
 	inner: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center'
+		justifyContent: 'flex-start',
+		alignItems: 'center',
+		alignContent: 'center'
 	},
 	gap: {
 		paddingHorizontal: 8

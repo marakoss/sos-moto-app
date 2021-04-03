@@ -89,7 +89,7 @@ const ctx = {
 };
 
 export const FiltersContext = createContext<iCtx>(ctx);
-FiltersContext.displayName = 'MyFilters';
+FiltersContext.displayName = 'FiltersContext';
 
 export function reducer(state: iState, action: iAction): iState {
 	switch (action.type) {
