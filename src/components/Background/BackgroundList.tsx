@@ -17,7 +17,7 @@ const Background: FC<iBackground> = ({ height, children }) => {
 
 	return (
 		<View style={s.wrapper}>
-			<View style={s.container}>
+			<View style={s.shape}>
 				<View
 					style={[
 						s.arrows,
@@ -30,7 +30,9 @@ const Background: FC<iBackground> = ({ height, children }) => {
 					]}
 				/>
 			</View>
-			<View style={{ paddingTop: itsHeight + 10 }}>{children}</View>
+			<View style={[s.enclosing, { paddingTop: itsHeight + 10 }]}>
+				{children}
+			</View>
 		</View>
 	);
 };
@@ -40,14 +42,17 @@ const s = StyleSheet.create({
 		flex: 1,
 		marginBottom: -40
 	},
-	container: {
+	shape: {
 		width: '100%',
-		position: 'relative',
+		position: 'absolute',
 		transform: [
 			{
 				rotate: '180deg'
 			}
 		]
+	},
+	enclosing: {
+		flex: 1
 	},
 	arrows: {
 		position: 'absolute',
