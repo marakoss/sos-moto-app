@@ -21,8 +21,9 @@ const Share: FC<myprops> = ({ lat, lon }) => {
 				icon={<IconShare fillColor={COLORS.WHITE} />}
 			>
 				<Text style={s.shareText}>
+					{'N '}
 					{toDecimalPlaces(lat, 5).toFixed(5)}
-					{', '}
+					{', E '}
 					{toDecimalPlaces(lon, 5).toFixed(5)}
 				</Text>
 			</ButtonInversed>
@@ -34,7 +35,8 @@ const s = StyleSheet.create({
 	share: {
 		position: 'absolute',
 		zIndex: 20,
-		marginLeft: 20
+		marginLeft: 20,
+		top: 5
 	},
 	shareText: {
 		fontSize: 10
