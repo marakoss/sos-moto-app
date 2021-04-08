@@ -55,11 +55,11 @@ const s = StyleSheet.create({
 		width: 1,
 		height: 1,
 		position: 'absolute',
-		left: '49%',
-		top: '49%'
+		left: '0%',
+		top: '0%'
 		// Debug
 		// borderColor: COLORS.BLACK,
-		// borderWidth: 1,
+		// borderWidth: 1
 	},
 	points: {
 		shadowColor: COLORS.BLACK,

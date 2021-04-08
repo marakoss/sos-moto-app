@@ -17,10 +17,6 @@ interface iMyProps {
 	lon: number;
 }
 
-function average(nums: Array<number>) {
-	return nums.reduce((a, b) => a + b) / nums.length;
-}
-
 function cyclicDistance(current: number, now: number): number {
 	const abs = Math.abs(current - now);
 	const distanceAround = 360 - abs;
@@ -105,12 +101,16 @@ const Radar: FC<iMyProps> = ({ people, lat, lon }) => {
 
 const s = StyleSheet.create({
 	container: {
-		alignItems: 'center',
-		justifyContent: 'center',
 		position: 'relative',
 		height: '100%'
 	},
-	radarContainer: {}
+	radarContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'relative',
+		height: '100%',
+		zIndex: 2
+	}
 });
 
 export default Radar;

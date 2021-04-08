@@ -89,8 +89,8 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 							<Text style={s.paragraph}>
 								Aplikace vznikla jako reakce na poptávku v
 								komunitě motorkářů, kteří se sdružili na
-								facebookové skupine "SOS Motorkáři" za jejiž
-								vznikem stojí Jaroslav Čech
+								facebookové skupině "SOS Motorkáři", za jejímž
+								vznikem stojí Jaroslav Čech.
 							</Text>
 							<Image
 								source={IMAGEJAROSLAV}
