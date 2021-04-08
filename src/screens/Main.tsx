@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react';
+import React, { FC, useEffect, useState, useContext, useCallback } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -25,129 +25,32 @@ import {
 	ButtonFilter,
 	Share,
 	Mobile,
+	Location,
 	UserListPlaceholder
 } from '@components/index';
 import { IconMenu, IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
 
-import * as Location from 'expo-location';
-import { LocationObject, PermissionStatus } from 'expo-location';
-
-import * as Network from 'expo-network';
-
 import { iCard } from 'types/card';
 
 import { loadUsers } from '@logic/Users';
 
-import { FiltersContext } from '@store/filters';
-import { MobileContext } from '@store/mobile';
-
-const location_initial = {
-	coords: {
-		latitude: 0,
-		longitude: 0
-	}
-};
+import { FiltersContext, MobileContext, LocationContext } from '@store/index';
 
 const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
-	const [geoStatus, setGeoStatus] = useState('');
-	const [isError, setIsError] = useState(true);
 	const [loading, setLoading] = useState(true);
-	const [isForeground, setIsForeground] = useState(true);
-	const [isConnected, setIsConnected] = useState(false);
-	const [isLocationResolved, setIsLocationResolved] = useState(false);
-	const [location, setLocation] = useState(location_initial);
-	const [latitude, setLatitude] = useState(0);
-	const [longitude, setLongitude] = useState(0);
-	const [network, setNetwork] = useState({}); // fix
 	const [people, setPeople] = useState<iCard[]>([]);
 	const filters = useContext(FiltersContext);
-	const mobile = useContext(MobileContext);
+	const { isConnected, isForeground } = useContext(MobileContext);
+	const {
+		isLocationGranted,
+		isLocationResolved,
+		location,
+		latitude,
+		longitude
+	} = useContext(LocationContext);
 
-	const updateLocation = (loc: LocationObject | null) => {
-		if (loc !== null) {
-			setLocation(loc);
-			setLatitude(loc.coords.latitude);
-			setLongitude(loc.coords.longitude);
-			setIsLocationResolved(true);
-		}
-	};
-
-	useEffect(() => {
-		if (!isError) return;
-
-		(async () => {
-			const { status } = await Location.requestPermissionsAsync();
-			return status;
-		})()
-			.then((status: PermissionStatus) => {
-				if (status !== PermissionStatus.GRANTED) {
-					setIsError(true);
-				} else {
-					setIsError(false);
-				}
-				setGeoStatus(status);
-
-				if (__DEV__) {
-					console.log('status change', status);
-				}
-			})
-			.catch(() => {
-				setIsError(true);
-			});
-	}, [isError, geoStatus]);
-
-	useEffect(() => {
-		if (isError) return;
-
-		(async () => {
-			const loc = await Location.getLastKnownPositionAsync({
-				requiredAccuracy: 100
-			});
-			if (__DEV__) {
-				console.log(
-					'Last known position was called at',
-					new Date().getTime()
-				);
-			}
-			return loc;
-		})().then(updateLocation);
-	}, [isError]);
-
-	useEffect(() => {
-		if (isError) return;
-
-		(async () => {
-			const loc = await Location.getCurrentPositionAsync({});
-			if (__DEV__) {
-				console.log(
-					'Real current position was called at',
-					new Date().getTime()
-				);
-			}
-			return loc;
-		})().then(updateLocation);
-	}, [isError]); // [location]);
-
-	useEffect(() => {
-		(async () => {
-			const response = await Network.getNetworkStateAsync();
-			return response;
-		})()
-			.then((response) => {
-				// console.log('connected?', response.isConnected);
-				setNetwork(response);
-				setIsConnected(
-					response.isConnected ? response.isConnected : false
-				);
-			})
-			.catch(() => {
-				setIsConnected(false);
-			});
-	}, []);
-	// network
-
-	const loadData = () => {
+	const loadData = useCallback(() => {
 		setLoading(true);
 		const data = loadUsers(latitude, longitude, filters.items, people);
 		data.then((apipeople) => {
@@ -157,17 +60,25 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 			console.log(error.message);
 			setLoading(false);
 		});
-	};
+	}, [filters, latitude, longitude, people]);
 
 	useEffect(() => {
-		if (!isError && isLocationResolved) {
+		if (isLocationGranted && isLocationResolved) {
 			loadData();
 		}
-	}, [location, isError, isLocationResolved, isForeground, filters]);
+	}, [
+		location,
+		isLocationGranted,
+		isLocationResolved,
+		isForeground,
+		filters,
+		loadData
+	]);
 
 	return (
 		<View style={s.container}>
-			<Mobile setIsForeground={setIsForeground} />
+			<Mobile />
+			<Location />
 			<LinearGradient
 				colors={[
 					COLORS.BACKGROUNDGRADIENT1,
@@ -182,9 +93,9 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 						<View>
 							<Headline
 								headline={
-									isError
-										? i18n.t('Location services inactive')
-										: i18n.t('Help in area')
+									isLocationGranted
+										? i18n.t('Help in area')
+										: i18n.t('Location services inactive')
 								}
 							/>
 						</View>
@@ -198,8 +109,11 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 							</Pressable>
 						</View>
 					</View>
+					<View style={s.share}>
+						<Share lat={latitude} lon={longitude} />
+					</View>
 					<View style={s.radar}>
-						{isError && (
+						{!isLocationGranted && (
 							<View style={s.errorContainer}>
 								<Pressable
 									onPress={() =>
@@ -216,19 +130,21 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 								</Pressable>
 							</View>
 						)}
-						{!isError && isLocationResolved && isForeground && (
-							<RadarAnimation />
-						)}
-						{!isError && isLocationResolved && (
+						{isLocationGranted &&
+							isLocationResolved &&
+							isForeground && <RadarAnimation />}
+						{isLocationGranted && isLocationResolved && (
+							// <Pressable onPress={requestLocationUpdate}>
 							<>
 								<RadarCircles />
-								<Share lat={latitude} lon={longitude} />
+
 								<Radar
 									people={people}
 									lat={latitude}
 									lon={longitude}
 								/>
 							</>
+							// </Pressable>
 						)}
 					</View>
 					<ButtonFilter
@@ -249,7 +165,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 							/>
 						)}
 						{(!isConnected ||
-							isError ||
+							isLocationGranted ||
 							!isLocationResolved ||
 							!isForeground) && <UserListPlaceholder />}
 					</Background>
@@ -276,9 +192,15 @@ const s = StyleSheet.create({
 		position: 'relative',
 		zIndex: 100
 	},
+	share: {
+		position: 'absolute',
+		left: 0,
+		top: 72
+	},
 	radar: {
 		width: '100%',
-		height: '40%'
+		height: '30%',
+		marginTop: 40
 	},
 	gradient: {
 		width: '100%',
@@ -288,7 +210,7 @@ const s = StyleSheet.create({
 		position: 'absolute',
 		zIndex: 4,
 		left: '70%',
-		top: '45%'
+		top: '42%'
 	},
 	menu: {
 		paddingRight: 20,

@@ -1,32 +1,54 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useCallback, useContext } from 'react';
+
 import { AppState, AppStateStatus } from 'react-native';
+import * as Network from 'expo-network';
+import { MobileContext, iMobileTypes } from '@store/index';
+// TODO: airplane mode
 
-// airplane mode
+interface iMobile {}
 
-// is connected
-
-// is in foreground
-
-interface iMobile {
-	setIsForeground?: Function;
-}
-
-const Mobile: FC<iMobile> = ({ setIsForeground }) => {
+const Mobile: FC<iMobile> = () => {
 	const state = useRef<AppStateStatus>('unknown');
+	const { dispatch } = useContext(MobileContext);
+	useEffect(() => {
+		(async () => {
+			const response = await Network.getNetworkStateAsync();
+			return response;
+		})()
+			.then((response) => {
+				dispatch({
+					type: iMobileTypes.setIsConnected,
+					value: response.isConnected ? response.isConnected : false
+				});
+			})
+			.catch(() => {
+				dispatch({
+					type: iMobileTypes.setIsConnected,
+					value: false
+				});
+			});
+	}, [dispatch]);
 
-	const handleAppStateChange = (nextAppState: AppStateStatus) => {
-		if (typeof setIsForeground === 'function') {
+	const handleAppStateChange = useCallback(
+		(nextAppState: AppStateStatus) => {
 			if (
-				//state.current.match(/inactive|background|unknown/) &&
+				// state.current.match(/inactive|background|unknown/) &&
 				nextAppState === 'active'
 			) {
-				setIsForeground(true);
+				dispatch({
+					type: iMobileTypes.setIsForeground,
+					value: true
+				});
 			} else {
-				setIsForeground(false);
+				dispatch({
+					type: iMobileTypes.setIsForeground,
+					value: false
+				});
 			}
-		}
-		state.current = nextAppState;
-	};
+			state.current = nextAppState;
+		},
+		[dispatch]
+	);
 
 	useEffect(() => {
 		state.current = AppState.currentState;
@@ -37,8 +59,7 @@ const Mobile: FC<iMobile> = ({ setIsForeground }) => {
 				handleAppStateChange(s)
 			);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [handleAppStateChange]);
 
 	return <></>;
 };

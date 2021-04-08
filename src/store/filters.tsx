@@ -91,7 +91,7 @@ const ctx = {
 export const FiltersContext = createContext<iCtx>(ctx);
 FiltersContext.displayName = 'FiltersContext';
 
-export function reducer(state: iState, action: iAction): iState {
+export function filtersReducer(state: iState, action: iAction): iState {
 	switch (action.type) {
 		case 'switch':
 			return getSwitched(state, action.value);
