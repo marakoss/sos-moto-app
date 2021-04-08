@@ -1,2 +1,4 @@
-export const IMAGEREGISTER = require('./menuitemregister.png');
-export const IMAGEABOUT = require('./menuitemabout.png');
+import IMAGEREGISTER from './menuitemregister.png';
+import IMAGEABOUT from './menuitemabout.png';
+
+export { IMAGEREGISTER, IMAGEABOUT };

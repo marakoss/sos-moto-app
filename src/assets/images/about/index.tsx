@@ -1,2 +1,4 @@
-export const IMAGEJAROSLAV = require('./jaroslav.png');
-export const IMAGEMAREK = require('./marek.png');
+import IMAGEJAROSLAV from './jaroslav.png';
+import IMAGEMAREK from './marek.png';
+
+export { IMAGEMAREK, IMAGEJAROSLAV };

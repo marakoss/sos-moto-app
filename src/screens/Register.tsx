@@ -1,5 +1,5 @@
-import React, { FC, useState, useContext } from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import React, { FC, useRef, useContext } from 'react';
+import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps } from '@react-navigation/stack';
 import globalStyle from '@components/Platform/globalStyle';
@@ -11,7 +11,8 @@ import { IconMenu } from '@icons/index';
 import { LocationContext } from '@store/index';
 
 const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
-	const [key, setKey] = useState(0);
+	const key = useRef(0);
+	const isDev = useRef(__DEV__);
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
 
@@ -31,27 +32,30 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 						iconWidth={20}
 						iconHeight={20}
 					>
-						{i18n.t('back to')} {i18n.t('menu')}
+						{i18n.t('back to')}
+						{i18n.t('menu')}
 					</Button>
+					{isDev.current && (
+						<>
+							<Button
+								onPress={() => {
+									key.current += 1;
+									return false;
+								}}
+							>
+								<Text>Reload</Text>
+							</Button>
+						</>
+					)}
 				</View>
 
 				<WebView
 					source={{
-						uri:
-							REGISTER_WEBVIEW_URL +
-							'?lat=' +
-							latitude +
-							'&lon=' +
-							longitude +
-							'&cachebust=' +
-							cachebust
+						uri: `${REGISTER_WEBVIEW_URL}?lat=${latitude}&lon=${longitude}&cachebust=${cachebust}`
 					}}
 					style={s.webview}
-					key={key}
+					key={key.current}
 				/>
-				{__DEV__ && (
-					<Button onPress={() => setKey(key + 1)}>reload</Button>
-				)}
 			</SafeAreaView>
 		</View>
 	);

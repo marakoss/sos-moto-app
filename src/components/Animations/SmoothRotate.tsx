@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+/* import React, { useRef, useEffect, useState } from 'react';
 import { Animated } from 'react-native';
 
 export const SmoothRotate = (props: any) => {
@@ -30,4 +30,4 @@ export const SmoothRotate = (props: any) => {
 			{props.children}
 		</Animated.View>
 	);
-};
+}; */

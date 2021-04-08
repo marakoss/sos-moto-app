@@ -173,7 +173,7 @@ const s = StyleSheet.create({
 	},
 	contact: {
 		flexDirection: 'row',
-		justifyContent: 'flex-start',
+		justifyContent: 'flex-start'
 	},
 	buttonSpace: {
 		marginRight: 8

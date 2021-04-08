@@ -53,7 +53,8 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								iconWidth={20}
 								iconHeight={20}
 							>
-								{i18n.t('back to')} {i18n.t('menu')}
+								{i18n.t('back to')}
+								{i18n.t('menu')}
 							</Button>
 							<Headline
 								headline={i18n.t('Application')}
@@ -75,7 +76,7 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								iOS a Android vyvíjel oddaný tým vývojářů,
 								testerů a analytiků z řad motorkářů a to s cílem
 								pomoci v nouzi dalším motorkářům. V duchu
-								myšlenky "od motorkářů pro motorkáře".
+								myšlenky od motorkářů pro motorkáře.
 							</Text>
 							<Text style={s.paragraph}>
 								Hlavním developerem je Marek Králík, který
@@ -89,7 +90,7 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 							<Text style={s.paragraph}>
 								Aplikace vznikla jako reakce na poptávku v
 								komunitě motorkářů, kteří se sdružili na
-								facebookové skupině "SOS Motorkáři", za jejímž
+								facebookové skupině SOS Motorkáři, za jejímž
 								vznikem stojí Jaroslav Čech.
 							</Text>
 							<Image
@@ -153,7 +154,7 @@ const s = StyleSheet.create({
 		fontSize: 17,
 		paddingHorizontal: 20,
 		paddingVertical: 10
-		//textAlign: 'justify'
+		// textAlign: 'justify'
 	}
 });
 

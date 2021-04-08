@@ -49,7 +49,8 @@ const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
 							iconFillColor={COLORS.DARKERTEXT}
 							iconHoverFillColor={COLORS.WHITE}
 						>
-							{i18n.t('back to')} {i18n.t('Radar')}
+							{i18n.t('back to')}
+							{i18n.t('Radar')}
 						</Button>
 
 						<View style={[s.item, { borderColor: COLORS.PRIMARY }]}>

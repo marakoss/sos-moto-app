@@ -1,4 +1,4 @@
-import React, { useRef, FC, useEffect } from 'react';
+import React, { useRef, FC, useEffect, useCallback } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
 import { COLORS } from '@dictionaries/colors';
@@ -6,7 +6,7 @@ import { COLORS } from '@dictionaries/colors';
 const RadarAnimation: FC = () => {
 	const animatedSize = useRef(new Animated.Value(0)).current;
 
-	const runAnimation = () => {
+	const runAnimation = useCallback(() => {
 		animatedSize.setValue(0);
 		Animated.sequence([
 			Animated.timing(animatedSize, {
@@ -16,11 +16,11 @@ const RadarAnimation: FC = () => {
 			}),
 			Animated.delay(2000)
 		]).start(() => runAnimation());
-	};
+	}, [animatedSize]);
 
 	useEffect(() => {
 		runAnimation();
-	}, []);
+	}, [runAnimation]);
 
 	return (
 		<View style={s.radar}>

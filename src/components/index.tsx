@@ -1,4 +1,3 @@
-// TODO: Update
 import Button from './Button/Button';
 import ButtonFilter from './Button/ButtonFilter';
 import ButtonInversed from './Button/ButtonInversed';

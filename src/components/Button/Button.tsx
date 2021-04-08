@@ -12,12 +12,12 @@ import { COLORS } from '@dictionaries/index';
 
 interface iMyButton {
 	styles?: {
-		button: any;
-		text: any;
+		button?: any;
+		text?: any;
 	};
 	stylesPressed?: {
-		button: any;
-		text: any;
+		button?: any;
+		text?: any;
 	};
 	title?: string;
 	onPress?: (ev: NativeSyntheticEvent<NativeTouchEvent>) => void;

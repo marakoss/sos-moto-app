@@ -72,5 +72,5 @@ export default {
 	...modals,
 	...labels,
 	...fragments,
-	'back to': 'Zpět na'
+	'back to': 'Zpět na '
 };
