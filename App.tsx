@@ -9,8 +9,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Main, Filter, Menu, Register, About } from '@screens/index';
 
-import { FiltersContext, reducer, filters } from '@store/filters';
-import { MobileContext, mobileReducer, mobile } from '@store/mobile';
+import {
+	FiltersContext,
+	filtersReducer,
+	filters,
+	MobileContext,
+	mobileReducer,
+	mobile,
+	LocationContext,
+	locationReducer,
+	location
+} from '@store/index';
 
 import i18n from 'i18n-js';
 import * as Localization from 'expo-localization';
@@ -27,8 +36,13 @@ i18n.fallbacks = true;
 const Stack = createStackNavigator();
 
 const App: FC = () => {
-	const [filterState, dispatchFilter] = useReducer(reducer, filters);
+	// TODO: Rework as HOC?
+	const [filterState, dispatchFilter] = useReducer(filtersReducer, filters);
 	const [mobileState, dispatchMobile] = useReducer(mobileReducer, mobile);
+	const [locationState, dispatchLocation] = useReducer(
+		locationReducer,
+		location
+	);
 
 	useEffect(() => {
 		if (__DEV__) {
@@ -40,19 +54,29 @@ const App: FC = () => {
 		<MobileContext.Provider
 			value={{ ...mobileState, dispatch: dispatchMobile }}
 		>
-			<FiltersContext.Provider
-				value={{ ...filterState, dispatch: dispatchFilter }}
+			<LocationContext.Provider
+				value={{ ...locationState, dispatch: dispatchLocation }}
 			>
-				<NavigationContainer>
-					<Stack.Navigator initialRouteName="Home" headerMode="none">
-						<Stack.Screen name="Home" component={Main} />
-						<Stack.Screen name="Filter" component={Filter} />
-						<Stack.Screen name="Menu" component={Menu} />
-						<Stack.Screen name="Register" component={Register} />
-						<Stack.Screen name="About" component={About} />
-					</Stack.Navigator>
-				</NavigationContainer>
-			</FiltersContext.Provider>
+				<FiltersContext.Provider
+					value={{ ...filterState, dispatch: dispatchFilter }}
+				>
+					<NavigationContainer>
+						<Stack.Navigator
+							initialRouteName="Home"
+							headerMode="none"
+						>
+							<Stack.Screen name="Home" component={Main} />
+							<Stack.Screen name="Filter" component={Filter} />
+							<Stack.Screen name="Menu" component={Menu} />
+							<Stack.Screen
+								name="Register"
+								component={Register}
+							/>
+							<Stack.Screen name="About" component={About} />
+						</Stack.Navigator>
+					</NavigationContainer>
+				</FiltersContext.Provider>
+			</LocationContext.Provider>
 		</MobileContext.Provider>
 	);
 };
