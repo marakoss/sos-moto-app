@@ -1,5 +1,10 @@
 import React, { FC, useRef, useContext } from 'react';
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import {
+	StyleSheet,
+	View,
+	SafeAreaView,
+	ActivityIndicator
+} from 'react-native';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps } from '@react-navigation/stack';
 import globalStyle from '@components/Platform/globalStyle';
@@ -14,6 +19,18 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const key = useRef(0);
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
+
+	const renderLoadingView = () => {
+		return (
+			<ActivityIndicator
+				animating
+				color={COLORS.PRIMARY}
+				size="large"
+				style={s.activityIndicator}
+				hidesWhenStopped
+			/>
+		);
+	};
 
 	return (
 		<View style={s.container}>
@@ -42,6 +59,8 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 					}}
 					style={s.webview}
 					key={key.current}
+					renderLoading={renderLoadingView}
+					startInLoadingState
 				/>
 			</SafeAreaView>
 		</View>
@@ -62,6 +81,9 @@ const s = StyleSheet.create({
 	},
 	content: {
 		paddingHorizontal: 20
+	},
+	activityIndicator: {
+		position: 'relative'
 	}
 });
 
