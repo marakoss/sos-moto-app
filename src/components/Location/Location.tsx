@@ -38,9 +38,7 @@ const Location: FC<iLocation> = () => {
 			return loc;
 		})()
 			.then(updateLocation)
-			.catch(() => {
-				console.warn('tfuk');
-			});
+			.catch(() => {});
 	}, [updateLocation]);
 
 	const requestLastLocation = useCallback(() => {
@@ -57,9 +55,7 @@ const Location: FC<iLocation> = () => {
 			return loc;
 		})()
 			.then(updateLocation)
-			.catch(() => {
-				console.warn('tfuk2');
-			});
+			.catch(() => {});
 	}, [updateLocation]);
 
 	const requestLocationPermission = useCallback(() => {
@@ -84,7 +80,6 @@ const Location: FC<iLocation> = () => {
 				}
 			})
 			.catch(() => {
-				console.warn('tfuk3');
 				dispatch({
 					type: iLocationTypes.setIsLocationGranted,
 					value: false

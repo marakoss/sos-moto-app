@@ -26,7 +26,7 @@ export const Item: FC = () => {
 const Placeholder: FC = () => {
 	return (
 		<View style={s.container}>
-			{[1, 2, 3, 4].map((current) => {
+			{[1, 2, 3, 4, 5].map((current) => {
 				return React.createElement(Item, { key: current });
 			})}
 		</View>

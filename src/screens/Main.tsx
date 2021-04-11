@@ -22,6 +22,7 @@ import {
 	Radar,
 	RadarAnimation,
 	RadarCircles,
+	RadarLoading,
 	ButtonFilter,
 	Share,
 	Mobile,
@@ -110,7 +111,11 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 						</View>
 					</View>
 					<View style={s.share}>
-						<Share lat={latitude} lon={longitude} />
+						<Share
+							lat={latitude}
+							lon={longitude}
+							loading={!isLocationResolved}
+						/>
 					</View>
 					<View style={s.radar}>
 						{!isLocationGranted && (
@@ -129,6 +134,9 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 									</View>
 								</Pressable>
 							</View>
+						)}
+						{!isLocationResolved && isForeground && (
+							<RadarLoading />
 						)}
 						{isLocationGranted &&
 							isLocationResolved &&

@@ -6,6 +6,7 @@ import RadarAnimation from './Radar/RadarAnimation';
 import RadarPoints from './Radar/RadarPoints';
 import RadarCircles from './Radar/RadarCircles';
 import RadarArrow from './Radar/RadarArrow';
+import RadarLoading from './Radar/RadarLoading';
 import Headline from './Headline/Headline';
 import Background from './Background/BackgroundList';
 import UserList from './UserList/UserList';
@@ -26,6 +27,7 @@ export {
 	RadarCircles,
 	RadarPoints,
 	RadarArrow,
+	RadarLoading,
 	Headline,
 	Background,
 	UserList,

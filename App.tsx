@@ -27,7 +27,7 @@ import { cs, en, sk } from '@translations/index';
 
 i18n.translations = {
 	cs: cs,
-	en: en, // TODO: Translate to english
+	en: en,
 	sk: sk
 };
 i18n.locale = Localization.locale;
