@@ -1,67 +1,68 @@
 const headlines = {
-	'Help in area': 'Pomoc v oblasti',
-	'Filter by': 'Druh pomoci',
-	Navigate: 'Navigace',
-	Authors: 'Autoři',
-	Application: 'Aplikace',
-	'Register with SOS Moto': 'Registrace služeb v SOS Moto'
+	'Help in area': 'Help in area',
+	'Filter by': 'Filter by',
+	Navigate: 'Navigation',
+	Authors: 'Authors',
+	Application: 'Application',
+	'Register with SOS Moto': 'Register with SOS Moto'
 };
 
 const services = {
-	HELP_SITE: 'pomoc na místě',
-	TOW: 'odtah',
-	TIRE: 'pneuservis',
-	WORKBENCH: 'dílna',
-	GARAGE: 'ustájení',
-	SLEEPOVER: 'nouzové ubytování',
-	REPAIR_SHOP: 'servis'
+	HELP_SITE: 'help on siye',
+	TOW: 'tow',
+	TIRE: 'tire change',
+	WORKBENCH: 'workbench',
+	GARAGE: 'garage',
+	SLEEPOVER: 'emergency sleepover',
+	REPAIR_SHOP: 'repair shop'
 };
 
 const buttons = {
-	call: 'volat',
-	Call: 'Volat',
-	confirm: 'Potvrdit',
-	Cancel: 'Zrušit',
-	navigate: 'navigovat',
+	call: 'call',
+	Call: 'Call',
+	confirm: 'confirm',
+	Cancel: 'Cancel',
+	navigate: 'navigate',
 	Radar: 'Radar',
-	Register: 'Registrovat se',
-	About: 'O aplikaci',
-	back: 'zpět',
+	Register: 'Register',
+	About: 'About',
+	back: 'back',
 	menu: 'menu',
 	Menu: 'Menu',
-	'back to application': 'zpět do aplikace',
-	'Allow access to location services': 'Povolit přistup k polohovým službám',
-	'Share location': 'Sdílet polohu',
-	'filters settings': 'nastavení filterů'
+	'back to application': 'back to application',
+	'Allow access to location services': 'Allow access to location services',
+	'Share location': 'Share location',
+	'filters settings': 'filter settings'
 };
 
 const errors = {
 	'Access to location services was denied':
-		'Přístup k polohovým službám byl odepřen',
-	'Location services inactive': 'Polohové služby neaktivní',
+		'Access to location services was denied',
+	'Location services inactive': 'Location services are inactive',
 	'Empty result':
-		'Velmi se omlouváme, ale nepodařilo se nám najít žádné registrované uživatele ve vaší oblasti do vzdálenosti 100 kilometrů',
-	'Try to change': 'Zkuste změnit'
+		'We are sorry, but we couldnt find any registered users within 100kilometers',
+	'Try to change': 'Try to change'
 };
 
 const modals = {
-	'Ask for help': 'Požádat o pomoc',
+	'Ask for help': 'Ask for help',
 	'Are you sure to make this call? Contacts in this application serves for emergency situations only':
-		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze'
+		'Are you sure to make this call? Contacts in this application serves for emergency situations only'
 };
 
 const labels = {
-	offers: 'nabízí: ',
-	note: 'poznámka: '
+	offers: 'offers: ',
+	note: 'note: ',
+	'Loading GPS location': 'Loading GPS location'
 };
 
 const fragments = {
 	filters_helpText:
-		'* Zde můžete zvolit druh pomoci, kterou hledáte. Pokud potřebujete jen např. odtah. deaktivujte všechny ostatní kategorie a my vám zobrazíme nejbližší kontakty, které tuto službu nabízejí.',
+		'* Here you can choose a type of help you are looking for. If you only need for example towing, deactivate all other categories and we show you just the closest contacts who offers this service.',
 	menu_registerText:
-		'Zvažte nabídnutí pomoci ostatním motorkářům v nouzové situaci a zaregistrujte se v aplikaci SOS Moto',
+		'Consider offering help to others in emergency situation by registering in SOS moto application',
 	menu_aboutText:
-		'Tuto aplikaci tvoří tým oddaných motorkářů, přečtěte si o nich více'
+		'This application is created by a team of devoted bikers, read more about them'
 };
 
 export default {
@@ -72,5 +73,5 @@ export default {
 	...modals,
 	...labels,
 	...fragments,
-	'back to': 'Zpět na '
+	'back to': 'Back to '
 };

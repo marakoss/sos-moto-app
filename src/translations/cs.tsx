@@ -52,7 +52,8 @@ const modals = {
 
 const labels = {
 	offers: 'nabízí: ',
-	note: 'poznámka: '
+	note: 'poznámka: ',
+	'Loading GPS location': 'Načítám GPS polohu'
 };
 
 const fragments = {
