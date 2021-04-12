@@ -8,7 +8,7 @@ const headlines = {
 };
 
 const services = {
-	HELP_SITE: 'help on siye',
+	HELP_SITE: 'help on site',
 	TOW: 'tow',
 	TIRE: 'tire change',
 	WORKBENCH: 'workbench',
