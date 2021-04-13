@@ -1,9 +1,10 @@
-import React, { FC, useRef, useContext } from 'react';
+import React, { FC, useRef, useContext, useEffect } from 'react';
 import {
 	StyleSheet,
 	View,
 	SafeAreaView,
-	ActivityIndicator
+	ActivityIndicator,
+	Alert
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -20,6 +21,19 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
 
+	const showRegisterAlert = () => {
+		Alert.alert(
+			i18n.t('Registration is also available online'),
+			i18n.t('alert_registerText'),
+			[
+				{
+					text: i18n.t('Ok')
+				}
+			],
+			{ cancelable: true }
+		);
+	};
+
 	const renderLoadingView = () => {
 		return (
 			<ActivityIndicator
@@ -31,6 +45,10 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 			/>
 		);
 	};
+
+	useEffect(() => {
+		showRegisterAlert();
+	});
 
 	return (
 		<View style={s.container}>

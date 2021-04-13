@@ -32,7 +32,8 @@ const buttons = {
 	'back to application': 'zpět do aplikace',
 	'Allow access to location services': 'Povolit přistup k polohovým službám',
 	'Share location': 'Sdílet polohu',
-	'filters settings': 'nastavení filterů'
+	'filters settings': 'nastavení filterů',
+	Ok: 'Ok'
 };
 
 const errors = {
@@ -47,7 +48,9 @@ const errors = {
 const modals = {
 	'Ask for help': 'Požádat o pomoc',
 	'Are you sure to make this call? Contacts in this application serves for emergency situations only':
-		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze'
+		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze',
+	'Registration is also available online':
+		'Tato registrace je také k dispozici online'
 };
 
 const labels = {
@@ -62,7 +65,9 @@ const fragments = {
 	menu_registerText:
 		'Zvažte nabídnutí pomoci ostatním motorkářům v nouzové situaci a zaregistrujte se v aplikaci SOS Moto',
 	menu_aboutText:
-		'Tuto aplikaci tvoří tým oddaných motorkářů, přečtěte si o nich více'
+		'Tuto aplikaci tvoří tým oddaných motorkářů, přečtěte si o nich více',
+	alert_registerText:
+		'Možná byste tuto registraci chtěli vyplnit z pohodlí svého počítače. V takovém případě navštivte adresu: https://sos.motoprerov.cz/register'
 };
 
 export default {

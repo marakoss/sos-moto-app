@@ -102,8 +102,8 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								K samotnému vzniku aplikace přispěli i další
 								motorkáři. Jmenovitě: Miroslav Kappel, Jakub
 								Reitinger, Martin Hlaváček, Eliška Hudcová,
-								Karin Šlechtová, Pavel Pittr a další. Celému
-								týmu tímto děkujeme.
+								Karin Šlechtová, Pavel Pittr, Michal Kochaníček
+								a další. Celému týmu tímto děkujeme.
 							</Text>
 							<Text style={s.paragraph}>
 								Vyrobeno v České Republice s ❤️

@@ -32,7 +32,8 @@ const buttons = {
 	'back to application': 'back to application',
 	'Allow access to location services': 'Allow access to location services',
 	'Share location': 'Share location',
-	'filters settings': 'filter settings'
+	'filters settings': 'filter settings',
+	Ok: 'Ok'
 };
 
 const errors = {
@@ -47,7 +48,9 @@ const errors = {
 const modals = {
 	'Ask for help': 'Ask for help',
 	'Are you sure to make this call? Contacts in this application serves for emergency situations only':
-		'Are you sure to make this call? Contacts in this application serves for emergency situations only'
+		'Are you sure to make this call? Contacts in this application serves for emergency situations only',
+	'Registration is also available online':
+		'Registration is also available online'
 };
 
 const labels = {
@@ -62,7 +65,9 @@ const fragments = {
 	menu_registerText:
 		'Consider offering help to others in emergency situation by registering in SOS moto application',
 	menu_aboutText:
-		'This application is created by a team of devoted bikers, read more about them'
+		'This application is created by a team of devoted bikers, read more about them',
+	alert_registerText:
+		'You might want to fill out this register form through the comfort of your computer. In that case navigate to: https://sos.motoprerov.cz/register'
 };
 
 export default {
