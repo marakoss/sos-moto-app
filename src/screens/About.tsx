@@ -106,6 +106,12 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								a další. Celému týmu tímto děkujeme.
 							</Text>
 							<Text style={s.paragraph}>
+								O překlad aplikace se starají: {'\n'}
+								CZ: Marek Králík {'\n'}
+								SK: Rastislav Puľák {'\n'}
+								EN: Marek Králík {'\n'}
+							</Text>
+							<Text style={s.paragraph}>
 								Vyrobeno v České Republice s ❤️
 							</Text>
 						</View>
