@@ -205,7 +205,8 @@ const s = StyleSheet.create({
 	share: {
 		position: 'absolute',
 		left: 0,
-		top: 72
+		top: 72,
+		zIndex: 10
 	},
 	radar: {
 		width: '100%',
@@ -218,7 +219,7 @@ const s = StyleSheet.create({
 	},
 	filter: {
 		position: 'absolute',
-		zIndex: 4,
+		zIndex: 10,
 		left: '70%',
 		top: '42%'
 	},
