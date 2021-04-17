@@ -1,4 +1,4 @@
-import React, { FC, useRef, useContext, useEffect } from 'react';
+import React, { FC, useRef, useContext, useEffect, useCallback } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -21,7 +21,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
 
-	const showRegisterAlert = () => {
+	const showRegisterAlert = useCallback(() => {
 		Alert.alert(
 			i18n.t('Registration is also available online'),
 			i18n.t('alert_registerText'),
@@ -32,7 +32,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 			],
 			{ cancelable: true }
 		);
-	};
+	}, []);
 
 	const renderLoadingView = () => {
 		return (
@@ -48,7 +48,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 
 	useEffect(() => {
 		showRegisterAlert();
-	});
+	}, [showRegisterAlert]);
 
 	return (
 		<View style={s.container}>
