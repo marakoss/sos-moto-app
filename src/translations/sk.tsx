@@ -1,73 +1,73 @@
 const headlines = {
-	'Help in area': 'Pomoc v oblasti',
+	'Help in area': 'Pomoc v okolí',
 	'Filter by': 'Druh pomoci',
-	Navigate: 'Navigace',
-	Authors: 'Autoři',
-	Application: 'Aplikace',
-	'Register with SOS Moto': 'Registrace služeb v SOS Moto'
+	Navigate: 'Navigovať',
+	Authors: 'Autori',
+	Application: 'Aplikácia',
+	'Register with SOS Moto': 'Registrácia služieb v SOS Moto'
 };
 
 const services = {
-	HELP_SITE: 'pomoc na místě',
+	HELP_SITE: 'pomoc na mieste',
 	TOW: 'odtah',
 	TIRE: 'pneuservis',
-	WORKBENCH: 'dílna',
-	GARAGE: 'ustájení',
-	SLEEPOVER: 'nouzové ubytování',
+	WORKBENCH: 'dielňa',
+	GARAGE: 'uskladnenie motocykla',
+	SLEEPOVER: 'núdzové ubytovanie',
 	REPAIR_SHOP: 'servis'
 };
 
 const buttons = {
-	call: 'volat',
-	Call: 'Volat',
-	confirm: 'Potvrdit',
-	Cancel: 'Zrušit',
-	navigate: 'navigovat',
+	call: 'volať',
+	Call: 'Volať',
+	confirm: 'Potvrdiť',
+	Cancel: 'Zrušiť',
+	navigate: 'navigovať',
 	Radar: 'Radar',
-	Register: 'Registrovat se',
-	About: 'O aplikaci',
-	back: 'zpět',
+	Register: 'Registrovať sa',
+	About: 'O aplikácii',
+	back: 'späť',
 	menu: 'menu',
 	Menu: 'Menu',
-	'back to application': 'zpět do aplikace',
-	'Allow access to location services': 'Povolit přistup k polohovým službám',
-	'Share location': 'Sdílet polohu',
-	'filters settings': 'nastavení filterů',
+	'back to application': 'späť do aplikácie',
+	'Allow access to location services': 'Povoliť prístup k polohovým službám',
+	'Share location': 'Zdieľať polohu',
+	'filters settings': 'nastavenie filtrov',
 	Ok: 'Ok'
 };
 
 const errors = {
 	'Access to location services was denied':
-		'Přístup k polohovým službám byl odepřen',
-	'Location services inactive': 'Polohové služby neaktivní',
+		'Prístup k polohovým službám bol odmietnutý',
+	'Location services inactive': 'Polohové služby neaktívne',
 	'Empty result':
-		'Velmi se omlouváme, ale nepodařilo se nám najít žádné registrované uživatele ve vaší oblasti do vzdálenosti 100 kilometrů',
-	'Try to change': 'Zkuste změnit'
+		'Veľmi sa ospravedlňujeme, ale nepodarilo sa nám nájsť žiadnych registrovaných uživateľov vo vašej oblasti do vzdialenosti 100 kilometrov',
+	'Try to change': 'Skuste zmeniť'
 };
 
 const modals = {
-	'Ask for help': 'Požádat o pomoc',
+	'Ask for help': 'Požiadať o pomoc',
 	'Are you sure to make this call? Contacts in this application serves for emergency situations only':
-		'Opravdu chcete volat? Kontakty v této aplikaci slouží pouze pro stav nouze',
+		'Skutočne chcete uskutočniť tento hovor? Kontakty v tejto aplikácii slúžia iba pre stav núdze',
 	'Registration is also available online':
-		'Tato registrace je také k dispozici online'
+		'Táto registrácia je k dispozícii aj online'
 };
 
 const labels = {
-	offers: 'nabízí: ',
+	offers: 'ponuka: ',
 	note: 'poznámka: ',
-	'Loading GPS location': 'Načítám GPS polohu'
+	'Loading GPS location': 'Načítavam GPS polohu'
 };
 
 const fragments = {
 	filters_helpText:
-		'* Zde můžete zvolit druh pomoci, kterou hledáte. Pokud potřebujete jen např. odtah. deaktivujte všechny ostatní kategorie a my vám zobrazíme nejbližší kontakty, které tuto službu nabízejí.',
+		'* Tu môžete zvoliť druh pomoci, ktorú hľadáte. Pokiaľ potrebujete napríklad iba odtiahnutie, deaktivujte všetky ostatné kategórie a my vám zobrazíme najbližšie kontakty, ktoré túto službu ponúkaju.',
 	menu_registerText:
-		'Zvažte nabídnutí pomoci ostatním motorkářům v nouzové situaci a zaregistrujte se v aplikaci SOS Moto',
+		'Zvážte možnosť poskytnutia pomoci ostatným motorkárom v núdzovej situácii a zaregistrujte sa v aplikácii SOS Moto',
 	menu_aboutText:
-		'Tuto aplikaci tvoří tým oddaných motorkářů, přečtěte si o nich více',
+		'Túto aplikáciu tvorí tím oddaných motorkárov, prečítajte si o nich viac',
 	alert_registerText:
-		'Možná byste tuto registraci chtěli vyplnit z pohodlí svého počítače. V takovém případě navštivte adresu: https://sos.motoprerov.cz/register'
+		'Možno by ste túto registráciu chceli vyplniť z pohodlia vášho počítača. V takom prípade navštivte adresu: https://sos.motoprerov.cz/register'
 };
 
 export default {
@@ -78,5 +78,5 @@ export default {
 	...modals,
 	...labels,
 	...fragments,
-	'back to': 'Zpět na '
+	'back to': 'Späť na '
 };
