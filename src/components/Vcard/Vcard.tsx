@@ -68,6 +68,7 @@ const Vcard: FC<iCard> = ({
 	const showNote = () => {
 		setNoteShowed(!noteShowed);
 	};
+	const noteNotEmpty = typeof note !== 'undefined' ? note : ' ';
 
 	return (
 		<Pressable onPress={() => showNote()}>
@@ -120,10 +121,10 @@ const Vcard: FC<iCard> = ({
 						{i18n.t('navigate')}
 					</Button>
 				</View>
-				{noteShowed && note && note?.length > 0 && (
+				{noteShowed && (
 					<View>
 						<Text>{i18n.t('note')}</Text>
-						<Text>{note}</Text>
+						<Text>{noteNotEmpty}</Text>
 					</View>
 				)}
 			</View>
