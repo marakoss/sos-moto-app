@@ -1,4 +1,12 @@
-import React, { FC, useRef, useContext, useEffect, useCallback } from 'react';
+import React, {
+	FC,
+	useRef,
+	useContext,
+	useEffect,
+	useCallback,
+	useMemo,
+	useState
+} from 'react';
 import {
 	StyleSheet,
 	View,
@@ -20,6 +28,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const key = useRef(0);
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
+	const [uri, setUri] = useState('');
 
 	const showRegisterAlert = useCallback(() => {
 		Alert.alert(
@@ -47,8 +56,32 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	};
 
 	useEffect(() => {
+		if (key.current === 0) {
+			setUri(
+				`${REGISTER_WEBVIEW_URL}?lat=${latitude}&lon=${longitude}&cachebust=${cachebust}`
+			);
+		}
+		key.current += 1;
+	}, [cachebust, latitude, longitude]);
+
+	useEffect(() => {
 		showRegisterAlert();
 	}, [showRegisterAlert]);
+
+	const webView = useMemo(
+		() => (
+			<WebView
+				source={{
+					uri: uri
+				}}
+				style={s.webview}
+				key={key.current}
+				renderLoading={renderLoadingView}
+				startInLoadingState
+			/>
+		),
+		[key, uri]
+	);
 
 	return (
 		<View style={s.container}>
@@ -70,16 +103,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 						{i18n.t('menu')}
 					</Button>
 				</View>
-
-				<WebView
-					source={{
-						uri: `${REGISTER_WEBVIEW_URL}?lat=${latitude}&lon=${longitude}&cachebust=${cachebust}`
-					}}
-					style={s.webview}
-					key={key.current}
-					renderLoading={renderLoadingView}
-					startInLoadingState
-				/>
+				{webView}
 			</SafeAreaView>
 		</View>
 	);
