@@ -9,7 +9,7 @@ const headlines = {
 
 const services = {
 	HELP_SITE: 'pomoc na mieste',
-	TOW: 'odtah',
+	TOW: 'odťah',
 	TIRE: 'pneuservis',
 	WORKBENCH: 'dielňa',
 	GARAGE: 'uskladnenie motocykla',
@@ -54,7 +54,7 @@ const modals = {
 };
 
 const labels = {
-	offers: 'ponuka: ',
+	offers: 'ponúka: ',
 	note: 'poznámka: ',
 	'Loading GPS location': 'Načítavam GPS polohu'
 };
