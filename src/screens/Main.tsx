@@ -59,10 +59,11 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 			setLoading(false);
 			setPeople(apipeople);
 		}).catch((error: Error) => {
+			// TODO: error should set people to empty result
 			console.log(error.message);
 			setLoading(false);
 		});
-	}, [filters, latitude, longitude, people]);
+	}, [filters, latitude, longitude]);
 
 	useEffect(() => {
 		if (isLocationGranted && isLocationResolved) {
