@@ -67,7 +67,10 @@ const fragments = {
 	menu_aboutText:
 		'Tuto aplikaci tvoří tým oddaných motorkářů, přečtěte si o nich více',
 	alert_registerText:
-		'Možná byste tuto registraci chtěli vyplnit z pohodlí svého počítače. V takovém případě navštivte adresu: https://sos.motoprerov.cz/register'
+		'Možná byste tuto registraci chtěli vyplnit z pohodlí svého počítače. V takovém případě navštivte adresu: https://sos.motoprerov.cz/register',
+	alert_shareText:
+		'Mám potíže na cestě. Nacházím se blízko místa: {{city}}. Moje GPS souřadnice jsou: {{lat}}, {{lon}}. https://www.google.com/maps/dir/?api=1&travelmode=driving&destination={{lat}},{{lon}}',
+	alert_shareTextCityUnknown: 'Nezjištěno'
 };
 
 export default {

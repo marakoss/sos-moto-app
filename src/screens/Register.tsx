@@ -23,6 +23,7 @@ import { REGISTER_WEBVIEW_URL } from '@env';
 import i18n from 'i18n-js';
 import { IconMenu } from '@icons/index';
 import { LocationContext } from '@store/index';
+import * as Localization from 'expo-localization';
 
 const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	const key = useRef(0);
@@ -58,7 +59,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 	useEffect(() => {
 		if (key.current === 0) {
 			setUri(
-				`${REGISTER_WEBVIEW_URL}?lat=${latitude}&lon=${longitude}&cachebust=${cachebust}`
+				`${REGISTER_WEBVIEW_URL}?lat=${latitude}&lon=${longitude}&lang=${Localization.locale}cachebust=${cachebust}`
 			);
 		}
 		key.current += 1;

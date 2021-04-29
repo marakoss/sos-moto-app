@@ -67,7 +67,10 @@ const fragments = {
 	menu_aboutText:
 		'This application is created by a team of devoted bikers, read more about them',
 	alert_registerText:
-		'You might want to fill out this register form through the comfort of your computer. In that case navigate to: https://sos.motoprerov.cz/register'
+		'You might want to fill out this register form through the comfort of your computer. In that case navigate to: https://sos.motoprerov.cz/register',
+	alert_shareText:
+		'I have a trouble on the road. I am close to: {{city}}. My GPS location is: {{lat}}, {{lon}}. https://www.google.com/maps/dir/?api=1&travelmode=driving&destination={{lat}},{{lon}}',
+	alert_shareTextCityUnknown: 'Unknown'
 };
 
 export default {

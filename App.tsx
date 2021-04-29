@@ -23,14 +23,21 @@ import {
 
 import i18n from 'i18n-js';
 import * as Localization from 'expo-localization';
-import { cs, en, sk } from '@translations/index';
+import { cs, en, de, sk, pl } from '@translations/index';
+
+if (__DEV__) {
+	console.log('Language was set to: ', Localization.locale);
+}
 
 i18n.translations = {
-	cs: cs,
 	en: en,
-	sk: sk
+	cs: cs,
+	sk: sk,
+	de: de,
+	pl: pl
 };
 i18n.locale = Localization.locale;
+i18n.defaultLocale = 'en';
 i18n.fallbacks = true;
 
 const Stack = createStackNavigator();

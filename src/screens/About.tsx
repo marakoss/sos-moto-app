@@ -61,7 +61,8 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								textColor={{ color: COLORS.BLACK }}
 							/>
 							<Text style={s.paragraph}>
-								Verze: {Application.nativeBuildVersion} {'\n'}
+								Verze: {Application.nativeApplicationVersion} (
+								{Application.nativeBuildVersion}) {'\n'}
 								Platforma: {Platform.OS} {'\n'}
 								Jazyk: {i18n.locale} {'\n'}
 								Kontakt: support@motoprerov.cz
@@ -110,6 +111,8 @@ const About: FC<StackScreenProps<any>> = ({ navigation }) => {
 								CZ: Marek Králík {'\n'}
 								SK: Rastislav Puľák {'\n'}
 								EN: Marek Králík {'\n'}
+								DE: Veronika Čermáková {'\n'}
+								PL: Filip Straňák {'\n'}
 							</Text>
 							<Text style={s.paragraph}>
 								Vyrobeno v České Republice s ❤️
