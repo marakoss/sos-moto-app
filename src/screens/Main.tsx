@@ -200,18 +200,20 @@ const s = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		position: 'relative',
-		zIndex: 100
+		zIndex: 3
 	},
 	share: {
-		position: 'absolute',
+		position: 'relative',
 		left: 0,
-		top: 72,
-		zIndex: 10
+		top: 0,
+		zIndex: 200
 	},
 	radar: {
 		width: '100%',
 		height: '30%',
-		marginTop: 40
+		marginBottom: 10,
+		position: 'relative',
+		zIndex: 2
 	},
 	gradient: {
 		width: '100%',

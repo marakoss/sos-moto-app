@@ -40,7 +40,9 @@ const Background: FC<iBackground> = ({ height, children }) => {
 const s = StyleSheet.create({
 	wrapper: {
 		flex: 1,
-		marginBottom: -40
+		marginBottom: -40,
+		position: 'relative',
+		zIndex: 2
 	},
 	shape: {
 		width: '100%',

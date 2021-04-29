@@ -54,7 +54,8 @@ const s = StyleSheet.create({
 		backgroundColor: COLORS.WHITE
 	},
 	list: {
-		paddingBottom: 50 // Last item might be unreachable
+		paddingTop: 10,
+		paddingBottom: 100 // Last item might be unreachable
 	}
 });
 

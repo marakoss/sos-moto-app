@@ -14,11 +14,13 @@ interface myprops {
 	lat: number;
 	lon: number;
 	loading: boolean;
+	city: string | null | undefined;
 }
 
-const Share: FC<myprops> = ({ lat, lon, loading }) => {
+const Share: FC<myprops> = ({ lat, lon, city, loading }) => {
+	const readableCity = city ? city : i18n.t('alert_shareTextCityUnknown');
 	return (
-		<View style={s.share}>
+		<View style={s.shareBtn}>
 			{loading && (
 				<>
 					<ButtonInversed
@@ -33,7 +35,7 @@ const Share: FC<myprops> = ({ lat, lon, loading }) => {
 			)}
 			{!loading && (
 				<ButtonInversed
-					onPress={() => onShare(lat, lon)}
+					onPress={() => onShare(lat, lon, readableCity)}
 					icon={<IconShare fillColor={COLORS.WHITE} />}
 				>
 					<Text style={s.shareText}>
@@ -49,11 +51,10 @@ const Share: FC<myprops> = ({ lat, lon, loading }) => {
 };
 
 const s = StyleSheet.create({
-	share: {
-		position: 'absolute',
-		zIndex: 20,
+	shareBtn: {
+		position: 'relative',
 		marginLeft: 20,
-		top: 5
+		alignItems: 'flex-start'
 	},
 	shareText: {
 		fontSize: 10
