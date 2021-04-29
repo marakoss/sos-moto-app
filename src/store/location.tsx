@@ -6,7 +6,8 @@ export enum iLocationTypes {
 	setLongitude,
 	setIsLocationResolved,
 	setIsLocationGranted,
-	updateLocation
+	updateLocation,
+	setCity
 }
 
 type iAction =
@@ -15,7 +16,8 @@ type iAction =
 	| { type: iLocationTypes.setLongitude; value: number }
 	| { type: iLocationTypes.setIsLocationResolved; value: boolean }
 	| { type: iLocationTypes.setIsLocationGranted; value: boolean }
-	| { type: iLocationTypes.updateLocation; value: iState };
+	| { type: iLocationTypes.updateLocation; value: iState }
+	| { type: iLocationTypes.setCity; value: string };
 
 type iState = {
 	location: object;
@@ -23,6 +25,7 @@ type iState = {
 	longitude: number;
 	isLocationResolved: boolean;
 	isLocationGranted?: boolean;
+	city?: string | null;
 };
 
 type iCtx = iState & {
@@ -39,6 +42,10 @@ const setLatitude = (oldState: iState, nextState: number): iState => {
 
 const setLongitude = (oldState: iState, nextState: number): iState => {
 	return { ...oldState, ...{ longitude: nextState } };
+};
+
+const setCity = (oldState: iState, nextState: string): iState => {
+	return { ...oldState, ...{ city: nextState } };
 };
 
 const setIsLocationResolved = (
@@ -69,7 +76,8 @@ export const location = {
 	latitude: 0,
 	longitude: 0,
 	isLocationResolved: false,
-	isLocationGranted: false
+	isLocationGranted: false,
+	city: null
 };
 
 const ctx = {
@@ -94,6 +102,8 @@ export function locationReducer(state: iState, action: iAction): iState {
 			return setIsLocationGranted(state, action.value);
 		case iLocationTypes.updateLocation:
 			return updateLocation(state, action.value);
+		case iLocationTypes.setCity:
+			return setCity(state, action.value);
 		default:
 			throw new Error();
 	}

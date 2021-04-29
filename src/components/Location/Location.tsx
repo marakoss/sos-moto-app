@@ -7,7 +7,9 @@ import { LocationContext, iLocationTypes } from '@store/index';
 interface iLocation {}
 
 const Location: FC<iLocation> = () => {
-	const { isLocationGranted, dispatch } = useContext(LocationContext);
+	const { isLocationGranted, latitude, longitude, dispatch } = useContext(
+		LocationContext
+	);
 
 	const updateLocation = useCallback(
 		(currentLocation: LocationObject | null) => {
@@ -26,6 +28,27 @@ const Location: FC<iLocation> = () => {
 		[dispatch]
 	);
 
+	const requestCity = useCallback(() => {
+		(async () => {
+			const geoCode = await ExpoLocation.reverseGeocodeAsync({
+				latitude: latitude,
+				longitude: longitude
+			});
+			return geoCode;
+		})()
+			.then((geo) => {
+				if (geo[0].city !== null) {
+					dispatch({
+						type: iLocationTypes.setCity,
+						value: geo[0].city
+					});
+				}
+			})
+			.catch(() => {
+				console.log('City wasnt resolved as', new Date().getTime());
+			});
+	}, [dispatch]);
+
 	const requestLocationUpdate = useCallback(() => {
 		(async () => {
 			const loc = await ExpoLocation.getCurrentPositionAsync({});
@@ -38,6 +61,7 @@ const Location: FC<iLocation> = () => {
 			return loc;
 		})()
 			.then(updateLocation)
+			.then(requestCity)
 			.catch(() => {});
 	}, [updateLocation]);
 

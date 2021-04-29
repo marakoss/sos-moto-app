@@ -48,7 +48,8 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 		isLocationResolved,
 		location,
 		latitude,
-		longitude
+		longitude,
+		city
 	} = useContext(LocationContext);
 
 	const loadData = useCallback(() => {
@@ -115,6 +116,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 							<Share
 								lat={latitude}
 								lon={longitude}
+								city={city}
 								loading={!isLocationResolved}
 							/>
 						)}
