@@ -5,5 +5,5 @@
     "semi": true,
     "useTabs": true,
     "arrowParens": "avoid",
-    "bracketSameLine": true
+    "bracketSameLine": false
 }

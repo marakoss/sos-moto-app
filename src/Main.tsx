@@ -66,7 +66,6 @@ const App: FC = () => {
 					value={{ ...filterState, dispatch: dispatchFilter }}
 				>
 					<NavigationContainer>
-						{/* @ts-expect-error Wrong typing in React */}
 						<Stack.Navigator
 							initialRouteName="Home"
 							screenOptions={{
