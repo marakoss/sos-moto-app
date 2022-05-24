@@ -1,28 +1,33 @@
 {
-  "name": "SOSMoto",
-  "displayName": "SOS Moto",
   "expo": {
-    "name": "SOS Moto",
-    "slug": "sos-moto",
-    "version": "1.0.1",
-    "orientation" : "portrait",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "icon": "./src/assets/images/app-icon/applogo.png",
+    "name": "newapp",
+    "slug": "newapp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "splash": {
-      "images": "./src/assets/images/splash/splashscreen.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "bundleIdentifier": "com.imagedesigncz.sosmoto",
-      "buildNumber": "1.0.0",
-      "supportsTablet": false
+      "supportsTablet": true
     },
     "android": {
-      "package": "com.imagedesigncz.sosmoto",
-      "versionCode": 1
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }
