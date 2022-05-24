@@ -15,7 +15,7 @@ const Mobile: FC<iMobile> = () => {
 			const response = await Network.getNetworkStateAsync();
 			return response;
 		})()
-			.then((response) => {
+			.then(response => {
 				dispatch({
 					type: iMobileTypes.setIsConnected,
 					value: response.isConnected ? response.isConnected : false
@@ -52,10 +52,10 @@ const Mobile: FC<iMobile> = () => {
 
 	useEffect(() => {
 		state.current = AppState.currentState;
-		AppState.addEventListener('change', (s) => handleAppStateChange(s));
+		AppState.addEventListener('change', s => handleAppStateChange(s));
 
 		return () => {
-			AppState.removeEventListener('change', (s) =>
+			AppState.removeEventListener('change', s =>
 				handleAppStateChange(s)
 			);
 		};

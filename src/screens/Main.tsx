@@ -55,7 +55,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 	const loadData = useCallback(() => {
 		setLoading(true);
 		const data = loadUsers(latitude, longitude, filters.items, people);
-		data.then((apipeople) => {
+		data.then(apipeople => {
 			setLoading(false);
 			setPeople(apipeople);
 		}).catch((error: Error) => {

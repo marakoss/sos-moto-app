@@ -23,7 +23,7 @@ const FilterItem: FC<filteritem> = ({
 		if (onClick && typeof onClick === 'function') {
 			onClick(checked);
 		}
-		setIsEnabled((enabled) => !enabled);
+		setIsEnabled(enabled => !enabled);
 	};
 
 	const color = textColor || s.textColor;

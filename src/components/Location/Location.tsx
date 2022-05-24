@@ -7,9 +7,8 @@ import { LocationContext, iLocationTypes } from '@store/index';
 interface iLocation {}
 
 const Location: FC<iLocation> = () => {
-	const { isLocationGranted, latitude, longitude, dispatch } = useContext(
-		LocationContext
-	);
+	const { isLocationGranted, latitude, longitude, dispatch } =
+		useContext(LocationContext);
 
 	const updateLocation = useCallback(
 		(currentLocation: LocationObject | null) => {
@@ -36,7 +35,7 @@ const Location: FC<iLocation> = () => {
 			});
 			return geoCode;
 		})()
-			.then((geo) => {
+			.then(geo => {
 				if (geo[0].city !== null) {
 					dispatch({
 						type: iLocationTypes.setCity,
@@ -84,7 +83,8 @@ const Location: FC<iLocation> = () => {
 
 	const requestLocationPermission = useCallback(() => {
 		(async () => {
-			const { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+			const { status } =
+				await ExpoLocation.requestForegroundPermissionsAsync();
 			return status;
 		})()
 			.then((status: PermissionStatus) => {

@@ -11,8 +11,8 @@ import { filters, FiltersContext } from '@store/filters';
 const renderFilters = (items: object, dispatch: Function) => {
 	if (!items) return [];
 	return Object.keys(items)
-		.filter((value) => typeof value === 'string')
-		.map((v) => {
+		.filter(value => typeof value === 'string')
+		.map(v => {
 			return (
 				<FilterItem
 					key={v}

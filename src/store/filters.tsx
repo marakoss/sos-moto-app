@@ -24,7 +24,7 @@ type iCtx = {
  */
 function transform(obj: object, defaultState: boolean = true): iKeyValuePair {
 	return Object.values(obj)
-		.filter((value) => typeof value === 'string')
+		.filter(value => typeof value === 'string')
 		.reduce((acc: any, cur) => {
 			acc[cur] = defaultState;
 			return acc;
@@ -32,9 +32,7 @@ function transform(obj: object, defaultState: boolean = true): iKeyValuePair {
 }
 
 export const getActive = (items: object) => {
-	const keys = Object.keys(items).filter(
-		(value) => typeof value === 'string'
-	);
+	const keys = Object.keys(items).filter(value => typeof value === 'string');
 	const values = Object.values(items);
 
 	return keys
@@ -44,15 +42,13 @@ export const getActive = (items: object) => {
 			}
 			return false;
 		})
-		.map((cur) => {
+		.map(cur => {
 			return NUMBERED_SERVICES.get(cur);
 		});
 };
 
 export const getDisabled = (items: object) => {
-	const keys = Object.keys(items).filter(
-		(value) => typeof value === 'string'
-	);
+	const keys = Object.keys(items).filter(value => typeof value === 'string');
 	const values = Object.values(items);
 
 	return keys
@@ -62,7 +58,7 @@ export const getDisabled = (items: object) => {
 			}
 			return false;
 		})
-		.map((cur) => {
+		.map(cur => {
 			return NUMBERED_SERVICES.get(cur);
 		});
 };

@@ -9,7 +9,8 @@ module.exports = {
 		"@typescript-eslint",
 		"react",
 		"react-native",
-		"react-hooks"
+		"react-hooks",
+		"import"
 	],
 	parserOptions: {
 		project: "./tsconfig.json",
@@ -24,10 +25,11 @@ module.exports = {
 		"react-native/react-native": true
 	},
 	rules: {
-		"import/extensions": "always",
+		"import/extensions": "warn",
 		"import/no-extraneous-dependencies": ["warn", { "devDependencies": false, "optionalDependencies": false, "peerDependencies": false }],
 		"import/prefer-default-export": "off",
 		"react/jsx-filename-extension": "off",
+		"react/jsx-props-no-spreading": "warn",
 		"react/prop-types": "off",
 		"react/destructuring-assignment": "warn",
 		"react-hooks/exhaustive-deps": "warn",

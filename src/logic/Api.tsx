@@ -16,7 +16,7 @@ export const getJson = async (url: string): Promise<Array<object>> => {
 		);
 	}
 	const error = new Error(
-		errors?.map((e) => e.message).join('\n') ?? 'unknown'
+		errors?.map(e => e.message).join('\n') ?? 'unknown'
 	);
 	return Promise.reject(error);
 };

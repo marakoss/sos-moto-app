@@ -32,7 +32,7 @@ const List: FC<iListView> = ({
 				contentContainerStyle={s.list}
 				data={people}
 				renderItem={renderItem}
-				keyExtractor={(item) => (item.id ? item.id : '').toString()}
+				keyExtractor={item => (item.id ? item.id : '').toString()}
 				ListEmptyComponent={
 					<Empty navigation={navigation} route={route} />
 				}
