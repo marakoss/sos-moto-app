@@ -14,7 +14,7 @@ import {
 	ActivityIndicator,
 	Alert
 } from 'react-native';
-import { WebView } from 'react-native-webview';
+//import { WebView } from 'react-native-webview';
 import { StackScreenProps } from '@react-navigation/stack';
 import globalStyle from '@components/Platform/globalStyle';
 import { Button, Headline } from '@components/index';
@@ -71,7 +71,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 
 	const webView = useMemo(
 		() => (
-			<WebView
+			/*<WebView
 				source={{
 					uri: uri
 				}}
@@ -79,7 +79,8 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 				key={key.current}
 				renderLoading={renderLoadingView}
 				startInLoadingState
-			/>
+			/>*/
+			<></>
 		),
 		[key, uri]
 	);

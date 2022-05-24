@@ -84,7 +84,7 @@ const Location: FC<iLocation> = () => {
 
 	const requestLocationPermission = useCallback(() => {
 		(async () => {
-			const { status } = await ExpoLocation.requestPermissionsAsync();
+			const { status } = await ExpoLocation.requestForegroundPermissionsAsync();
 			return status;
 		})()
 			.then((status: PermissionStatus) => {
