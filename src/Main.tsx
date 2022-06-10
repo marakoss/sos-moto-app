@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useReducer } from 'react';
+import React, { FC, useReducer } from 'react';
 
-import { activateKeepAwake } from 'expo-keep-awake';
+import { useKeepAwake } from 'expo-keep-awake';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -49,11 +49,9 @@ const App: FC = () => {
 		location
 	);
 
-	useEffect(() => {
-		if (__DEV__) {
-			activateKeepAwake();
-		}
-	}, []);
+	if (__DEV__) {
+	//	useKeepAwake();
+	}
 
 	return (
 		<MobileContext.Provider
