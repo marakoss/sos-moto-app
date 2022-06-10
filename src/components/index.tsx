@@ -17,6 +17,7 @@ import FilterItem from './FilterItem/FilterItem';
 import Share from './Share/Share';
 import Mobile from './Mobile/Mobile';
 import Location from './Location/Location';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 export {
 	Button,
@@ -37,5 +38,6 @@ export {
 	FilterItem,
 	Share,
 	Mobile,
-	Location
+	Location,
+	ErrorBoundary
 };

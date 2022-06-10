@@ -27,7 +27,8 @@ import {
 	Share,
 	Mobile,
 	Location,
-	UserListPlaceholder
+	UserListPlaceholder,
+	ErrorBoundary
 } from '@components/index';
 import { IconMenu, IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
@@ -80,6 +81,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 
 	return (
 		<View style={s.container}>
+			<ErrorBoundary>
 			<Mobile />
 			<Location />
 			<LinearGradient
@@ -184,6 +186,7 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 					</Background>
 				</SafeAreaView>
 			</LinearGradient>
+			</ErrorBoundary>
 		</View>
 	);
 };
