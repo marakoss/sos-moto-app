@@ -52,12 +52,10 @@ const Mobile: FC<iMobile> = () => {
 
 	useEffect(() => {
 		state.current = AppState.currentState;
-		AppState.addEventListener('change', s => handleAppStateChange(s));
+		const event = AppState.addEventListener('change', s => handleAppStateChange(s));
 
 		return () => {
-			AppState.removeEventListener('change', s =>
-				handleAppStateChange(s)
-			);
+			event.remove()
 		};
 	}, [handleAppStateChange]);
 
