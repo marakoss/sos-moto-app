@@ -8,7 +8,7 @@ import {
 	Image,
 	Platform
 } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 import globalStyle from '@components/Platform/globalStyle';
 import { Button, Headline, Background } from '@components/index';
 import { IMAGEABOUT } from '@images/banners';
@@ -20,7 +20,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import * as Application from 'expo-application';
 
-const About: FC<StackScreenProps<any>> = ({ navigation }) => {
+const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
 		<View style={s.container}>
 			<View style={s.headerContainer}>

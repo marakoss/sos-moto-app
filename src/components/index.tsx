@@ -1,6 +1,8 @@
 import Button from './Button/Button';
 import ButtonFilter from './Button/ButtonFilter';
 import ButtonInversed from './Button/ButtonInversed';
+import ButtonMenu from './Button/ButtonMenu';
+import CustomDrawerContent from './Drawer/CustomDrawer';
 import Radar from './Radar/Radar';
 import RadarAnimation from './Radar/RadarAnimation';
 import RadarPoints from './Radar/RadarPoints';
@@ -23,6 +25,8 @@ export {
 	Button,
 	ButtonFilter,
 	ButtonInversed,
+	ButtonMenu,
+	CustomDrawerContent,
 	Radar,
 	RadarAnimation,
 	RadarCircles,

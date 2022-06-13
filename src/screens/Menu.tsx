@@ -7,7 +7,7 @@ import {
 	Text,
 	Image
 } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 import i18n from 'i18n-js';
 import { Headline, Button, Background } from '@components/index';
 import { IconNavigate, IconPerson, IconInfo } from '@icons/index';
@@ -16,7 +16,7 @@ import globalStyle from '@components/Platform/globalStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS } from '@dictionaries/colors';
 
-const Menu: FC<StackScreenProps<any>> = ({ navigation }) => {
+const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
 		<View style={s.container}>
 			<View style={s.headerContainer}>

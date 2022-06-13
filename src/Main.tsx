@@ -3,7 +3,7 @@ import React, { FC, useReducer } from 'react';
 import { useKeepAwake } from 'expo-keep-awake';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Main, Filter, Menu, Register, About } from '@screens/index';
 
@@ -18,6 +18,8 @@ import {
 	locationReducer,
 	location
 } from '@store/index';
+
+import { CustomDrawerContent } from '@components/index';
 
 import i18n from 'i18n-js';
 import * as Localization from 'expo-localization';
@@ -38,7 +40,7 @@ i18n.locale = Localization.locale;
 i18n.defaultLocale = 'en';
 i18n.fallbacks = true;
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App: FC = () => {
 	// TODO: Rework as HOC?
@@ -64,21 +66,22 @@ const App: FC = () => {
 					value={{ ...filterState, dispatch: dispatchFilter }}
 				>
 					<NavigationContainer>
-						<Stack.Navigator
+						<Drawer.Navigator
 							initialRouteName="Home"
 							screenOptions={{
 								headerShown: false
 							}}
+							drawerContent={CustomDrawerContent}	
 						>
-							<Stack.Screen name="Home" component={Main} />
-							<Stack.Screen name="Filter" component={Filter} />
-							<Stack.Screen name="Menu" component={Menu} />
-							<Stack.Screen
+							<Drawer.Screen name="Home" component={Main} />
+							<Drawer.Screen name="Filter" component={Filter} />
+							<Drawer.Screen name="Menu" component={Menu} />
+							<Drawer.Screen
 								name="Register"
 								component={Register}
 							/>
-							<Stack.Screen name="About" component={About} />
-						</Stack.Navigator>
+							<Drawer.Screen name="About" component={About} />
+						</Drawer.Navigator>
 					</NavigationContainer>
 				</FiltersContext.Provider>
 			</LocationContext.Provider>

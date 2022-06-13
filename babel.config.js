@@ -32,7 +32,8 @@ module.exports = function (api) {
 					safe: true,
 					allowUndefined: false
 				}
-			]
+			],
+			"react-native-reanimated/plugin",
 		]
 	};
 };

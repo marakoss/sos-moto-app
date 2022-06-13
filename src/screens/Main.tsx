@@ -11,12 +11,13 @@ import {
 import globalStyle from '@components/Platform/globalStyle';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import i18n from 'i18n-js';
 
 import {
 	UserList,
+	ButtonMenu,
 	Background,
 	Headline,
 	Radar,
@@ -30,18 +31,18 @@ import {
 	UserListPlaceholder,
 	ErrorBoundary
 } from '@components/index';
-import { IconMenu, IconFilters } from '@icons/index';
+import { IconFilters } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
 
-import { iCard } from 'types/card';
+import { ICard } from 'types/card';
 
 import { loadUsers } from '@logic/Users';
 
 import { FiltersContext, MobileContext, LocationContext } from '@store/index';
 
-const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
+const Main: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 	const [loading, setLoading] = useState(true);
-	const [people, setPeople] = useState<iCard[]>([]);
+	const [people, setPeople] = useState<ICard[]>([]);
 	const filters = useContext(FiltersContext);
 	const { isConnected, isForeground } = useContext(MobileContext);
 	const {
@@ -105,13 +106,9 @@ const Main: FC<StackScreenProps<any>> = ({ navigation, route }) => {
 							/>
 						</View>
 						<View>
-							<Pressable
-								onPress={() => navigation.navigate('Menu')}
-							>
-								<View style={s.menu}>
-									<IconMenu fillColor={COLORS.WHITE} />
-								</View>
-							</Pressable>
+								<ButtonMenu
+									onPress={() => navigation.openDrawer()}
+								/>
 						</View>
 					</View>
 					<View style={s.share}>
@@ -233,8 +230,10 @@ const s = StyleSheet.create({
 	},
 	menu: {
 		paddingRight: 20,
-		marginTop: 2, // TODO: can we get rid of this?
-		backgroundColor: 'rgba(0, 0, 0, 0.0001)'
+		backgroundColor: 'rgba(0, 0, 0, 0.0001)',
+		borderColor: 'rgba(255, 255, 255, 1)',
+		borderWidth: 1,
+		borderRadius: 50
 	},
 	errorContainer: {
 		alignItems: 'center',
