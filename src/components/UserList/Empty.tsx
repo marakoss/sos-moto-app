@@ -5,9 +5,9 @@ import i18n from 'i18n-js';
 
 import { COLORS } from '@dictionaries/colors';
 import { IconEmpty } from '@icons/index';
-import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
-const Empty: FC<StackScreenProps<any>> = ({ navigation }) => {
+const Empty: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	const onPress = () => {
 		if (navigation) navigation.navigate('Filter');
 	};

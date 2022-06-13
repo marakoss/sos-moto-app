@@ -1,7 +1,7 @@
 import { getJson } from '@logic/Api';
 import { coordsDistance } from '@utils/Geo';
 
-import type { iCard } from 'types/card';
+import type { ICard } from 'types/card';
 import { API_BASE } from '@env';
 
 import { getActive } from '@store/filters';
@@ -20,8 +20,8 @@ export const loadUsers = async (
 	lat: number,
 	lon: number,
 	filtered: object,
-	people: Array<iCard>
-): Promise<iCard[]> => {
+	people: ICard[]
+): Promise<ICard[]> => {
 	const distance = coordsDistance(
 		lat,
 		lon,
@@ -60,5 +60,5 @@ export const loadUsers = async (
 		console.log('Started making request with query', query, lastRequest);
 	}
 
-	return getJson(query) as Promise<iCard[]>;
+	return getJson(query) as Promise<ICard[]>;
 };

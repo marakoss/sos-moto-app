@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-interface iSvgIconConstituentValues {
+interface ISvgIconConstituentValues {
 	strokeColor?: string;
 	strokeWidth?: string;
 	strokeWidth2?: string;
@@ -25,6 +25,6 @@ interface iSvgIconConstituentValues {
 	className5?: string;
 }
 
-export default iSvgIconConstituentValues;
+export default ISvgIconConstituentValues;
 
-export interface mySvgIcon extends FC<iSvgIconConstituentValues> {}
+export interface IMySvgIcon extends FC<ISvgIconConstituentValues> {}

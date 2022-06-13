@@ -1,10 +1,10 @@
 import { filters, FiltersContext, filtersReducer } from './filters';
-import { mobile, MobileContext, mobileReducer, iMobileTypes } from './mobile';
+import { mobile, MobileContext, mobileReducer, IMobileTypes } from './mobile';
 import {
 	location,
 	LocationContext,
 	locationReducer,
-	iLocationTypes
+	ILocationTypes
 } from './location';
 
 export {
@@ -14,9 +14,9 @@ export {
 	mobile,
 	MobileContext,
 	mobileReducer,
-	iMobileTypes,
+	IMobileTypes,
 	location,
 	LocationContext,
 	locationReducer,
-	iLocationTypes
+	ILocationTypes
 };

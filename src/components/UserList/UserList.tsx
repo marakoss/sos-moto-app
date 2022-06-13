@@ -3,11 +3,11 @@ import { StyleSheet, View, FlatList, ListRenderItem } from 'react-native';
 
 import Vcard from '@components/Vcard/Vcard';
 import { COLORS } from '@dictionaries/colors';
-import { iCard } from 'types/card';
+import { ICard } from 'types/card';
 import Empty from './Empty';
 
 interface iListView {
-	people: iCard[];
+	people: ICard[];
 	loading: boolean;
 	onRefresh: Function;
 	navigation?: any;
@@ -21,7 +21,7 @@ const List: FC<iListView> = ({
 	navigation,
 	route
 }) => {
-	const renderItem: ListRenderItem<iCard> = ({ item, index }) => (
+	const renderItem: ListRenderItem<ICard> = ({ item, index }) => (
 		/* eslint-disable react/jsx-props-no-spreading */
 		<Vcard {...item} index={index} />
 	);

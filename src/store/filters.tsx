@@ -1,19 +1,19 @@
 import { createContext, Dispatch } from 'react';
 import { SERVICES, NUMBERED_SERVICES } from '@dictionaries/services';
 
-type iAction = { type: 'switch'; value: string };
+type IAction = { type: 'switch'; value: string };
 
-type iKeyValuePair = {
+type IKeyValuePair = {
 	[key: string]: boolean;
 };
 
-type iState = {
-	items: iKeyValuePair;
+type IState = {
+	items: IKeyValuePair;
 };
 
-type iCtx = {
-	items: iKeyValuePair;
-	dispatch: Dispatch<iAction>;
+type ICtx = {
+	items: IKeyValuePair;
+	dispatch: Dispatch<IAction>;
 };
 
 /**
@@ -22,7 +22,7 @@ type iCtx = {
  * to object
  * { item1: true, item2: true, ...}
  */
-function transform(obj: object, defaultState: boolean = true): iKeyValuePair {
+function transform(obj: object, defaultState: boolean = true): IKeyValuePair {
 	return Object.values(obj)
 		.filter(value => typeof value === 'string')
 		.reduce((acc: any, cur) => {
@@ -63,7 +63,7 @@ export const getDisabled = (items: object) => {
 		});
 };
 
-const getSwitched = (oldState: iState, item: string): iState => {
+const getSwitched = (oldState: IState, item: string): IState => {
 	if (oldState.items) {
 		const { items } = oldState;
 		const newItem = items[item] !== true;
@@ -84,10 +84,10 @@ const ctx = {
 	dispatch: () => {}
 };
 
-export const FiltersContext = createContext<iCtx>(ctx);
+export const FiltersContext = createContext<ICtx>(ctx);
 FiltersContext.displayName = 'FiltersContext';
 
-export function filtersReducer(state: iState, action: iAction): iState {
+export function filtersReducer(state: IState, action: IAction): IState {
 	switch (action.type) {
 		case 'switch':
 			return getSwitched(state, action.value);

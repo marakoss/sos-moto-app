@@ -1,4 +1,4 @@
-export type iPoint = {
+export type IPoint = {
 	x: number;
 	y: number;
 };

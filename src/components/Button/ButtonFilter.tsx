@@ -11,7 +11,7 @@ import {
 import { IconBlob } from '@icons/index';
 import { COLORS } from '@dictionaries/colors';
 
-interface iMyProp {
+interface IMyProp {
 	styles?: {
 		container: any;
 	};
@@ -29,7 +29,7 @@ interface iMyProp {
 	iconHeight?: number;
 }
 
-const ButtonFilter: FC<iMyProp> = ({
+const ButtonFilter: FC<IMyProp> = ({
 	accessibilityLabel,
 	icon,
 	onPress,

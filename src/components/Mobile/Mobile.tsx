@@ -2,12 +2,12 @@ import React, { FC, useEffect, useRef, useCallback, useContext } from 'react';
 
 import { AppState, AppStateStatus } from 'react-native';
 import * as Network from 'expo-network';
-import { MobileContext, iMobileTypes } from '@store/index';
+import { MobileContext, IMobileTypes } from '@store/index';
 // TODO: airplane mode
 
-interface iMobile {}
+interface IMobile {}
 
-const Mobile: FC<iMobile> = () => {
+const Mobile: FC<IMobile> = () => {
 	const state = useRef<AppStateStatus>('unknown');
 	const { dispatch } = useContext(MobileContext);
 	useEffect(() => {
@@ -17,13 +17,13 @@ const Mobile: FC<iMobile> = () => {
 		})()
 			.then(response => {
 				dispatch({
-					type: iMobileTypes.setIsConnected,
+					type: IMobileTypes.setIsConnected,
 					value: response.isConnected ? response.isConnected : false
 				});
 			})
 			.catch(() => {
 				dispatch({
-					type: iMobileTypes.setIsConnected,
+					type: IMobileTypes.setIsConnected,
 					value: false
 				});
 			});
@@ -36,12 +36,12 @@ const Mobile: FC<iMobile> = () => {
 				nextAppState === 'active'
 			) {
 				dispatch({
-					type: iMobileTypes.setIsForeground,
+					type: IMobileTypes.setIsForeground,
 					value: true
 				});
 			} else {
 				dispatch({
-					type: iMobileTypes.setIsForeground,
+					type: IMobileTypes.setIsForeground,
 					value: false
 				});
 			}

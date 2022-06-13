@@ -12,7 +12,7 @@ import { IconPhone, IconNavigate } from '@icons/index';
 import { colorList } from '@dictionaries/colors';
 import { COLORS, SERVICES } from '@dictionaries/index';
 import i18n from 'i18n-js';
-import { iCard } from 'types/card';
+import { ICard } from 'types/card';
 import { hexToRgbA } from '@utils/Colors';
 
 const makeCall = (phoneNumber: string | undefined) => {
@@ -52,7 +52,7 @@ const getServices = (services: Array<number> | undefined) => {
 	});
 };
 
-const Vcard: FC<iCard> = ({
+const Vcard: FC<ICard> = ({
 	name,
 	surname,
 	phone,

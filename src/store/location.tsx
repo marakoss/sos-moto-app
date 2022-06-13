@@ -1,6 +1,6 @@
 import { createContext, Dispatch } from 'react';
 
-export enum iLocationTypes {
+export enum ILocationTypes {
 	setLocation,
 	setLatitude,
 	setLongitude,
@@ -10,16 +10,16 @@ export enum iLocationTypes {
 	setCity
 }
 
-type iAction =
-	| { type: iLocationTypes.setLocation; value: object }
-	| { type: iLocationTypes.setLatitude; value: number }
-	| { type: iLocationTypes.setLongitude; value: number }
-	| { type: iLocationTypes.setIsLocationResolved; value: boolean }
-	| { type: iLocationTypes.setIsLocationGranted; value: boolean }
-	| { type: iLocationTypes.updateLocation; value: iState }
-	| { type: iLocationTypes.setCity; value: string };
+type IAction =
+	| { type: ILocationTypes.setLocation; value: object }
+	| { type: ILocationTypes.setLatitude; value: number }
+	| { type: ILocationTypes.setLongitude; value: number }
+	| { type: ILocationTypes.setIsLocationResolved; value: boolean }
+	| { type: ILocationTypes.setIsLocationGranted; value: boolean }
+	| { type: ILocationTypes.updateLocation; value: IState }
+	| { type: ILocationTypes.setCity; value: string };
 
-type iState = {
+type IState = {
 	location: object;
 	latitude: number;
 	longitude: number;
@@ -28,38 +28,38 @@ type iState = {
 	city?: string | null;
 };
 
-type iCtx = iState & {
-	dispatch: Dispatch<iAction>;
+type iCtx = IState & {
+	dispatch: Dispatch<IAction>;
 };
 
-const setLocation = (oldState: iState, nextState: object): iState => {
+const setLocation = (oldState: IState, nextState: object): IState => {
 	return { ...oldState, ...{ location: nextState } };
 };
 
-const setLatitude = (oldState: iState, nextState: number): iState => {
+const setLatitude = (oldState: IState, nextState: number): IState => {
 	return { ...oldState, ...{ latitude: nextState } };
 };
 
-const setLongitude = (oldState: iState, nextState: number): iState => {
+const setLongitude = (oldState: IState, nextState: number): IState => {
 	return { ...oldState, ...{ longitude: nextState } };
 };
 
-const setCity = (oldState: iState, nextState: string): iState => {
+const setCity = (oldState: IState, nextState: string): IState => {
 	return { ...oldState, ...{ city: nextState } };
 };
 
 const setIsLocationResolved = (
-	oldState: iState,
+	oldState: IState,
 	nextState: boolean
-): iState => {
+): IState => {
 	return { ...oldState, ...{ isLocationResolved: nextState } };
 };
 
-const setIsLocationGranted = (oldState: iState, nextState: boolean): iState => {
+const setIsLocationGranted = (oldState: IState, nextState: boolean): IState => {
 	return { ...oldState, ...{ isLocationGranted: nextState } };
 };
 
-const updateLocation = (oldState: iState, nextState: iState): iState => {
+const updateLocation = (oldState: IState, nextState: IState): IState => {
 	return {
 		...oldState,
 		...{
@@ -88,21 +88,21 @@ const ctx = {
 export const LocationContext = createContext<iCtx>(ctx);
 LocationContext.displayName = 'LocationContext';
 
-export function locationReducer(state: iState, action: iAction): iState {
+export function locationReducer(state: IState, action: IAction): IState {
 	switch (action.type) {
-		case iLocationTypes.setLocation:
+		case ILocationTypes.setLocation:
 			return setLocation(state, action.value);
-		case iLocationTypes.setLatitude:
+		case ILocationTypes.setLatitude:
 			return setLatitude(state, action.value);
-		case iLocationTypes.setLongitude:
+		case ILocationTypes.setLongitude:
 			return setLongitude(state, action.value);
-		case iLocationTypes.setIsLocationResolved:
+		case ILocationTypes.setIsLocationResolved:
 			return setIsLocationResolved(state, action.value);
-		case iLocationTypes.setIsLocationGranted:
+		case ILocationTypes.setIsLocationGranted:
 			return setIsLocationGranted(state, action.value);
-		case iLocationTypes.updateLocation:
+		case ILocationTypes.updateLocation:
 			return updateLocation(state, action.value);
-		case iLocationTypes.setCity:
+		case ILocationTypes.setCity:
 			return setCity(state, action.value);
 		default:
 			throw new Error();

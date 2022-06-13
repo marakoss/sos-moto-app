@@ -23,7 +23,7 @@ const RadarAnimation: FC = () => {
 	}, [runAnimation]);
 
 	return (
-		<View style={s.radar}>
+		<View style={s.radar} pointerEvents="none">
 			<Animated.View
 				style={[
 					s.radarCircleAnimated,
@@ -43,6 +43,7 @@ const RadarAnimation: FC = () => {
 						]
 					}
 				]}
+				pointerEvents="none"
 			/>
 		</View>
 	);

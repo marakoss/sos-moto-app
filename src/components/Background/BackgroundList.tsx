@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { COLORS } from '@dictionaries/colors';
 
-interface iBackground {
+interface IBackground {
 	height?: number;
 }
 
-const Background: FC<iBackground> = ({ height, children }) => {
+const Background: FC<IBackground> = ({ height, children }) => {
 	const windowWidth = useWindowDimensions().width;
 	// const windowHeight = useWindowDimensions().height;
 

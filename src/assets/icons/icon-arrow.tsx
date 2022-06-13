@@ -1,8 +1,8 @@
 import React from 'react';
 import Svg, { Polygon } from 'react-native-svg';
-import { mySvgIcon } from 'types/svg';
+import { IMySvgIcon } from 'types/svg';
 
-const IconArrow: mySvgIcon = ({
+const IconArrow: IMySvgIcon = ({
 	fillColor,
 	fillColor2,
 	width,

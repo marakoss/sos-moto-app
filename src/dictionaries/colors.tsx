@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+
+type Color = string;
+
 export enum COLORS {
 	TRANSPARENT = 'transparent',
 	WHITE = '#FFFFFF',
@@ -20,7 +23,7 @@ export enum COLORS {
 	LIGHTINFO = '#aaccFF'
 }
 
-export const colorList: Array<string> = [
+export const colorList: Color[] = [
 	COLORS.RED,
 	COLORS.GREEN,
 	COLORS.BLUE,

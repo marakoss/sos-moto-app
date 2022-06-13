@@ -1,4 +1,4 @@
-export type iCoordinate = {
+export type ICoordinate = {
 	lat: number;
 	lon: number;
 };

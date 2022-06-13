@@ -5,18 +5,18 @@ import { hexToRgbA } from '@utils/Colors';
 import { coordsDistance } from '@utils/Geo';
 import { COLORS, colorList } from '@dictionaries/colors';
 
-import type { iCoordinate } from 'types/gps';
-import type { iPoint } from 'types/cartesian';
-import type { iCard } from 'types/card';
+import type { ICoordinate } from 'types/gps';
+import type { IPoint } from 'types/cartesian';
+import type { ICard } from 'types/card';
 
 interface iMyProps {
-	people: iCard[];
+	people: ICard[];
 	lat: number;
 	lon: number;
 }
 
 const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
-	const points = people.map((person: iCard) => {
+	const points = people.map((person: ICard) => {
 		// average between points
 		const maxDistance = 20;
 		const point = getPoint(person, { lat, lon }, 100, maxDistance);
@@ -24,7 +24,7 @@ const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
 	});
 
 	let n = 0;
-	const list = points.map((point: iPoint) => {
+	const list = points.map((point: IPoint) => {
 		const realpoint = sperateClosePoints(point, points, n);
 		const color = colorList[Number(n)];
 
@@ -125,7 +125,7 @@ const getNormalizedCoords = (
 	lon: number,
 	center_lat: number = 0,
 	center_lon: number = 0
-): iCoordinate => {
+): ICoordinate => {
 	return {
 		lat: lat - center_lat,
 		lon: lon - center_lon
@@ -136,11 +136,11 @@ const getNormalizedCoords = (
  * Transform GPS coords to X,Y points with a center of 0, 0.
  */
 const getPoint = (
-	gps: iCoordinate,
-	origin: iCoordinate,
+	gps: ICoordinate,
+	origin: ICoordinate,
 	radius: number,
 	maxDistance: number = 10
-): iPoint => {
+): IPoint => {
 	// Get viewport rectangle [square]
 	const viewportSize = radius * 2;
 	const scale = viewportSize / maxDistance;
@@ -177,10 +177,10 @@ const getPoint = (
  * If points are close together move them aside
  */
 const sperateClosePoints = (
-	point: iPoint,
-	points: iPoint[],
+	point: IPoint,
+	points: IPoint[],
 	index: number
-): iPoint => {
+): IPoint => {
 	const radius = 15; // pixels
 	const moveBy = radius / 2;
 	let new_x = point.x;

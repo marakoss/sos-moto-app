@@ -1,30 +1,30 @@
 import { createContext, Dispatch } from 'react';
 
-export enum iMobileTypes {
+export enum IMobileTypes {
 	setIsForeground,
 	setIsConnected,
 	setItAirplaneMode
 }
 
-type iAction =
-	| { type: iMobileTypes.setIsForeground; value: boolean }
-	| { type: iMobileTypes.setIsConnected; value: boolean };
+type IAction =
+	| { type: IMobileTypes.setIsForeground; value: boolean }
+	| { type: IMobileTypes.setIsConnected; value: boolean };
 
-type iState = {
+type IState = {
 	isForeground: boolean;
 	isConnected: boolean;
 	isAirplaneMode: boolean;
 };
 
-type iCtx = iState & {
-	dispatch: Dispatch<iAction>;
+type iCtx = IState & {
+	dispatch: Dispatch<IAction>;
 };
 
-const isForeground = (oldState: iState, nextState: boolean): iState => {
+const isForeground = (oldState: IState, nextState: boolean): IState => {
 	return { ...oldState, ...{ isForeground: nextState } };
 };
 
-const isConnected = (oldState: iState, nextState: boolean): iState => {
+const isConnected = (oldState: IState, nextState: boolean): IState => {
 	return { ...oldState, ...{ isConnected: nextState } };
 };
 
@@ -42,11 +42,11 @@ const ctx = {
 export const MobileContext = createContext<iCtx>(ctx);
 MobileContext.displayName = 'MobileContext';
 
-export function mobileReducer(state: iState, action: iAction): iState {
+export function mobileReducer(state: IState, action: IAction): IState {
 	switch (action.type) {
-		case iMobileTypes.setIsForeground:
+		case IMobileTypes.setIsForeground:
 			return isForeground(state, action.value);
-		case iMobileTypes.setIsConnected:
+		case IMobileTypes.setIsConnected:
 			return isConnected(state, action.value);
 		default:
 			throw new Error();
