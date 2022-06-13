@@ -1,11 +1,11 @@
-type iJSONResponse = {
-	data?: Array<object>;
-	errors?: Array<{ message: string }>;
+type IJSONResponse = {
+	data?: object[];
+	errors?: { message: string }[];
 };
 
-export const getJson = async (url: string): Promise<Array<object>> => {
+export const getJson = async (url: string): Promise<object[]> => {
 	const response = await fetch(url);
-	const { data, errors }: iJSONResponse = await response.json();
+	const { data, errors }: IJSONResponse = await response.json();
 
 	if (response.ok) {
 		if (data) {

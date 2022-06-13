@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import {
 	StyleSheet,
 	View,
@@ -7,14 +8,17 @@ import {
 	Text,
 	Image
 } from 'react-native';
+
 import { DrawerScreenProps } from '@react-navigation/drawer';
+
 import i18n from 'i18n-js';
+
 import { Headline, Button, Background } from '@components/index';
 import { IconNavigate, IconPerson, IconInfo } from '@icons/index';
 import { IMAGEABOUT } from '@images/banners';
 import globalStyle from '@components/Platform/globalStyle';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, SCREENS } from '@dictionaries/index';
 
 const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
@@ -44,7 +48,7 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 						showsVerticalScrollIndicator={false}
 					>
 						<Button
-							onPress={() => navigation.navigate('Home')}
+							onPress={() => navigation.navigate(SCREENS.HOME)}
 							icon={() => IconNavigate}
 							iconFillColor={COLORS.DARKERTEXT}
 							iconHoverFillColor={COLORS.WHITE}
@@ -58,7 +62,9 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 								{i18n.t('menu_registerText')}
 							</Text>
 							<Button
-								onPress={() => navigation.navigate('Register')}
+								onPress={() =>
+									navigation.navigate(SCREENS.REGISTER)
+								}
 								icon={() => IconPerson}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}
@@ -77,7 +83,9 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 								{i18n.t('menu_aboutText')}
 							</Text>
 							<Button
-								onPress={() => navigation.navigate('About')}
+								onPress={() =>
+									navigation.navigate(SCREENS.ABOUT)
+								}
 								icon={() => IconInfo}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}

@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
-export function createCtx<iContextType>(passed: any) {
-	const ctx = createContext<iContextType | undefined>(passed);
+export function createCtx<IContextType>(passed: any) {
+	const ctx = createContext<IContextType | undefined>(passed);
 	function useCtx() {
 		const c = useContext(ctx);
 		if (!c)

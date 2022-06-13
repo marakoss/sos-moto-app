@@ -32,7 +32,7 @@ import {
 	ErrorBoundary
 } from '@components/index';
 import { IconFilters } from '@icons/index';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, SCREENS } from '@dictionaries/index';
 
 import { ICard } from 'types/card';
 
@@ -83,106 +83,111 @@ const Main: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 	return (
 		<View style={s.container}>
 			<ErrorBoundary>
-			<Mobile />
-			<Location />
-			<LinearGradient
-				colors={[
-					COLORS.BACKGROUNDGRADIENT1,
-					COLORS.BACKGROUNDGRADIENT2
-				]}
-				start={{ x: 0, y: 0 }}
-				end={{ x: 0, y: 1 }}
-				style={s.gradient}
-			>
-				<SafeAreaView style={s.safeArea}>
-					<View style={s.header}>
-						<View>
-							<Headline
-								headline={
-									isLocationGranted
-										? i18n.t('Help in area')
-										: i18n.t('Location services inactive')
-								}
+				<Mobile />
+				<Location />
+				<LinearGradient
+					colors={[
+						COLORS.BACKGROUNDGRADIENT1,
+						COLORS.BACKGROUNDGRADIENT2
+					]}
+					start={{ x: 0, y: 0 }}
+					end={{ x: 0, y: 1 }}
+					style={s.gradient}
+				>
+					<SafeAreaView style={s.safeArea}>
+						<View style={s.navigation}>
+							<ButtonMenu
+								onPress={() => navigation.openDrawer()}
+								iconFillColor={'#FFF'}
 							/>
 						</View>
-						<View>
-								<ButtonMenu
-									onPress={() => navigation.openDrawer()}
-								/>
-						</View>
-					</View>
-					<View style={s.share}>
-						{isLocationGranted && (
-							<Share
-								lat={latitude}
-								lon={longitude}
-								city={city}
-								loading={!isLocationResolved}
-							/>
-						)}
-					</View>
-					<View style={s.radar}>
-						{!isLocationGranted && (
-							<View style={s.errorContainer}>
-								<Pressable
-									onPress={() =>
-										Linking.openURL('app-settings:')
+						<View style={s.header}>
+							<View>
+								<Headline
+									headline={
+										isLocationGranted
+											? i18n.t('Help in area')
+											: i18n.t(
+													'Location services inactive'
+											  )
 									}
-								>
-									<View style={s.error}>
-										<Text style={s.errorText}>
-											{i18n.t(
-												'Allow access to location services'
-											)}
-										</Text>
-									</View>
-								</Pressable>
+								/>
 							</View>
-						)}
-						{!isLocationResolved && isForeground && (
-							<RadarLoading />
-						)}
-						{isLocationGranted &&
-							isLocationResolved &&
-							isForeground && <RadarAnimation />}
-						{isLocationGranted && isLocationResolved && (
-							// <Pressable onPress={requestLocationUpdate}>
-							<>
-								<RadarCircles />
-
-								<Radar
-									people={people}
+						</View>
+						<View style={s.share}>
+							{isLocationGranted && (
+								<Share
 									lat={latitude}
 									lon={longitude}
+									city={city}
+									loading={!isLocationResolved}
 								/>
-							</>
-							// </Pressable>
-						)}
-					</View>
-					<ButtonFilter
-						wrapperStyle={s.filter}
-						onPress={() => navigation.navigate('Filter')}
-						icon={() => IconFilters}
-						iconFillColor={COLORS.WHITE}
-						iconHoverFillColor={COLORS.PRIMARY}
-					/>
-					<Background>
-						{isConnected && isLocationResolved && isForeground && (
-							<UserList
-								people={people}
-								loading={loading}
-								onRefresh={() => loadData()}
-								navigation={navigation}
-								route={route}
-							/>
-						)}
-						{(!isConnected ||
-							!isLocationGranted ||
-							!isLocationResolved ||
-							!isForeground) && <UserListPlaceholder />}
-					</Background>
-				</SafeAreaView>
-			</LinearGradient>
+							)}
+						</View>
+						<View style={s.radar}>
+							{!isLocationGranted && (
+								<View style={s.errorContainer}>
+									<Pressable
+										onPress={() =>
+											Linking.openURL('app-settings:')
+										}
+									>
+										<View style={s.error}>
+											<Text style={s.errorText}>
+												{i18n.t(
+													'Allow access to location services'
+												)}
+											</Text>
+										</View>
+									</Pressable>
+								</View>
+							)}
+							{!isLocationResolved && isForeground && (
+								<RadarLoading />
+							)}
+							{isLocationGranted &&
+								isLocationResolved &&
+								isForeground && <RadarAnimation />}
+							{isLocationGranted && isLocationResolved && (
+								// <Pressable onPress={requestLocationUpdate}>
+								<>
+									<RadarCircles />
+
+									<Radar
+										people={people}
+										lat={latitude}
+										lon={longitude}
+									/>
+								</>
+								// </Pressable>
+							)}
+						</View>
+						<ButtonFilter
+							wrapperStyle={s.filter}
+							onPress={() => navigation.navigate(SCREENS.FILTER)}
+							icon={() => IconFilters}
+							iconFillColor={COLORS.WHITE}
+							iconHoverFillColor={COLORS.PRIMARY}
+						/>
+						<Background>
+							{isConnected &&
+								isLocationResolved &&
+								isForeground && (
+									<UserList
+										people={people}
+										loading={loading}
+										onRefresh={() => loadData()}
+										navigation={navigation}
+										route={route}
+									/>
+								)}
+							{(!isConnected ||
+								!isLocationGranted ||
+								!isLocationResolved ||
+								!isForeground) && <UserListPlaceholder />}
+						</Background>
+					</SafeAreaView>
+				</LinearGradient>
 			</ErrorBoundary>
 		</View>
 	);
@@ -197,6 +202,11 @@ const s = StyleSheet.create({
 	safeArea: {
 		flex: 1,
 		...globalStyle.droidSafeArea
+	},
+	navigation: {
+		position: 'relative',
+		zIndex: 2000,
+		color: '#fff'
 	},
 	header: {
 		width: '100%',

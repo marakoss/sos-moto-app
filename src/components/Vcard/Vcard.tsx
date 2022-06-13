@@ -7,13 +7,15 @@ import {
 	Alert,
 	Pressable
 } from 'react-native';
+
 import Button from '@components/Button/Button';
 import { IconPhone, IconNavigate } from '@icons/index';
 import { colorList } from '@dictionaries/colors';
 import { COLORS, SERVICES } from '@dictionaries/index';
+import { hexToRgbA } from '@utils/Colors';
+
 import i18n from 'i18n-js';
 import { ICard } from 'types/card';
-import { hexToRgbA } from '@utils/Colors';
 
 const makeCall = (phoneNumber: string | undefined) => {
 	Alert.alert(

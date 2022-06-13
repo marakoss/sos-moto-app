@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { StyleSheet, Text, View, Switch } from 'react-native';
 import { COLORS } from '@dictionaries/colors';
 
-interface filteritem {
+interface IFilterItem {
 	itemText: string;
 	textColor?: object;
 	key?: string | number;
@@ -10,7 +10,7 @@ interface filteritem {
 	initialState?: boolean;
 }
 
-const FilterItem: FC<filteritem> = ({
+const FilterItem: FC<IFilterItem> = ({
 	itemText,
 	textColor,
 	onClick,

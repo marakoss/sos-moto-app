@@ -1,6 +1,6 @@
 import React, { ReactNode, FC, useCallback, useRef, useState } from 'react';
 import {
-    Animated,
+	Animated,
 	StyleSheet,
 	View,
 	Pressable,
@@ -11,7 +11,7 @@ import {
 import { COLORS } from '@dictionaries/colors';
 import { IconMenu } from '@icons/index';
 
-interface IMyProp {
+interface IButtonMenu {
 	styles?: {
 		container: any;
 	};
@@ -29,8 +29,8 @@ interface IMyProp {
 	iconHeight?: number;
 }
 
-const ButtonMenu: FC<IMyProp> = ({
-    children,
+const ButtonMenu: FC<IButtonMenu> = ({
+	children,
 	accessibilityLabel,
 	icon,
 	onPress,
@@ -41,10 +41,10 @@ const ButtonMenu: FC<IMyProp> = ({
 	iconWidth,
 	iconHeight
 }): React.ReactElement => {
-    const switchPosition = useRef(new Animated.Value(0)).current;
+	const switchPosition = useRef(new Animated.Value(0)).current;
 	const [isMenuopen, setIsMenuOpen] = useState(true);
 
-    const runAnimation = useCallback(() => {
+	const runAnimation = useCallback(() => {
 		console.log('click');
 		switchPosition.setValue(isMenuopen ? 1 : 0);
 
@@ -58,23 +58,36 @@ const ButtonMenu: FC<IMyProp> = ({
 		setIsMenuOpen(!isMenuopen);
 	}, [switchPosition, isMenuopen]);
 
-
 	return (
 		<Pressable
 			accessibilityLabel={accessibilityLabel}
 			testID={testID}
 			disabled={disabled}
-			onPress={(event) => {runAnimation(); if (onPress) return onPress(event);}}
+			onPress={event => {
+				runAnimation();
+				if (onPress) return onPress(event);
+			}}
 			style={s.container}
 		>
 			{({ pressed }) => (
-				<Animated.View style={[s.container, {transform:
-                    [{translateX: switchPosition.interpolate({
-						inputRange: [0, 1],
-						outputRange: [0, 50]
-					})}]
-                }]}>
-					<View style={s.gap}><IconMenu fillColor='#555' /></View>
+				<Animated.View
+					style={[
+						s.container,
+						{
+							transform: [
+								{
+									translateX: switchPosition.interpolate({
+										inputRange: [0, 1],
+										outputRange: [0, 50]
+									})
+								}
+							]
+						}
+					]}
+				>
+					<View style={s.gap}>
+						<IconMenu fillColor={iconFillColor || '#000000'} />
+					</View>
 				</Animated.View>
 			)}
 		</Pressable>
@@ -86,7 +99,7 @@ const s = StyleSheet.create({
 		width: 80,
 		height: 80,
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'center'
 	},
 	gap: {
 		paddingHorizontal: 8

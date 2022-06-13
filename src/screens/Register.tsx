@@ -7,6 +7,7 @@ import React, {
 	useMemo,
 	useState
 } from 'react';
+
 import {
 	StyleSheet,
 	View,
@@ -14,18 +15,20 @@ import {
 	ActivityIndicator,
 	Alert
 } from 'react-native';
+
 //import { WebView } from 'react-native-webview';
-import { StackScreenProps } from '@react-navigation/stack';
+
+import { DrawerScreenProps } from '@react-navigation/drawer';
 import globalStyle from '@components/Platform/globalStyle';
 import { Button, Headline } from '@components/index';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, SCREENS } from '@dictionaries/index';
 import { REGISTER_WEBVIEW_URL } from '@env';
 import i18n from 'i18n-js';
 import { IconMenu } from '@icons/index';
 import { LocationContext } from '@store/index';
 import * as Localization from 'expo-localization';
 
-const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
+const Register: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	const key = useRef(0);
 	const { latitude, longitude } = useContext(LocationContext);
 	const cachebust = Math.floor(Math.random() * 1000000);
@@ -94,7 +97,7 @@ const Register: FC<StackScreenProps<any>> = ({ navigation }) => {
 				/>
 				<View style={s.content}>
 					<Button
-						onPress={() => navigation.navigate('Menu')}
+						onPress={() => navigation.navigate(SCREENS.MENU)}
 						icon={() => IconMenu}
 						iconFillColor={COLORS.DARKERTEXT}
 						iconHoverFillColor={COLORS.WHITE}

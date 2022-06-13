@@ -5,7 +5,7 @@ export interface ICard {
 	phone?: string;
 	lat: number;
 	lon: number;
-	services?: Array<number>;
+	services?: number[];
 	distance?: number;
 	index?: number;
 	note?: string;

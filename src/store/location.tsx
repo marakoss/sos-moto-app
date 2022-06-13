@@ -28,7 +28,7 @@ type IState = {
 	city?: string | null;
 };
 
-type iCtx = IState & {
+type ICtx = IState & {
 	dispatch: Dispatch<IAction>;
 };
 
@@ -85,7 +85,7 @@ const ctx = {
 	dispatch: () => {}
 };
 
-export const LocationContext = createContext<iCtx>(ctx);
+export const LocationContext = createContext<ICtx>(ctx);
 LocationContext.displayName = 'LocationContext';
 
 export function locationReducer(state: IState, action: IAction): IState {

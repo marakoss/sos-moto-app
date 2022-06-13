@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
-type Color = string;
+import { ColorValue } from 'react-native';
 
 export enum COLORS {
 	TRANSPARENT = 'transparent',
@@ -23,7 +21,7 @@ export enum COLORS {
 	LIGHTINFO = '#aaccFF'
 }
 
-export const colorList: Color[] = [
+export const colorList: ColorValue[] = [
 	COLORS.RED,
 	COLORS.GREEN,
 	COLORS.BLUE,

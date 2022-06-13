@@ -9,10 +9,10 @@ import RadarPoints from '@components/Radar/RadarPoints';
 
 import useAnimationFrame from '@components/Animations/useAnimationFrame';
 
-import type { iCard } from 'types/card';
+import type { ICard } from 'types/card';
 
-interface iMyProps {
-	people: iCard[];
+interface IRadar {
+	people: ICard[];
 	lat: number;
 	lon: number;
 }
@@ -26,10 +26,10 @@ function cyclicDistance(current: number, now: number): number {
 	return distance;
 }
 
-const Radar: FC<iMyProps> = ({ people, lat, lon }) => {
+const Radar: FC<IRadar> = ({ people, lat, lon }) => {
 	const [heading, setHeading] = useState(0);
 	const myHeading = useRef<number>(0);
-	const locationRef = useRef<Array<number>>([0, 0]);
+	const locationRef = useRef<number[]>([0, 0]);
 
 	const step = () => {
 		if (myHeading.current < 0) {

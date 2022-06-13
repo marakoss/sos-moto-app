@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
-import { IMySvgIcon } from 'types/svg';
+import { ISvgIcon } from 'types/svg';
 
-const IconShare: IMySvgIcon = ({ width, height, fillColor }): JSX.Element => {
+const IconShare: ISvgIcon = ({ width, height, fillColor }): JSX.Element => {
 	return (
 		<Svg
 			width={Number(width) || 15}

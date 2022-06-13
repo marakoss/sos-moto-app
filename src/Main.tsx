@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Main, Filter, Menu, Register, About } from '@screens/index';
+import { SCREENS } from '@dictionaries/screens';
 
 import {
 	FiltersContext,
@@ -52,7 +53,7 @@ const App: FC = () => {
 	);
 
 	if (__DEV__) {
-	//	useKeepAwake();
+		//	useKeepAwake();
 	}
 
 	return (
@@ -67,20 +68,36 @@ const App: FC = () => {
 				>
 					<NavigationContainer>
 						<Drawer.Navigator
-							initialRouteName="Home"
+							initialRouteName={SCREENS.HOME}
 							screenOptions={{
-								headerShown: false
+								headerShown: false,
+								drawerStyle: {
+									backgroundColor: '#fff'
+								},
+								drawerType: 'front'
 							}}
-							drawerContent={CustomDrawerContent}	
+							drawerContent={CustomDrawerContent}
 						>
-							<Drawer.Screen name="Home" component={Main} />
-							<Drawer.Screen name="Filter" component={Filter} />
-							<Drawer.Screen name="Menu" component={Menu} />
 							<Drawer.Screen
-								name="Register"
+								name={SCREENS.HOME}
+								component={Main}
+							/>
+							<Drawer.Screen
+								name={SCREENS.FILTER}
+								component={Filter}
+							/>
+							<Drawer.Screen
+								name={SCREENS.MENU}
+								component={Menu}
+							/>
+							<Drawer.Screen
+								name={SCREENS.REGISTER}
 								component={Register}
 							/>
-							<Drawer.Screen name="About" component={About} />
+							<Drawer.Screen
+								name={SCREENS.ABOUT}
+								component={About}
+							/>
 						</Drawer.Navigator>
 					</NavigationContainer>
 				</FiltersContext.Provider>

@@ -10,14 +10,14 @@ import { toDecimalPlaces } from '@utils/Math';
 
 import i18n from 'i18n-js';
 
-interface myprops {
+interface IShare {
 	lat: number;
 	lon: number;
 	loading: boolean;
 	city: string | null | undefined;
 }
 
-const Share: FC<myprops> = ({ lat, lon, city, loading }) => {
+const Share: FC<IShare> = ({ lat, lon, city, loading }) => {
 	const readableCity = city ? city : i18n.t('alert_shareTextCityUnknown');
 	return (
 		<View style={s.shareBtn}>

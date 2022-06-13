@@ -8,16 +8,18 @@ import {
 	Image,
 	Platform
 } from 'react-native';
+
 import { DrawerScreenProps } from '@react-navigation/drawer';
+
 import globalStyle from '@components/Platform/globalStyle';
 import { Button, Headline, Background } from '@components/index';
 import { IMAGEABOUT } from '@images/banners';
 import { IMAGEJAROSLAV, IMAGEMAREK } from '@images/about';
 import { IconMenu } from '@icons/index';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, SCREENS } from '@dictionaries/index';
+
 import i18n from 'i18n-js';
 import { LinearGradient } from 'expo-linear-gradient';
-
 import * as Application from 'expo-application';
 
 const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
@@ -46,7 +48,9 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 					<ScrollView style={s.scrollView}>
 						<View style={s.content}>
 							<Button
-								onPress={() => navigation.navigate('Menu')}
+								onPress={() =>
+									navigation.navigate(SCREENS.MENU)
+								}
 								icon={() => IconMenu}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}

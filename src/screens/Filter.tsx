@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, SafeAreaView, Text, ScrollView } from 'react-native';
-import { StackScreenProps } from '@react-navigation/stack';
+
+import { DrawerScreenProps } from '@react-navigation/drawer';
 import i18n from 'i18n-js';
+
 import { Headline, Button, FilterItem } from '@components/index';
 import { IconCheck } from '@icons/index';
 import globalStyle from '@components/Platform/globalStyle';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, SCREENS } from '@dictionaries/index';
 import { filters, FiltersContext } from '@store/filters';
 
 const renderFilters = (items: object, dispatch: Function) => {
@@ -24,7 +26,7 @@ const renderFilters = (items: object, dispatch: Function) => {
 		});
 };
 
-const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
+const Filter: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
 		<FiltersContext.Consumer>
 			{({ items, dispatch }) => (
@@ -45,7 +47,9 @@ const Filter: FC<StackScreenProps<any>> = ({ navigation }) => {
 							</View>
 							<View style={s.buttonContainer}>
 								<Button
-									onPress={() => navigation.navigate('Home')}
+									onPress={() =>
+										navigation.navigate(SCREENS.HOME)
+									}
 									styles={{
 										button: s.button,
 										text: s.buttonText

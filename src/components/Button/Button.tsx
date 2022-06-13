@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { COLORS } from '@dictionaries/index';
 
-interface IMyButton {
+interface IButton {
 	styles?: {
 		button?: any;
 		text?: any;
@@ -32,7 +32,7 @@ interface IMyButton {
 	iconHeight?: number;
 }
 
-const Button: FC<IMyButton> = ({
+const Button: FC<IButton> = ({
 	children,
 	accessibilityLabel,
 	onPress,

@@ -16,7 +16,7 @@ type IState = {
 	isAirplaneMode: boolean;
 };
 
-type iCtx = IState & {
+type ICtx = IState & {
 	dispatch: Dispatch<IAction>;
 };
 
@@ -39,7 +39,7 @@ const ctx = {
 	dispatch: () => {}
 };
 
-export const MobileContext = createContext<iCtx>(ctx);
+export const MobileContext = createContext<ICtx>(ctx);
 MobileContext.displayName = 'MobileContext';
 
 export function mobileReducer(state: IState, action: IAction): IState {

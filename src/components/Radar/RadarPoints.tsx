@@ -9,13 +9,13 @@ import type { ICoordinate } from 'types/gps';
 import type { IPoint } from 'types/cartesian';
 import type { ICard } from 'types/card';
 
-interface iMyProps {
+interface IRadarPoints {
 	people: ICard[];
 	lat: number;
 	lon: number;
 }
 
-const RadarPoints: FC<iMyProps> = ({ people, lat, lon }) => {
+const RadarPoints: FC<IRadarPoints> = ({ people, lat, lon }) => {
 	const points = people.map((person: ICard) => {
 		// average between points
 		const maxDistance = 20;

@@ -41,7 +41,7 @@ module.exports = {
 		"react-native/no-single-element-style-arrays": 2,
 		"@typescript-eslint/no-use-before-define": ["warn", { "functions": false, "classes": false, "variables": false }],
 		"@typescript-eslint/no-unused-vars": "warn",
-		"@typescript-eslint/naming-convention": ["warn", { selector: 'typeLike', format: ['camelCase'] }],
+		"@typescript-eslint/naming-convention": ["warn", { selector: 'typeLike', format: ['PascalCase'] }],
 		"arrow-body-style": "off",
 		"consistent-return": "warn",
 		"comma-dangle": "off",

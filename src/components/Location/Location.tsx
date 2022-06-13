@@ -2,11 +2,11 @@ import React, { FC, useContext, useEffect, useCallback } from 'react';
 
 import * as ExpoLocation from 'expo-location';
 import { LocationObject, PermissionStatus } from 'expo-location';
-import { LocationContext, iLocationTypes } from '@store/index';
+import { LocationContext, ILocationTypes } from '@store/index';
 
-interface iLocation {}
+interface ILocation {}
 
-const Location: FC<iLocation> = () => {
+const Location: FC<ILocation> = () => {
 	const { isLocationGranted, latitude, longitude, dispatch } =
 		useContext(LocationContext);
 
@@ -14,7 +14,7 @@ const Location: FC<iLocation> = () => {
 		(currentLocation: LocationObject | null) => {
 			if (currentLocation !== null) {
 				dispatch({
-					type: iLocationTypes.updateLocation,
+					type: ILocationTypes.updateLocation,
 					value: {
 						location: currentLocation,
 						latitude: currentLocation.coords.latitude,
@@ -38,7 +38,7 @@ const Location: FC<iLocation> = () => {
 			.then(geo => {
 				if (geo[0].city !== null) {
 					dispatch({
-						type: iLocationTypes.setCity,
+						type: ILocationTypes.setCity,
 						value: geo[0].city
 					});
 				}
@@ -90,12 +90,12 @@ const Location: FC<iLocation> = () => {
 			.then((status: PermissionStatus) => {
 				if (status !== PermissionStatus.GRANTED) {
 					dispatch({
-						type: iLocationTypes.setIsLocationGranted,
+						type: ILocationTypes.setIsLocationGranted,
 						value: false
 					});
 				} else {
 					dispatch({
-						type: iLocationTypes.setIsLocationGranted,
+						type: ILocationTypes.setIsLocationGranted,
 						value: true
 					});
 				}
@@ -105,7 +105,7 @@ const Location: FC<iLocation> = () => {
 			})
 			.catch(() => {
 				dispatch({
-					type: iLocationTypes.setIsLocationGranted,
+					type: ILocationTypes.setIsLocationGranted,
 					value: false
 				});
 			});

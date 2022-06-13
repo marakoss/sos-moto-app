@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { COLORS } from '@dictionaries/colors';
 
-interface headline {
+interface IHeadline {
 	headline: string;
 	textColor?: object;
 }
 
-const Headline: FC<headline> = ({ headline, textColor }) => {
+const Headline: FC<IHeadline> = ({ headline, textColor }) => {
 	const color = textColor || s.textColor;
 
 	return (

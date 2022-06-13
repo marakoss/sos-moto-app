@@ -6,7 +6,7 @@ import { COLORS } from '@dictionaries/colors';
 import { ICard } from 'types/card';
 import Empty from './Empty';
 
-interface iListView {
+interface IListView {
 	people: ICard[];
 	loading: boolean;
 	onRefresh: Function;
@@ -14,7 +14,7 @@ interface iListView {
 	route?: any;
 }
 
-const List: FC<iListView> = ({
+const List: FC<IListView> = ({
 	people,
 	loading,
 	onRefresh,
