@@ -1,7 +1,7 @@
-import Main from './Main';
+import Homepage from './Homepage';
 import Filter from './Filter';
 import Menu from './Menu';
 import Register from './Register';
 import About from './About';
 
-export { Main, Filter, Menu, Register, About };
+export { Homepage, Filter, Menu, Register, About };

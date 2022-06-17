@@ -1,11 +1,11 @@
 import React, { FC, useReducer } from 'react';
 
-import { useKeepAwake } from 'expo-keep-awake';
+// import { useKeepAwake } from 'expo-keep-awake';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { Main, Filter, Menu, Register, About } from '@screens/index';
+import { Homepage, Filter, Menu, Register, About } from '@screens/index';
 import { SCREENS } from '@dictionaries/screens';
 
 import {
@@ -72,15 +72,21 @@ const App: FC = () => {
 							screenOptions={{
 								headerShown: false,
 								drawerStyle: {
-									backgroundColor: '#fff'
+									width: 200
 								},
-								drawerType: 'front'
+								drawerType: 'back',
+								overlayColor: 'transparent'
 							}}
 							drawerContent={CustomDrawerContent}
+							screenListeners={({ navigation, route }) => ({
+								state: e => {
+									// console.log('Navigation state changed', e);
+								}
+							})}
 						>
 							<Drawer.Screen
 								name={SCREENS.HOME}
-								component={Main}
+								component={Homepage}
 							/>
 							<Drawer.Screen
 								name={SCREENS.FILTER}

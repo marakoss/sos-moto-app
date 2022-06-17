@@ -4,15 +4,12 @@ import {
 	DrawerContentScrollView,
 	DrawerItemList
 } from '@react-navigation/drawer';
-import ButtonMenu from '../Button/ButtonMenu';
-
 const CustomDrawerContent: FC<any> = (props: any) => {
 	return (
-		<DrawerContentScrollView {...props} style={{ overflow: 'visible' }}>
-			<View style={{ position: 'relative', width: 500 }}>
-				<ButtonMenu onPress={() => props.navigation.toggleDrawer()} />
+		<DrawerContentScrollView {...props} style={{ paddingTop: 40 }}>
+			<View style={{ flex: 1, minHeight: '100%' }}>
+				<DrawerItemList {...props} />
 			</View>
-			<DrawerItemList {...props} />
 		</DrawerContentScrollView>
 	);
 };

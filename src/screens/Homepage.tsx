@@ -11,7 +11,7 @@ import {
 import globalStyle from '@components/Platform/globalStyle';
 
 import { LinearGradient } from 'expo-linear-gradient';
-import { DrawerScreenProps } from '@react-navigation/drawer';
+import { DrawerScreenProps, useDrawerStatus } from '@react-navigation/drawer';
 
 import i18n from 'i18n-js';
 
@@ -40,7 +40,7 @@ import { loadUsers } from '@logic/Users';
 
 import { FiltersContext, MobileContext, LocationContext } from '@store/index';
 
-const Main: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
+const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 	const [loading, setLoading] = useState(true);
 	const [people, setPeople] = useState<ICard[]>([]);
 	const filters = useContext(FiltersContext);
@@ -53,6 +53,7 @@ const Main: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 		longitude,
 		city
 	} = useContext(LocationContext);
+	const drawer = useDrawerStatus();
 
 	const loadData = useCallback(() => {
 		setLoading(true);
@@ -98,7 +99,7 @@ const Main: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 						<View style={s.navigation}>
 							<ButtonMenu
 								onPress={() => navigation.openDrawer()}
-								iconFillColor={'#FFF'}
+								isDrawerOpen={drawer === 'open'}
 							/>
 						</View>
 						<View style={s.header}>
@@ -206,7 +207,8 @@ const s = StyleSheet.create({
 	navigation: {
 		position: 'relative',
 		zIndex: 2000,
-		color: '#fff'
+		marginTop: 10,
+		marginLeft: 12
 	},
 	header: {
 		width: '100%',
@@ -264,4 +266,4 @@ const s = StyleSheet.create({
 	}
 });
 
-export default Main;
+export default Homepage;
