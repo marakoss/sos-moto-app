@@ -10,7 +10,7 @@ import {
 
 import Button from '@components/Button/Button';
 import { IconPhone, IconNavigate } from '@icons/index';
-import { colorList } from '@dictionaries/colors';
+import { getColor } from '@dictionaries/colors';
 import { COLORS, SERVICES } from '@dictionaries/index';
 import { hexToRgbA } from '@utils/Colors';
 
@@ -53,6 +53,7 @@ const getServices = (services: Array<number> | undefined) => {
 		return i18n.translate(text) + (array.length - 1 > index ? ', ' : '');
 	});
 };
+const colorMap = getColor();
 
 const Vcard: FC<ICard> = ({
 	name,
@@ -65,7 +66,8 @@ const Vcard: FC<ICard> = ({
 	note,
 	index
 }) => {
-	const color = colorList[Number(index)];
+	
+	const color = colorMap.next().value || '#000000';
 	const [noteShowed, setNoteShowed] = useState(false);
 	const showNote = () => {
 		setNoteShowed(!noteShowed);

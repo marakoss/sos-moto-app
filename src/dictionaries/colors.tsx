@@ -23,16 +23,17 @@ export enum COLORS {
 	LIGHTINFO = '#aaccFF'
 }
 
+export function* getColor() {
+	let i = 0;
+	while (true) {
+		yield colorList[i++%5];
+	}
+}
+
 export const colorList: ColorValue[] = [
 	COLORS.RED,
 	COLORS.GREEN,
 	COLORS.BLUE,
 	COLORS.ORANGE,
 	COLORS.YELLOW,
-	// error state?
-	COLORS.RED,
-	COLORS.GREEN,
-	COLORS.BLUE,
-	COLORS.ORANGE,
-	COLORS.YELLOW
 ];

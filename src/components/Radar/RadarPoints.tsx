@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { hexToRgbA } from '@utils/Colors';
 import { coordsDistance } from '@utils/Geo';
-import { COLORS, colorList } from '@dictionaries/colors';
+import { COLORS, getColor } from '@dictionaries/colors';
 
 import type { ICoordinate } from 'types/gps';
 import type { IPoint } from 'types/cartesian';
@@ -14,6 +14,8 @@ interface IRadarPoints {
 	lat: number;
 	lon: number;
 }
+
+const colorMap = getColor();
 
 const RadarPoints: FC<IRadarPoints> = ({ people, lat, lon }) => {
 	const points = people.map((person: ICard) => {
@@ -26,7 +28,7 @@ const RadarPoints: FC<IRadarPoints> = ({ people, lat, lon }) => {
 	let n = 0;
 	const list = points.map((point: IPoint) => {
 		const realpoint = sperateClosePoints(point, points, n);
-		const color = colorList[Number(n)];
+		const color = colorMap.next().value ?? '#';
 
 		n += 1; // RN screams each child should have unique key
 
