@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { StyleSheet, Text, View, ColorValue } from 'react-native';
-import { COLORS } from '@dictionaries/colors';
+import { COLORS, FONTSIZES } from '@dictionaries/index';
 
 interface IHeadline {
 	headline: string;
@@ -22,7 +22,7 @@ const s = StyleSheet.create({
 		color: COLORS.WHITE
 	},
 	text: {
-		fontSize: 30,
+		fontSize: FONTSIZES.TITLE,
 		fontWeight: '800'
 	},
 	container: {

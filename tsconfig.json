@@ -15,6 +15,7 @@
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
       "@logic/*": ["logic/*"],
+      "@hooks/*": ["hooks/*"],
       "react": ["../node_modules/@types/react"]
     }
   },

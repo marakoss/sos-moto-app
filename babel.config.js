@@ -18,7 +18,8 @@ module.exports = function (api) {
 						'@translations': './src/translations',
 						'@types': './src/types',
 						'@utils': './src/utils',
-						'@logic': './src/logic'
+						'@logic': './src/logic',
+						'@hooks': './src/hooks'
 					}
 				}
 			],

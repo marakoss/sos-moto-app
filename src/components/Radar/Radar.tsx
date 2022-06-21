@@ -7,7 +7,7 @@ import { LocationHeadingObject } from 'expo-location';
 import RadarArrow from '@components/Radar/RadarArrow';
 import RadarPoints from '@components/Radar/RadarPoints';
 
-import useAnimationFrame from '@components/Animations/useAnimationFrame';
+import useAnimationFrame from '@hooks/useAnimationFrame';
 
 import type { ICard } from 'types/card';
 
