@@ -10,6 +10,9 @@ import {
 import { COLORS } from '@dictionaries/colors';
 import { IconMenu } from '@icons/index';
 
+const width = 60;
+const height = 40;
+
 interface IButtonMenu {
 	styles?: {
 		container: any;
@@ -60,25 +63,28 @@ const ButtonMenu: FC<IButtonMenu> = ({
 				<View style={s.track}>
 					<Animated.View
 						style={[
-							s.circle,
+							s.switch,
 							{
 								transform: [
 									{
 										translateX: switchPosition.interpolate({
 											inputRange: [0, 1],
-											outputRange: [0, 24]
+											outputRange: [0, width-height]
 										})
 									}
 								]
 							}
 						]}
 					>
-						<View style={s.icon}>
-							<IconMenu
-								fillColor={m.iconColorOpen.color}
-								width={20}
-								height={20}
-							/>
+						<View style={s.onstate} />
+						<View style={s.circle}>
+							<View style={s.icon}>
+								<IconMenu
+									fillColor={m.iconColorOpen.color}
+									width={height/2}
+									height={height/2}
+								/>
+							</View>
 						</View>
 					</Animated.View>
 				</View>
@@ -95,34 +101,51 @@ const m = {
 
 const s = StyleSheet.create({
 	container: {
-		width: 64,
-		height: 40,
+		width: width,
+		height: height,
 		alignItems: 'flex-start',
 		justifyContent: 'center',
 		overflow: 'visible'
 	},
 	track: {
-		width: 64,
-		height: 40,
-		borderColor: COLORS.LIGHTBORDER,
+		width: width,
+		height: height,
+		borderRadius: height,
 		borderWidth: 1,
-		borderRadius: 40
+		borderColor: COLORS.DARKBORDER,
+		overflow: 'hidden'
+	},
+	switch:{
+		height: height
 	},
 	circle: {
-		width: 40,
-		height: 40,
+		width: height,
+		height: height,
+		borderRadius: height,
+		borderColor: COLORS.DARKBORDER,
 		backgroundColor: COLORS.WHITE,
-		borderColor: COLORS.LIGHTBORDER,
 		borderWidth: 1,
-		borderRadius: 40,
 		alignItems: 'center',
 		justifyContent: 'center',
 		flex: 1,
-		left: -1
+		left: -1,
+		position: 'relative',
+		zIndex: 2
+	},
+	onstate: {
+		backgroundColor: COLORS.SECONDARY,
+		width: width,
+		height: height,
+		right: height,
+		top: 0,
+		bottom: 0,
+		position: 'absolute',
+		zindex: 1
 	},
 	icon: {
-		width: 20,
-		height: 20
+		width: height / 2,
+		height: height / 2,
+		backgroundColor: COLORS.WHITE,
 	}
 });
 
