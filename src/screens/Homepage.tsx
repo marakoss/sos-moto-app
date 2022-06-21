@@ -10,7 +10,6 @@ import {
 
 import globalStyle from '@components/Platform/globalStyle';
 
-import { LinearGradient } from 'expo-linear-gradient';
 import { DrawerScreenProps, useDrawerStatus } from '@react-navigation/drawer';
 
 import i18n from 'i18n-js';
@@ -18,20 +17,17 @@ import i18n from 'i18n-js';
 import {
 	UserList,
 	ButtonMenu,
-	Background,
 	Headline,
 	Radar,
 	RadarAnimation,
 	RadarCircles,
 	RadarLoading,
-	ButtonFilter,
 	Share,
 	Mobile,
 	Location,
 	UserListPlaceholder,
 	ErrorBoundary
 } from '@components/index';
-import { IconFilters } from '@icons/index';
 import { COLORS, SCREENS } from '@dictionaries/index';
 
 import { ICard } from 'types/card';
@@ -86,14 +82,8 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 			<ErrorBoundary>
 				<Mobile />
 				<Location />
-				<LinearGradient
-					colors={[
-						COLORS.BACKGROUNDGRADIENT1,
-						COLORS.BACKGROUNDGRADIENT2
-					]}
-					start={{ x: 0, y: 0 }}
-					end={{ x: 0, y: 1 }}
-					style={s.gradient}
+				<View
+					style={s.background}
 				>
 					<SafeAreaView style={s.safeArea}>
 						<View style={s.navigation}>
@@ -112,6 +102,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 													'Location services inactive'
 											  )
 									}
+									textColor={COLORS.BLACK}
 								/>
 							</View>
 						</View>
@@ -163,14 +154,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 								// </Pressable>
 							)}
 						</View>
-						<ButtonFilter
-							wrapperStyle={s.filter}
-							onPress={() => navigation.navigate(SCREENS.FILTER)}
-							icon={() => IconFilters}
-							iconFillColor={COLORS.WHITE}
-							iconHoverFillColor={COLORS.PRIMARY}
-						/>
-						<Background>
+						<View>
 							{isConnected &&
 								isLocationResolved &&
 								isForeground && (
@@ -186,9 +170,9 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 								!isLocationGranted ||
 								!isLocationResolved ||
 								!isForeground) && <UserListPlaceholder />}
-						</Background>
+						</View>
 					</SafeAreaView>
-				</LinearGradient>
+				</View>
 			</ErrorBoundary>
 		</View>
 	);
@@ -196,8 +180,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 
 const s = StyleSheet.create({
 	container: {
-		width: '100%',
-		backgroundColor: COLORS.BLACK,
+		backgroundColor: COLORS.WHITE,
 		flex: 1
 	},
 	safeArea: {
@@ -205,47 +188,29 @@ const s = StyleSheet.create({
 		...globalStyle.droidSafeArea
 	},
 	navigation: {
-		position: 'relative',
-		zIndex: 2000,
-		marginTop: 10,
-		marginLeft: 12
+		
 	},
 	header: {
-		width: '100%',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		position: 'relative',
-		zIndex: 3
+
 	},
 	share: {
 		position: 'relative',
-		left: 0,
-		top: 0,
-		zIndex: 200
 	},
 	radar: {
 		width: '100%',
-		height: '30%',
+		height: 100,
 		marginBottom: 10,
 		position: 'relative',
-		zIndex: 2
+		zIndex: -1
 	},
-	gradient: {
-		width: '100%',
-		height: '100%'
+	background: {
+		flex: 1
 	},
 	filter: {
-		position: 'absolute',
-		zIndex: 10,
-		left: '70%',
-		top: '42%'
+
 	},
 	menu: {
-		paddingRight: 20,
-		backgroundColor: 'rgba(0, 0, 0, 0.0001)',
-		borderColor: 'rgba(255, 255, 255, 1)',
-		borderWidth: 1,
-		borderRadius: 50
+		
 	},
 	errorContainer: {
 		alignItems: 'center',

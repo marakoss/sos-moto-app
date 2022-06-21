@@ -10,7 +10,6 @@ import RadarCircles from './Radar/RadarCircles';
 import RadarArrow from './Radar/RadarArrow';
 import RadarLoading from './Radar/RadarLoading';
 import Headline from './Headline/Headline';
-import Background from './Background/BackgroundList';
 import UserList from './UserList/UserList';
 import UserListEmpty from './UserList/Empty';
 import UserListPlaceholder from './UserList/Placeholder';
@@ -34,7 +33,6 @@ export {
 	RadarArrow,
 	RadarLoading,
 	Headline,
-	Background,
 	UserList,
 	UserListEmpty,
 	UserListPlaceholder,

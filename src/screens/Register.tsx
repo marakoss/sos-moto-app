@@ -93,7 +93,7 @@ const Register: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 			<SafeAreaView style={s.safeArea}>
 				<Headline
 					headline={i18n.t('Register')}
-					textColor={{ color: COLORS.BLACK }}
+					textColor={COLORS.BLACK}
 				/>
 				<View style={s.content}>
 					<Button

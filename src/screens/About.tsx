@@ -12,7 +12,7 @@ import {
 import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import globalStyle from '@components/Platform/globalStyle';
-import { Button, Headline, Background } from '@components/index';
+import { Button, Headline } from '@components/index';
 import { IMAGEABOUT } from '@images/banners';
 import { IMAGEJAROSLAV, IMAGEMAREK } from '@images/about';
 import { IconMenu } from '@icons/index';
@@ -38,13 +38,13 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 					<View style={s.header}>
 						<Headline
 							headline={i18n.t('About')}
-							textColor={{ color: COLORS.WHITE }}
+							textColor={COLORS.WHITE}
 						/>
 					</View>
 				</LinearGradient>
 			</View>
 			<SafeAreaView style={s.safeArea}>
-				<Background>
+				<View>
 					<ScrollView style={s.scrollView}>
 						<View style={s.content}>
 							<Button
@@ -62,7 +62,7 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 							</Button>
 							<Headline
 								headline={i18n.t('Application')}
-								textColor={{ color: COLORS.BLACK }}
+								textColor={COLORS.BLACK}
 							/>
 							<Text style={s.paragraph}>
 								Verze: {Application.nativeApplicationVersion} (
@@ -74,7 +74,7 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 
 							<Headline
 								headline={i18n.t('Authors')}
-								textColor={{ color: COLORS.BLACK }}
+								textColor={COLORS.BLACK}
 							/>
 							<Text style={s.paragraph}>
 								Tuto mobilní aplikaci (SOS MOTO) na platformách
@@ -123,7 +123,7 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 							</Text>
 						</View>
 					</ScrollView>
-				</Background>
+				</View>
 			</SafeAreaView>
 		</View>
 	);

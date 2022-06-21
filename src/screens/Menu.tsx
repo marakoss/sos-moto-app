@@ -13,7 +13,7 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import i18n from 'i18n-js';
 
-import { Headline, Button, Background } from '@components/index';
+import { Headline, Button } from '@components/index';
 import { IconNavigate, IconPerson, IconInfo } from '@icons/index';
 import { IMAGEABOUT } from '@images/banners';
 import globalStyle from '@components/Platform/globalStyle';
@@ -36,13 +36,13 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 					<View style={s.header}>
 						<Headline
 							headline={i18n.t('Navigate')}
-							textColor={{ color: COLORS.WHITE }}
+							textColor={COLORS.WHITE}
 						/>
 					</View>
 				</LinearGradient>
 			</View>
 			<SafeAreaView style={s.safeArea}>
-				<Background>
+				<View>
 					<ScrollView
 						style={s.content}
 						showsVerticalScrollIndicator={false}
@@ -94,7 +94,7 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 							</Button>
 						</View>
 					</ScrollView>
-				</Background>
+				</View>
 			</SafeAreaView>
 		</View>
 	);

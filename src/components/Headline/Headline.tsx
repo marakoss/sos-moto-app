@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ColorValue } from 'react-native';
 import { COLORS } from '@dictionaries/colors';
 
 interface IHeadline {
 	headline: string;
-	textColor?: object;
+	textColor?: ColorValue | string;
 }
 
 const Headline: FC<IHeadline> = ({ headline, textColor }) => {
-	const color = textColor || s.textColor;
+	const color = textColor || s.textColor.color;
 
 	return (
 		<View style={s.container}>
-			<Text style={[s.text, color]}>{headline}</Text>
+			<Text style={[s.text, { color: color }]}>{headline}</Text>
 		</View>
 	);
 };

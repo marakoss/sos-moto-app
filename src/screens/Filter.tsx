@@ -35,7 +35,7 @@ const Filter: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 						<View style={s.header}>
 							<Headline
 								headline={i18n.t('Filter by')}
-								textColor={{ color: COLORS.BLACK }}
+								textColor={COLORS.BLACK}
 							/>
 						</View>
 						<ScrollView
