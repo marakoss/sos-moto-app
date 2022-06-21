@@ -22,7 +22,6 @@ import {
 	RadarAnimation,
 	RadarCircles,
 	RadarLoading,
-	Share,
 	Mobile,
 	Location,
 	UserListPlaceholder,
@@ -30,15 +29,13 @@ import {
 } from '@components/index';
 import { COLORS, SCREENS } from '@dictionaries/index';
 
-import { ICard } from 'types/card';
-
 import { loadUsers } from '@logic/Users';
 
-import { FiltersContext, MobileContext, LocationContext } from '@store/index';
+import { FiltersContext, MobileContext, LocationContext, IVCardTypes, VCardContext } from '@store/index';
 
 const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 	const [loading, setLoading] = useState(true);
-	const [people, setPeople] = useState<ICard[]>([]);
+	const { users, dispatch } = useContext(VCardContext);
 	const filters = useContext(FiltersContext);
 	const { isConnected, isForeground } = useContext(MobileContext);
 	const {
@@ -53,10 +50,13 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 
 	const loadData = useCallback(() => {
 		setLoading(true);
-		const data = loadUsers(latitude, longitude, filters.items, people);
+		const data = loadUsers(latitude, longitude, filters.items, users);
 		data.then(apipeople => {
 			setLoading(false);
-			setPeople(apipeople);
+			dispatch({
+				type: IVCardTypes.setUsers,
+				value: apipeople
+			});
 		}).catch((error: Error) => {
 			// TODO: error should set people to empty result
 			console.log(error.message);
@@ -82,9 +82,6 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 			<ErrorBoundary>
 				<Mobile />
 				<Location />
-				<View
-					style={s.background}
-				>
 					<SafeAreaView style={s.safeArea}>
 						<View style={s.navigation}>
 							<ButtonMenu
@@ -99,22 +96,12 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 										isLocationGranted
 											? i18n.t('Help in area')
 											: i18n.t(
-													'Location services inactive'
-											  )
+												'Location services inactive'
+											)
 									}
 									textColor={COLORS.BLACK}
 								/>
 							</View>
-						</View>
-						<View style={s.share}>
-							{isLocationGranted && (
-								<Share
-									lat={latitude}
-									lon={longitude}
-									city={city}
-									loading={!isLocationResolved}
-								/>
-							)}
 						</View>
 						<View style={s.radar}>
 							{!isLocationGranted && (
@@ -146,7 +133,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 									<RadarCircles />
 
 									<Radar
-										people={people}
+										people={users}
 										lat={latitude}
 										lon={longitude}
 									/>
@@ -159,7 +146,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 								isLocationResolved &&
 								isForeground && (
 									<UserList
-										people={people}
+										people={users}
 										loading={loading}
 										onRefresh={() => loadData()}
 										navigation={navigation}
@@ -172,7 +159,6 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 								!isForeground) && <UserListPlaceholder />}
 						</View>
 					</SafeAreaView>
-				</View>
 			</ErrorBoundary>
 		</View>
 	);
@@ -180,7 +166,6 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 
 const s = StyleSheet.create({
 	container: {
-		backgroundColor: COLORS.WHITE,
 		flex: 1
 	},
 	safeArea: {
@@ -188,13 +173,10 @@ const s = StyleSheet.create({
 		...globalStyle.droidSafeArea
 	},
 	navigation: {
-		
+
 	},
 	header: {
 
-	},
-	share: {
-		position: 'relative',
 	},
 	radar: {
 		width: '100%',
@@ -207,10 +189,8 @@ const s = StyleSheet.create({
 		flex: 1
 	},
 	filter: {
-
 	},
 	menu: {
-		
 	},
 	errorContainer: {
 		alignItems: 'center',

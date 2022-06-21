@@ -1,5 +1,6 @@
 import { filters, FiltersContext, filtersReducer } from './filters';
 import { mobile, MobileContext, mobileReducer, IMobileTypes } from './mobile';
+import { vcards, VCardContext, vcardReducer, IVCardTypes } from './vcard';
 import {
 	location,
 	LocationContext,
@@ -18,5 +19,9 @@ export {
 	location,
 	LocationContext,
 	locationReducer,
-	ILocationTypes
+	ILocationTypes,
+	vcards,
+	VCardContext,
+	vcardReducer,
+	IVCardTypes
 };

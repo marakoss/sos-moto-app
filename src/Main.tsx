@@ -17,7 +17,10 @@ import {
 	mobile,
 	LocationContext,
 	locationReducer,
-	location
+	location,
+	VCardContext,
+	vcardReducer,
+	vcards
 } from '@store/index';
 
 import { CustomDrawerContent } from '@components/index';
@@ -47,6 +50,7 @@ const App: FC = () => {
 	// TODO: Rework as HOC?
 	const [filterState, dispatchFilter] = useReducer(filtersReducer, filters);
 	const [mobileState, dispatchMobile] = useReducer(mobileReducer, mobile);
+	const [vcardState, dispatchVcard] = useReducer(vcardReducer, vcards);
 	const [locationState, dispatchLocation] = useReducer(
 		locationReducer,
 		location
@@ -66,46 +70,50 @@ const App: FC = () => {
 				<FiltersContext.Provider
 					value={{ ...filterState, dispatch: dispatchFilter }}
 				>
-					<NavigationContainer>
-						<Drawer.Navigator
-							initialRouteName={SCREENS.HOME}
-							screenOptions={{
-								headerShown: false,
-								drawerStyle: {
-									width: 200
-								},
-								drawerType: 'back',
-								overlayColor: 'transparent'
-							}}
-							drawerContent={CustomDrawerContent}
-							screenListeners={({ navigation, route }) => ({
-								state: e => {
-									// console.log('Navigation state changed', e);
-								}
-							})}
-						>
-							<Drawer.Screen
-								name={SCREENS.HOME}
-								component={Homepage}
-							/>
-							<Drawer.Screen
-								name={SCREENS.FILTER}
-								component={Filter}
-							/>
-							<Drawer.Screen
-								name={SCREENS.MENU}
-								component={Menu}
-							/>
-							<Drawer.Screen
-								name={SCREENS.REGISTER}
-								component={Register}
-							/>
-							<Drawer.Screen
-								name={SCREENS.ABOUT}
-								component={About}
-							/>
-						</Drawer.Navigator>
-					</NavigationContainer>
+					<VCardContext.Provider
+						value={{ ...vcardState, dispatch: dispatchVcard }}
+					>
+						<NavigationContainer>
+							<Drawer.Navigator
+								initialRouteName={SCREENS.HOME}
+								screenOptions={{
+									headerShown: false,
+									drawerStyle: {
+										width: 200
+									},
+									drawerType: 'back',
+									overlayColor: 'transparent'
+								}}
+								drawerContent={CustomDrawerContent}
+								screenListeners={({ navigation, route }) => ({
+									state: e => {
+										// console.log('Navigation state changed', e);
+									}
+								})}
+							>
+								<Drawer.Screen
+									name={SCREENS.HOME}
+									component={Homepage}
+								/>
+								<Drawer.Screen
+									name={SCREENS.FILTER}
+									component={Filter}
+								/>
+								<Drawer.Screen
+									name={SCREENS.MENU}
+									component={Menu}
+								/>
+								<Drawer.Screen
+									name={SCREENS.REGISTER}
+									component={Register}
+								/>
+								<Drawer.Screen
+									name={SCREENS.ABOUT}
+									component={About}
+								/>
+							</Drawer.Navigator>
+						</NavigationContainer>
+					</VCardContext.Provider>
 				</FiltersContext.Provider>
 			</LocationContext.Provider>
 		</MobileContext.Provider>
