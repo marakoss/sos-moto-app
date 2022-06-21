@@ -31,7 +31,8 @@ export const vcards = {
 		lon: 0,
 		services: [1],
 		distance: 0,
-		note: ''
+		note: '',
+		language: 'cz'
 	}]
 };
 

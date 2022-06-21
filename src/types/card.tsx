@@ -9,4 +9,5 @@ export interface ICard {
 	services?: number[];
 	distance?: number;
 	note?: string;
+	language?: string;
 }

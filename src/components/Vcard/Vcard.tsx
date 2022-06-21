@@ -10,7 +10,6 @@ import {
 
 import Button from '@components/Button/Button';
 import { IconPhone, IconNavigate } from '@icons/index';
-import { getColor } from '@dictionaries/colors';
 import { COLORS, SERVICES } from '@dictionaries/index';
 import { hexToRgbA } from '@utils/Colors';
 
@@ -53,7 +52,7 @@ const getServices = (services: Array<number> | undefined) => {
 		return i18n.translate(text) + (array.length - 1 > index ? ', ' : '');
 	});
 };
-const colorMap = getColor();
+
 
 const Vcard: FC<ICard> = ({
 	name,
@@ -64,14 +63,14 @@ const Vcard: FC<ICard> = ({
 	services,
 	distance,
 	note,
-	index
+	index,
 }) => {
 	
-	const color = colorMap.next().value || '#000000';
 	const [noteShowed, setNoteShowed] = useState(false);
 	const showNote = () => {
 		setNoteShowed(!noteShowed);
 	};
+	const color = '#000000';
 	const noteNotEmpty = typeof note !== 'undefined' ? note : ' ';
 
 	return (

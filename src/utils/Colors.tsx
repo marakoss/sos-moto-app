@@ -1,6 +1,6 @@
 import { ColorValue } from 'react-native';
 
-export const hexToRgbA = (hex: ColorValue): string => {
+export const hexToRgbA = (hex: ColorValue | string): string => {
 	let c;
 	if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex.toString())) {
 		c = hex.toString().substring(1).split('');
