@@ -4,7 +4,7 @@ export enum COLORS {
 	TRANSPARENT = 'transparent',
 	WHITE = '#FFFFFF',
 	BLACK = '#000000',
-	PRIMARY = '#EC2B3C',
+	PRIMARY = '#6E4DFF',
 	SECONDARY = '#7D44F2',
 	DARKTEXT = '#777777',
 	DARKERTEXT = '#555555',
@@ -23,13 +23,6 @@ export enum COLORS {
 	LIGHTINFO = '#aaccFF'
 }
 
-export function* getColor() {
-	let i = 0;
-	while (true) {
-		yield colorList[i++%5];
-	}
-}
-
 export const colorList: ColorValue[] = [
 	COLORS.RED,
 	COLORS.GREEN,
@@ -37,3 +30,10 @@ export const colorList: ColorValue[] = [
 	COLORS.ORANGE,
 	COLORS.YELLOW,
 ];
+
+export function* getColor() {
+	let i = 0;
+	while (true) {
+		yield colorList[i++%5];
+	}
+}

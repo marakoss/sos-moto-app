@@ -1,3 +1,4 @@
+import Avatar from './Avatar/Avatar';
 import Button from './Button/Button';
 import ButtonFilter from './Button/ButtonFilter';
 import ButtonInversed from './Button/ButtonInversed';
@@ -21,6 +22,7 @@ import Location from './Location/Location';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 export {
+	Avatar,
 	Button,
 	ButtonFilter,
 	ButtonInversed,

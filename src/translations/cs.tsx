@@ -1,4 +1,5 @@
 const headlines = {
+	'Search in area': 'Vyhledat v okolí',
 	'Help in area': 'Pomoc v oblasti',
 	'Filter by': 'Druh pomoci',
 	Navigate: 'Navigace',
@@ -14,11 +15,14 @@ const services = {
 	WORKBENCH: 'dílna',
 	GARAGE: 'ustájení',
 	SLEEPOVER: 'nouzové ubytování',
-	REPAIR_SHOP: 'servis'
+	REPAIR_SHOP: 'servis',
+	HOTEL: 'ubytování',
+	GUIDE: 'průvodce',
+	RESTAURANT: 'občerstvení',
 };
 
 const buttons = {
-	call: 'volat',
+	call: 'zavolat',
 	Call: 'Volat',
 	confirm: 'Potvrdit',
 	Cancel: 'Zrušit',
@@ -56,7 +60,12 @@ const modals = {
 const labels = {
 	offers: 'nabízí: ',
 	note: 'poznámka: ',
-	'Loading GPS location': 'Načítám GPS polohu'
+	'Loading GPS location': 'Načítám GPS polohu',
+	distance: 'Vzdálenost',
+	reccommended: 'Doporučeno',
+	times: 'krát',
+	language: 'Jazyk',
+	kilometers: 'km'
 };
 
 const fragments = {

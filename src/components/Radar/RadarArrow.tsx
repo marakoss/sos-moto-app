@@ -8,10 +8,10 @@ const Arrow: FC = () => {
 	return (
 		<View style={s.arrow}>
 			<IconArrow
-				fillColor={COLORS.PRIMARY}
+				fillColor={COLORS.RED}
 				fillColor2={COLORS.DARKERRED}
-				width="100"
-				height="100"
+				width={100}
+				height={100}
 			/>
 		</View>
 	);

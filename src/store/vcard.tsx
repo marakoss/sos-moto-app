@@ -20,8 +20,8 @@ const setUsers = (oldState: IState, nextState: ICard[]): IState => {
 	return { ...oldState, ...{ users: nextState } };
 };
 
-export const vcards = {
-	users: [{
+/*
+	{
 		index: 0,
 		id: '1',
 		name: 'empty',
@@ -32,8 +32,12 @@ export const vcards = {
 		services: [1],
 		distance: 0,
 		note: '',
-		language: 'cz'
-	}]
+		lang: 'cz'
+	}
+*/
+
+export const vcards = {
+	users: []
 };
 
 const ctx = {

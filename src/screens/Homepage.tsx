@@ -94,7 +94,7 @@ const Homepage: FC<DrawerScreenProps<any>> = ({ navigation, route }) => {
 								<Headline
 									headline={
 										isLocationGranted
-											? i18n.t('Help in area')
+											? i18n.t('Search in area')
 											: i18n.t(
 												'Location services inactive'
 											)

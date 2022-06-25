@@ -1,6 +1,6 @@
 export interface ICard {
 	index?: number;
-	id?: string;
+	id: string;
 	name?: string;
 	surname?: string;
 	phone?: string;
@@ -10,4 +10,5 @@ export interface ICard {
 	distance?: number;
 	note?: string;
 	language?: string;
+	rating?: number;
 }

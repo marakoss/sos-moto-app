@@ -5,15 +5,21 @@ export enum SERVICES {
 	WORKBENCH,
 	GARAGE,
 	SLEEPOVER,
-	REPAIR_SHOP
+	REPAIR_SHOP,
+	HOTEL,
+	GUIDE,
+	RESTAURANT
 }
 
 export const NUMBERED_SERVICES = new Map([
-	['HELP_SITE', '0'],
-	['TOW', '1'],
-	['TIRE', '2'],
-	['WORKBENCH', '3'],
-	['GARAGE', '4'],
-	['SLEEPOVER', '5'],
-	['REPAIR_SHOP', '6']
+	[SERVICES.HELP_SITE.toString(), '0'],
+	[SERVICES.TOW.toString(), '1'],
+	[SERVICES.TIRE.toString(), '2'],
+	[SERVICES.WORKBENCH.toString(), '3'],
+	[SERVICES.GARAGE.toString(), '4'],
+	[SERVICES.SLEEPOVER.toString(), '5'],
+	[SERVICES.REPAIR_SHOP.toString(), '6'],
+	[SERVICES.HOTEL.toString(), '7'],
+	[SERVICES.GUIDE.toString(), '8'],
+	[SERVICES.RESTAURANT.toString(), '9'],
 ]);
