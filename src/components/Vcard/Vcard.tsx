@@ -2,19 +2,19 @@ import React, { FC, useState } from 'react';
 import {
 	StyleSheet,
 	Text,
-	View,
-	Pressable,
+	View
 } from 'react-native';
 
 import Button from '@components/Button/Button';
+import ButtonInversed from '@components/Button/ButtonInversed';
 import Avatar from '@components/Avatar/Avatar';
-import { IconPhone, IconNavigate } from '@icons/index';
+import { IconPhone, IconNavigate, IconMore } from '@icons/index';
 import { COLORS, THEME, SERVICES } from '@dictionaries/index';
 
 import i18n from 'i18n-js';
 import { ICard } from 'types/card';
 
-import { makeCall, navigate } from './Actions';
+import { makeCall, navigate, shareViaPhone } from './Actions';
 
 
 const getServices = (services: Array<number> | undefined) => {
@@ -49,7 +49,7 @@ const Vcard: FC<ICard> = ({
 	const noteNotEmpty = typeof note !== 'undefined' ? note : ' ';
 
 	return (
-		<Pressable onPress={() => expand()}>
+		
 			<View style={s.container}>
 
 				<View style={s.header}>
@@ -106,19 +106,44 @@ const Vcard: FC<ICard> = ({
 					>
 						{i18n.t('call')}
 					</Button>
-					<Button
-						onPress={() => navigate(lat, lon)}
-						icon={() => IconNavigate}
-						iconWidth={16}
-						iconHeight={16}
-						iconFillColor={COLORS.DARKTEXT}
-						iconHoverFillColor={COLORS.WHITE}
+					<ButtonInversed
+						onPress={() => expand()}
+						
+						icon={() => IconMore}
+						iconWidth={12}
+						iconHeight={12}
+						iconFillColor={COLORS.WHITE}
+						iconHoverFillColor={COLORS.BLACK}
 					>
-						{i18n.t('navigate')}
-					</Button>
+						{i18n.t('more')}
+					</ButtonInversed>
+					{isExpanded && (
+						<View>
+							<Button
+								onPress={() => navigate(lat, lon)}
+								icon={() => IconNavigate}
+								iconWidth={16}
+								iconHeight={16}
+								iconFillColor={COLORS.DARKTEXT}
+								iconHoverFillColor={COLORS.WHITE}
+							>
+								{i18n.t('navigate')}
+							</Button>
+
+							<Button
+								onPress={() => shareViaPhone(lat, lon, '')}
+								icon={() => IconNavigate}
+								iconWidth={16}
+								iconHeight={16}
+								iconFillColor={COLORS.DARKTEXT}
+								iconHoverFillColor={COLORS.WHITE}
+							>
+								{i18n.t('share')}
+							</Button>
+						</View>
+					)}
 				</View>
 			</View>
-		</Pressable>
 	);
 };
 

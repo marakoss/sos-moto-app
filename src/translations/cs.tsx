@@ -1,3 +1,5 @@
+import { shareViaPhone } from "@components/Vcard/Actions";
+
 const headlines = {
 	'Search in area': 'Vyhledat v okolí',
 	'Help in area': 'Pomoc v oblasti',
@@ -27,6 +29,8 @@ const buttons = {
 	confirm: 'Potvrdit',
 	Cancel: 'Zrušit',
 	navigate: 'navigovat',
+	share: 'sdílet polohu',
+	more: 'více',
 	Radar: 'Radar',
 	Register: 'Registrovat se',
 	About: 'O aplikaci',

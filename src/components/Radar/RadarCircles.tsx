@@ -38,7 +38,7 @@ const s = StyleSheet.create({
 		position: 'absolute',
 		width: 100,
 		height: 100,
-		borderColor: COLORS.PRIMARY,
+		borderColor: COLORS.RED,
 		borderWidth: 2,
 		borderRadius: 1000
 	}

@@ -1,5 +1,6 @@
 import { Linking, Alert } from 'react-native';
 import i18n from 'i18n-js';
+import { onShare } from '@utils/Share';
 
 export const makeCall = (phoneNumber: string | undefined) => {
 	Alert.alert(
@@ -28,3 +29,5 @@ export const navigate = (lat: number, lon: number) => {
 		`https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=${lat},${lon}`
 	);
 };
+
+export const shareViaPhone = onShare;

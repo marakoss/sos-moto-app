@@ -69,7 +69,7 @@ const s = StyleSheet.create({
 		width: 13,
 		height: 13,
 		borderRadius: 13,
-		backgroundColor: '#f00'
+		backgroundColor: COLORS.RED
 	},
 	shadowSpace: {
 		width: 17,

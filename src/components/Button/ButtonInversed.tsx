@@ -35,12 +35,34 @@ const ButtonInversed: FC<IButtonInversed> = ({
 	onPress,
 	disabled,
 	testID,
-	icon
+	icon,
+	iconFillColor,
+	iconHoverFillColor,
+	iconWidth,
+	iconHeight
 }): React.ReactElement => {
 	const buttonStyles = [s.button];
 	const buttonPressed = [s.buttonPressed];
 	const textStyles = [s.text];
 	const textPressed = [s.textPressed];
+
+	const getIcon = (Component: ReactNode, pressed: boolean) => {
+		if (Component instanceof Function) {
+			if (!pressed) {
+				return React.createElement(Component(), {
+					fillColor: iconFillColor,
+					width: iconWidth,
+					height: iconHeight
+				});
+			}
+			return React.createElement(Component(), {
+				fillColor: iconHoverFillColor,
+				width: iconWidth,
+				height: iconHeight
+			});
+		}
+		return Component;
+	};
 
 	return (
 		<Pressable
@@ -52,7 +74,7 @@ const ButtonInversed: FC<IButtonInversed> = ({
 		>
 			{({ pressed }) => (
 				<View style={[s.inner, buttonStyles, pressed && buttonPressed]}>
-					<View style={s.gap}>{icon}</View>
+					<View style={s.gap}>{getIcon(icon, pressed)}</View>
 					<View style={s.gap}>
 						<Text style={[textStyles, pressed && textPressed]}>
 							{children}

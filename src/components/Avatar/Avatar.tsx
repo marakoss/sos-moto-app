@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import {
 	StyleSheet,
 	View,
-	Text,
 	Image
 } from 'react-native';
 import { AVATAR_BASE } from '@env';
 import { COLORS } from '@dictionaries/index';
+import Placeholder from './Placeholder';
 
 interface IAvatar {
 	uuid: string;
@@ -15,26 +15,22 @@ interface IAvatar {
 }
 
 const getAvatarResource = (uuid: string): string => {
-	//return `${AVATAR_BASE}${uuid}`;
-	return '';
+	return `${AVATAR_BASE}${uuid}`;
 };
 
 const borderSize = 3;
 
-const Tab: FC<IAvatar> = ({
+const Avatar: FC<IAvatar> = ({
 	uuid,
 	name,
 	size
 }): React.ReactElement => {
 
 	const asize = size || 80;
-
 	return (
 		<View style={[s.container, , { width: asize, height: asize }]}>
 			<View style={s.mask}>
-				<View style={s.placeholder}>
-					<Text style={s.letter}>{name?.substring(0, 1)}</Text>
-				</View>
+				<Placeholder name={name || ''} />
 				<View style={s.image}>
 					<Image source={{
 							width: asize - (borderSize * 2),
@@ -42,7 +38,7 @@ const Tab: FC<IAvatar> = ({
 							uri: getAvatarResource(uuid)
 					}} />
 				</View>
-				</View>
+			</View>
 		</View>
 	);
 };
@@ -57,17 +53,8 @@ const s = StyleSheet.create({
 		backgroundColor: COLORS.LIGHTTEXT,
 		borderRadius: 1000,
 		overflow: 'hidden',
-		position: 'relative'
-	},
-	placeholder: {
-		...StyleSheet.absoluteFillObject,
-		justifyContent: 'center',
-		alignItems: 'center',
-		zIndex: 1
-	},
-	letter: {
-		fontSize: 40,
-		color: COLORS.WHITE
+		position: 'relative',
+		flex: 1
 	},
 	image: {
 		position: 'relative',
@@ -75,4 +62,4 @@ const s = StyleSheet.create({
 	},
 });
 
-export default Tab;
+export default Avatar;
