@@ -15,6 +15,7 @@ export default () => {
 		de: de,
 		pl: pl
 	});
+
 	i18n.locale = Localization.locale;
 	i18n.defaultLocale = 'en';
 	i18n.enableFallback = true;
