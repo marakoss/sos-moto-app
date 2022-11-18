@@ -1,4 +1,4 @@
-# SOS MOTO APP #
+# SOS MOTO APP
 
 Find help on the road, quickly
 
@@ -9,31 +9,34 @@ SOS MOTO is a mobile application written in React Native that allows you to call
 
 ![SOS Moto Application - by Motorcyclist to Motorcyclicts](media/sosmoto-app-overview.png)
 
+### Dependencies
 
-### Dependencies ###
+-   Node 16 (`nvm use 16`)
+-   Expo cli
+-   Backend Service to load data (not included)
 
-* Node 14 (`nvm use 14`)
-* Expo cli
-* Backend Service https://api.motoprerov.cz to load data
+### IOS
 
-### IOS ###
-- Autolinking doesn't work in ios so you must manually run:
-```cd ios```
-```npx pod install```
-- Build it done though xcode
+-   Autolinking doesn't work in ios so you must manually run:
+    `cd ios`
+    `npx pod install`
+-   Build it done though xcode
 
-### Android ###
-- Build it done though Android Studio
-- Increment versionCode before next upload to Google play
+### Android
 
-### Cache ###
+-   Build it done though Android Studio
+-   Increment versionCode before next upload to Google play
+
+### Cache
+
 .Env variables and others are cached. Clear cache by running
-```yarn start -c```
+`yarn start -c`
 
+### Code style
 
-### Code style ###
 This project defines linting rules in .eslintsrc.js
-run ```yarn lint``` to get current report
+run `yarn lint` to get current report
 
-### Licence ###
+### Licence
+
 This program and its components is proprietary, excluding the 3rd party libraries we rely on. Copying and modifying of the sources is prohibited for non-member users, so is building and ditributing the SOS Moto App from sources. Feel free to observe and learn from the sources. And if you wish to contribute to this community project, contact us at support@motosos.cz
