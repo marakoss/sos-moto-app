@@ -14,7 +14,7 @@ const IconAvatarPlaceholder: ISvgIcon = ({
 			width={Number(width) || 100}
 			height={Number(height) || 100}
 			viewBox="0 0 100 100"
-			>
+		>
 			<Rect
 				fill={fillColor || '#F46F43'}
 				width={50}

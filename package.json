@@ -10,9 +10,12 @@
 		"lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./src"
 	},
 	"dependencies": {
+		"@react-navigation/native": "^6.0.13",
 		"eslint": "^8.27.0",
 		"expo": "^47.0.6",
+		"expo-localization": "~14.0.0",
 		"expo-status-bar": "~1.4.0",
+		"i18n-js": "^4.1.1",
 		"prettier": "^2.7.1",
 		"react": "18.1.0",
 		"react-native": "0.70.5",
@@ -20,8 +23,11 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.20.2",
+		"@react-native-community/eslint-config": "^3.2.0",
 		"@types/react": "~18.0.14",
 		"@types/react-native": "~0.70.6",
+		"eslint-config-airbnb-typescript": "^17.0.0",
+		"eslint-plugin-import": "^2.26.0",
 		"typescript": "~4.8.0"
 	},
 	"engines": {
