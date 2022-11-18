@@ -1,33 +1,32 @@
 {
-  "expo": {
-    "name": "sosmoto",
-    "slug": "sosmoto",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "SOS Moto",
+		"slug": "sos-moto",
+		"version": "2.0.0",
+		"orientation": "portrait",
+		"icon": "./src/assets/images/app-icon/applogo.png",
+		"userInterfaceStyle": "light",
+		"splash": {
+			"image": "./src/assets/images/splash/splashscreen.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"bundleIdentifier": "com.imagedesigncz.sosmoto",
+			"supportsTablet": false,
+			"buildNumber": "2.0.0"
+		},
+		"android": {
+			"package": "com.imagedesigncz.sosmoto",
+			"versionCode": 1,
+			"adaptiveIcon": {
+				"foregroundImage": "./src/assets/images/app-icon/applogo.png",
+				"backgroundColor": "#FFFFFF"
+			}
+		}
+	}
 }
