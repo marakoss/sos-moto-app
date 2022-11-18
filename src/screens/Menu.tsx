@@ -6,7 +6,8 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import { Headline, Button } from '@components/index';
 import { COLORS, SCREENS } from '@dictionaries/index';
-import Localization from 'Localization';
+
+import Localization from '@src/Localization';
 
 const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
@@ -26,7 +27,9 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 						showsVerticalScrollIndicator={false}
 					>
 						<Button
-							onPress={() => navigation.navigate(SCREENS.HOME)}
+							onPress={() =>
+								navigation.navigate(SCREENS.HOME.toString())
+							}
 							iconFillColor={COLORS.DARKERTEXT}
 							iconHoverFillColor={COLORS.WHITE}
 						>
@@ -40,7 +43,9 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 							</Text>
 							<Button
 								onPress={() =>
-									navigation.navigate(SCREENS.REGISTER)
+									navigation.navigate(
+										SCREENS.REGISTER.toString()
+									)
 								}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}
@@ -60,7 +65,9 @@ const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 							</Text>
 							<Button
 								onPress={() =>
-									navigation.navigate(SCREENS.ABOUT)
+									navigation.navigate(
+										SCREENS.ABOUT.toString()
+									)
 								}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}

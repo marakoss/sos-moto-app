@@ -15,7 +15,7 @@ import { COLORS, SCREENS } from '@dictionaries/index';
 
 import * as Application from 'expo-application';
 
-import Localization from 'Localization';
+import Localization from '@src/Localization';
 
 const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 	return (
@@ -34,7 +34,7 @@ const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
 						<View style={s.content}>
 							<Button
 								onPress={() =>
-									navigation.navigate(SCREENS.MENU)
+									navigation.navigate(SCREENS.MENU.toString())
 								}
 								iconFillColor={COLORS.DARKERTEXT}
 								iconHoverFillColor={COLORS.WHITE}

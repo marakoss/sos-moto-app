@@ -4,8 +4,9 @@
 		"esModuleInterop": true,
 		"jsx": "react",
 		"strict": true,
-		"baseUrl": "src",
+		"baseUrl": "./src",
 		"paths": {
+			"@src/*": ["./*"],
 			"@assets/*": ["assets/*"],
 			"@images/*": ["assets/images/*"],
 			"@icons/*": ["assets/icons/*"],
