@@ -1,0 +1,7 @@
+export enum SCREENS {
+	HOME,
+	FILTER,
+	MENU,
+	REGISTER,
+	ABOUT
+}
