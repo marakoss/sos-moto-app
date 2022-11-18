@@ -2,11 +2,9 @@ import React, { FC } from 'react';
 import { Text } from 'react-native';
 
 import { ComposedContextProvider } from './Store';
-import Localization from './Localization';
+import './Localization';
 
 const Main: FC = () => {
-	Localization();
-
 	return (
 		<>
 			<ComposedContextProvider>

@@ -1,5 +1,5 @@
-import { IMobileTypes, MobileProvider } from './mobile';
-import { ILocationTypes, LocationProvider } from './location';
+import { IMobileTypes, MobileProvider, MobileContext } from './mobile';
+import { ILocationTypes, LocationProvider, LocationContext } from './location';
 
 /*import { filters, FiltersContext, filtersReducer } from './filters';
 import { vcards, VCardContext, vcardReducer, IVCardTypes } from './vcard';*/
@@ -7,8 +7,10 @@ import { vcards, VCardContext, vcardReducer, IVCardTypes } from './vcard';*/
 export {
 	ILocationTypes,
 	LocationProvider,
+	LocationContext,
 	IMobileTypes,
-	MobileProvider
+	MobileProvider,
+	MobileContext
 	/*	filters,
 	FiltersContext,
 	filtersReducer,

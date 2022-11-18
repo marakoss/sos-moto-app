@@ -32,8 +32,11 @@ export const colorList: ColorValue[] = [
 ];
 
 export function* getColor() {
-	let i = 0;
+	const colorsUsed: ColorValue[] = [];
+
 	while (true) {
-		yield colorList[i++ % 5];
+		const nextColor = colorList[colorsUsed.length % 5];
+		colorsUsed.push(nextColor);
+		yield nextColor;
 	}
 }
