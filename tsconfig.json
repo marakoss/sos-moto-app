@@ -1,6 +1,24 @@
 {
-  "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true
-  }
+	"extends": "expo/tsconfig.base",
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"jsx": "react",
+		"strict": true,
+		"baseUrl": "src",
+		"paths": {
+			"@assets/*": ["assets/*"],
+			"@images/*": ["assets/images/*"],
+			"@icons/*": ["assets/icons/*"],
+			"@components/*": ["components/*"],
+			"@dictionaries/*": ["dictionaries/*"],
+			"@screens/*": ["screens/*"],
+			"@store/*": ["store/*"],
+			"@translations/*": ["translations/*"],
+			"@types/*": ["types/*"],
+			"@utils/*": ["utils/*"],
+			"@logic/*": ["logic/*"],
+			"@hooks/*": ["hooks/*"]
+		}
+	},
+	"exclude": ["__tests__/**/*-test.ts"]
 }
