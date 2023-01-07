@@ -19,7 +19,9 @@
 			"@utils/*": ["utils/*"],
 			"@logic/*": ["logic/*"],
 			"@hooks/*": ["hooks/*"]
-		}
+		},
+		"noImplicitAny": true,
+		"strictNullChecks": true
 	},
 	"exclude": ["__tests__/**/*-test.ts"]
 }

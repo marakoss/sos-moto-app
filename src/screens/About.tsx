@@ -8,6 +8,7 @@ import {
 	Platform
 } from 'react-native';
 
+import { ParamListBase } from '@react-navigation/native';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import { Button, Headline } from '@components/index';
@@ -17,7 +18,7 @@ import * as Application from 'expo-application';
 
 import Localization from '@src/Localization';
 
-const About: FC<DrawerScreenProps<any>> = ({ navigation }) => {
+const About: FC<DrawerScreenProps<ParamListBase>> = ({ navigation }) => {
 	return (
 		<View style={s.container}>
 			<View style={s.headerContainer}>

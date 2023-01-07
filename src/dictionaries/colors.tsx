@@ -20,7 +20,7 @@ export enum COLORS {
 	BACKGROUNDGRADIENT1 = '#7828e4',
 	BACKGROUNDGRADIENT2 = '#2F84CB',
 	LIGHTPRIMARY = '#FFAAAA',
-	LIGHTINFO = '#aaccFF'
+	LIGHTINFO = '#AACCFF'
 }
 
 export const colorList: ColorValue[] = [

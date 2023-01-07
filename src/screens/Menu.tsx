@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { StyleSheet, View, ScrollView, SafeAreaView, Text } from 'react-native';
 
+import { ParamListBase } from '@react-navigation/native';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 
 import { Headline, Button } from '@components/index';
@@ -9,7 +10,7 @@ import { COLORS, SCREENS } from '@dictionaries/index';
 
 import Localization from '@src/Localization';
 
-const Menu: FC<DrawerScreenProps<any>> = ({ navigation }) => {
+const Menu: FC<DrawerScreenProps<ParamListBase>> = ({ navigation }) => {
 	return (
 		<View style={s.container}>
 			<View style={s.headerContainer}>

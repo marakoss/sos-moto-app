@@ -1,4 +1,5 @@
+import Home from './Home';
 import Menu from './Menu';
 import About from './About';
 
-export { Menu, About };
+export { Home, Menu, About };

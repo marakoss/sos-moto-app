@@ -3,10 +3,10 @@ import Svg, { Polygon } from 'react-native-svg';
 import { ISvgIcon } from 'types/svg';
 
 const IconArrow: ISvgIcon = ({
-	fillColor,
-	fillColor2,
 	width,
-	height
+	height,
+	fillColor,
+	fillColor2
 }): JSX.Element => {
 	return (
 		<Svg

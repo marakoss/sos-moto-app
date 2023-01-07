@@ -3,11 +3,11 @@ import Svg, { Rect } from 'react-native-svg';
 import { ISvgIcon } from 'types/svg';
 
 const IconAvatarPlaceholder: ISvgIcon = ({
+	width,
+	height,
 	fillColor,
 	fillColor2,
-	fillColor3,
-	width,
-	height
+	fillColor3
 }): JSX.Element => {
 	return (
 		<Svg

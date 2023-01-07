@@ -1,14 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
-export default function useAnimationFrame(
-	cb: Function,
-	deps: Array<any>
-): void {
+export default function useAnimationFrame(cb: Function): void {
 	const frame = useRef(0);
 	const last = useRef(performance.now());
 	const init = useRef(performance.now());
 
-	const animate = () => {
+	const animate = useCallback(() => {
 		const now = performance.now();
 		const time = (now - init.current) / 1000;
 		const delta = (now - last.current) / 1000;
@@ -16,11 +13,10 @@ export default function useAnimationFrame(
 		cb({ time, delta });
 		last.current = now;
 		frame.current = requestAnimationFrame(animate);
-	};
+	}, [cb]);
 
 	useEffect(() => {
 		frame.current = requestAnimationFrame(animate);
 		return () => cancelAnimationFrame(frame.current);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, deps); // Make sure to change it if the deps change
+	}, [animate]);
 }

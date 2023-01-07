@@ -1,17 +1,17 @@
-import React, { PropsWithChildren, FC } from 'react';
+import React, { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { Menu, About } from '@screens/index';
+import { Home, Menu, About } from '@screens/index';
 import { SCREENS } from '@dictionaries/screens';
 
 const Drawer = createDrawerNavigator();
 
-export const Navigation: FC<PropsWithChildren> = () => {
+export const Navigation: FC = () => {
 	return (
 		<NavigationContainer>
 			<Drawer.Navigator
-				initialRouteName={SCREENS.ABOUT.toString()}
+				initialRouteName={SCREENS.HOME.toString()}
 				screenOptions={{
 					headerShown: false,
 					drawerStyle: {
@@ -27,6 +27,10 @@ export const Navigation: FC<PropsWithChildren> = () => {
 					}
 				})}
 			>
+				<Drawer.Screen
+					name={SCREENS.HOME.toString()}
+					component={Home}
+				/>
 				<Drawer.Screen
 					name={SCREENS.MENU.toString()}
 					component={Menu}

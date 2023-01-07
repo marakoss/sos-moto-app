@@ -32,6 +32,12 @@ SOS MOTO is a mobile application written in React Native that allows you to call
 .Env variables and others are cached. Clear cache by running
 `yarn start -c`
 
+### Debugging
+
+-   Install react developer tools `yarn global add react-devtools`
+-   Then run `react-devtools`.
+-   Should automatically connect to debugging instances
+
 ### Code style
 
 This project defines linting rules in .eslintsrc.js
