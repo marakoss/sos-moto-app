@@ -7,7 +7,7 @@ import Main from './src/Main';
 export default function App() {
 	return (
 		<StrictMode>
-			<GestureHandlerRootView>
+			<GestureHandlerRootView style={{ flex: 1 }}>
 				<StatusBar style="auto" />
 				<Main />
 			</GestureHandlerRootView>
